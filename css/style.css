@@ -491,7 +491,7 @@ ul,li{
 	left: 70px;
 }
 .main-header .main-menu{
-	text-align: center;
+	text-align: right;;
 	display: block;
 }
 .main-header .link-button{
@@ -1464,11 +1464,12 @@ ul,li{
 ***/
 
 .page-title{
-	padding: 95px 0px 90px;
+	padding: 155px 0px 150px;
 	position: relative;
 	z-index: 1;
 	background-repeat: no-repeat !important;
 	background-size: cover !important;
+	background-position: center !important;
 }
 .page-title .title h4{
 	font-size: 60px;
