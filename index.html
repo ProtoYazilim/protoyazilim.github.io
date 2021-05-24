@@ -8,13 +8,7 @@
 
 
     function navigate() {
-      // If it's an iPhone..
-      if ((navigator.platform.indexOf("iPhone") != -1)
-        || (navigator.platform.indexOf("iPod") != -1)
-        || (navigator.platform.indexOf("iPad") != -1))
-        window.open("maps://www.google.com/maps/dir/?api=1&travelmode=driving&layer=traffic&destination=40.99997926589421,29.09928272867985");
-      else
-        window.open("https://www.google.com/maps/dir/?api=1&travelmode=driving&layer=traffic&destination=40.99997926589421,29.09928272867985");
+      window.open("https://www.google.com/maps/dir/?api=1&travelmode=driving&layer=traffic&destination=40.99997926589421,29.09928272867985");
     }</script><script defer="defer" src="main.js"></script><link href="style.css" rel="stylesheet"></head><script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script><script>function toggle(src, target) {
     const element = document.getElementById(src)
     $(`#${target}`).collapse('toggle')
