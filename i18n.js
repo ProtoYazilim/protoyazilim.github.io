@@ -305,6 +305,7 @@
         en: "Proton Message Management Platform",
         de: "Proton Nachrichten verwaltungs plattform",
       },
+      SailOps: { en: "SailOps", de: "SailOps" },
     };
     document.querySelectorAll(".project-title h1").forEach(function (el) {
       var t = el.textContent.trim();
@@ -329,6 +330,11 @@
         {
           en: "Proton Message Management Platform lets you design, send, and report millions of emails, SMS, and push notifications quickly and reliably. It can be deployed on your infrastructure or cloud account. Beyond bulk messaging, Proton provides APIs for real‑time notifications.",
           de: "Die Proton Nachrichten verwaltungs plattform ermöglicht das Entwerfen, Versenden und Auswerten von Millionen E‑Mails, SMS und Push‑Benachrichtigungen – schnell und zuverlässig. Deployments sind on‑premises oder in Ihrer Cloud möglich. Neben Massenversand bietet Proton APIs für Echtzeit‑Benachrichtigungen.",
+        },
+      "SailOps, yat kiralama şirketleri ve filo operatörleri için uçtan uca operasyon platformudur. Filo durumu, dijital check-in/out, envanter, bakım, dokümanlar ve çoklu üs koordinasyonunu tek bir yerde merkezileştirir.":
+        {
+          en: "SailOps is an end-to-end operations platform for yacht charter companies and fleet operators. It centralizes fleet status, digital check‑in/out, inventory, maintenance, documents, and multi‑base coordination—into one place.",
+          de: "SailOps ist eine End-to-End-Betriebsplattform für Yachtcharterunternehmen und Flottenbetreiber. Es zentralisiert Flottenstatus, digitales Check-in/out, Inventar, Wartung, Dokumente und Multi-Basis-Koordination an einem Ort.",
         },
     };
 
@@ -967,6 +973,144 @@
             en: "Proton Message Management Platform provides SMTP support for your email sending, Twilio for your SMS sending, APNS and Firebase Cloud Messaging support for your instant notification sending. In addition, Proton allows for organization-specific integrations.",
             de: "Die Proton-Nachrichtenverwaltungsplattform bietet SMTP-Unterstützung für Ihr E-Mail-Versenden, Twilio für Ihr SMS-Versenden, APNS- und Firebase Cloud Messaging-Unterstützung für Ihr Sofortbenachrichtigungs-Versenden. Darüber hinaus ermöglicht Proton organisationsspezifische Integrationen.",
           },
+
+        // SailOps translations
+        SailOps: {
+          en: "SailOps",
+          de: "SailOps",
+        },
+        "SailOps is an end-to-end operations platform for yacht charter companies and fleet operators. It centralizes fleet status, digital check‑in/out, inventory, maintenance, documents, and multi‑base coordination—into one place. Developed and owned by Proto Yazılım.":
+          {
+            tr: "SailOps, yat kiralama şirketleri ve filo operatörleri için uçtan uca operasyon platformudur. Filo durumu, dijital check-in/out, envanter, bakım, dokümanlar ve çoklu üs koordinasyonunu tek bir yerde merkezileştirir.",
+            de: "SailOps ist eine End-to-End-Betriebsplattform für Yachtcharterunternehmen und Flottenbetreiber. Es zentralisiert Flottenstatus, digitales Check-in/out, Inventar, Wartung, Dokumente und Multi-Basis-Koordination an einem Ort. Entwickelt und im Besitz von Proto Yazılım.",
+          },
+        "Fleet Management": {
+          tr: "Filo Yönetimi",
+          de: "Flottenverwaltung",
+        },
+        "Central tracking of vessels, technical specs, and availability per base. Manage your entire fleet from a single dashboard with real-time status updates.":
+          {
+            tr: "Gemilerin, teknik özelliklerin ve üs başına müsaitlik durumunun merkezi takibi. Tüm filonuzu gerçek zamanlı durum güncellemeleri ile tek bir panelden yönetin.",
+            de: "Zentrale Verfolgung von Schiffen, technischen Spezifikationen und Verfügbarkeit pro Basis. Verwalten Sie Ihre gesamte Flotte von einem einzigen Dashboard mit Echtzeit-Statusaktualisierungen.",
+          },
+        "Digital Check‑in / Check‑out": {
+          tr: "Dijital Check-in / Check-out",
+          de: "Digitales Check-in / Check-out",
+        },
+        "Timestamped handover checklists for safety and equipment, with photos and notes. Ensure every charter starts and ends with complete documentation.":
+          {
+            tr: "Güvenlik ve ekipman için zaman damgalı teslim kontrol listeleri, fotoğraflar ve notlarla. Her kiralama işleminin eksiksiz dokümantasyonla başladığından ve bittiğinden emin olun.",
+            de: "Zeitgestempelte Übergabe-Checklisten für Sicherheit und Ausrüstung mit Fotos und Notizen. Stellen Sie sicher, dass jeder Charter mit vollständiger Dokumentation beginnt und endet.",
+          },
+        "Inventory Management": {
+          tr: "Envanter Yönetimi",
+          de: "Bestandsverwaltung",
+        },
+        "Two‑level inventory system (boat + depot) ensures nothing is missing at departure. Track equipment, provisions, and supplies with precision.":
+          {
+            tr: "İki seviyeli envanter sistemi (tekne + depo) kalkışta hiçbir şeyin eksik olmamasını sağlar. Ekipman, erzak ve malzemeleri hassasiyetle takip edin.",
+            de: "Zweistufiges Inventarsystem (Boot + Depot) stellt sicher, dass bei der Abfahrt nichts fehlt. Verfolgen Sie Ausrüstung, Vorräte und Materialien präzise.",
+          },
+        "Maintenance Tracking": {
+          tr: "Bakım Takibi",
+          de: "Wartungsverfolgung",
+        },
+        "Scheduled servicing and on‑demand repairs with cost and history logs. Keep your fleet in top condition with automated maintenance reminders and comprehensive service records.":
+          {
+            tr: "Planlı servis ve talep üzerine onarımlar, maliyet ve geçmiş kayıtlarıyla. Otomatik bakım hatırlatıcıları ve kapsamlı servis kayıtlarıyla filonuzu en iyi durumda tutun.",
+            de: "Geplante Wartung und On-Demand-Reparaturen mit Kosten- und Verlaufsprotokollen. Halten Sie Ihre Flotte in Top-Zustand mit automatischen Wartungserinnerungen und umfassenden Serviceaufzeichnungen.",
+          },
+        "Document Management": {
+          tr: "Doküman Yönetimi",
+          de: "Dokumentenverwaltung",
+        },
+        "Licenses, insurance, certificates with expiry reminders and role‑based access. Stay compliant with automated alerts for document renewals.":
+          {
+            tr: "Lisanslar, sigortalar, sertifikalar, son kullanma hatırlatıcıları ve rol tabanlı erişimle. Doküman yenilemeleri için otomatik uyarılarla uyumlu kalın.",
+            de: "Lizenzen, Versicherungen, Zertifikate mit Ablauferinnerungen und rollenbasiertem Zugriff. Bleiben Sie konform mit automatischen Warnungen für Dokumentenerneuerungen.",
+          },
+        "Multi‑base Operations": {
+          tr: "Çoklu Üs Operasyonları",
+          de: "Multi-Basis-Betrieb",
+        },
+        "Coordinate vessels, staff, and stock across locations. Seamlessly manage operations across multiple marinas and charter bases with centralized control.":
+          {
+            tr: "Gemileri, personeli ve stokları lokasyonlar arasında koordine edin. Merkezi kontrol ile birden fazla marina ve kiralama üssü arasındaki operasyonları sorunsuz yönetin.",
+            de: "Koordinieren Sie Schiffe, Personal und Lagerbestände standortübergreifend. Verwalten Sie nahtlos Betriebe über mehrere Marinas und Charterbasen mit zentraler Kontrolle.",
+          },
+
+        // Reverse Turkish to English/German translations for SailOps
+        "SailOps, yat kiralama şirketleri ve filo operatörleri için uçtan uca operasyon platformudur. Filo durumu, dijital check-in/out, envanter, bakım, dokümanlar ve çoklu üs koordinasyonunu tek bir yerde merkezileştirir. Proto Yazılım tarafından geliştirilmiş ve sahiplenilmiştir.":
+          {
+            en: "SailOps is an end-to-end operations platform for yacht charter companies and fleet operators. It centralizes fleet status, digital check‑in/out, inventory, maintenance, documents, and multi‑base coordination—into one place. Developed and owned by Proto Yazılım.",
+            de: "SailOps ist eine End-to-End-Betriebsplattform für Yachtcharterunternehmen und Flottenbetreiber. Es zentralisiert Flottenstatus, digitales Check-in/out, Inventar, Wartung, Dokumente und Multi-Basis-Koordination an einem Ort. Entwickelt und im Besitz von Proto Yazılım.",
+          },
+        "SailOps, yat kiralama şirketleri ve filo operatörleri için uçtan uca operasyon platformudur. Filo durumu, dijital check-in/out, envanter, bakım, dokümanlar ve çoklu üs koordinasyonunu tek bir yerde merkezileştirir.":
+          {
+            en: "SailOps is an end-to-end operations platform for yacht charter companies and fleet operators. It centralizes fleet status, digital check‑in/out, inventory, maintenance, documents, and multi‑base coordination—into one place.",
+            de: "SailOps ist eine End-to-End-Betriebsplattform für Yachtcharterunternehmen und Flottenbetreiber. Es zentralisiert Flottenstatus, digitales Check-in/out, Inventar, Wartung, Dokumente und Multi-Basis-Koordination an einem Ort.",
+          },
+        "Filo Yönetimi": {
+          en: "Fleet Management",
+          de: "Flottenverwaltung",
+        },
+        "Gemilerin, teknik özelliklerin ve üs başına müsaitlik durumunun merkezi takibi. Tüm filonuzu gerçek zamanlı durum güncellemeleri ile tek bir panelden yönetin.":
+          {
+            en: "Central tracking of vessels, technical specs, and availability per base. Manage your entire fleet from a single dashboard with real-time status updates.",
+            de: "Zentrale Verfolgung von Schiffen, technischen Spezifikationen und Verfügbarkeit pro Basis. Verwalten Sie Ihre gesamte Flotte von einem einzigen Dashboard mit Echtzeit-Statusaktualisierungen.",
+          },
+        "Dijital Check-in / Check-out": {
+          en: "Digital Check‑in / Check‑out",
+          de: "Digitales Check-in / Check-out",
+        },
+        "Güvenlik ve ekipman için zaman damgalı teslim kontrol listeleri, fotoğraflar ve notlarla. Her kiralama işleminin eksiksiz dokümantasyonla başladığından ve bittiğinden emin olun.":
+          {
+            en: "Timestamped handover checklists for safety and equipment, with photos and notes. Ensure every charter starts and ends with complete documentation.",
+            de: "Zeitgestempelte Übergabe-Checklisten für Sicherheit und Ausrüstung mit Fotos und Notizen. Stellen Sie sicher, dass jeder Charter mit vollständiger Dokumentation beginnt und endet.",
+          },
+        "Envanter Yönetimi": {
+          en: "Inventory Management",
+          de: "Bestandsverwaltung",
+        },
+        "İki seviyeli envanter sistemi (tekne + depo) kalkışta hiçbir şeyin eksik olmamasını sağlar. Ekipman, erzak ve malzemeleri hassasiyetle takip edin.":
+          {
+            en: "Two‑level inventory system (boat + depot) ensures nothing is missing at departure. Track equipment, provisions, and supplies with precision.",
+            de: "Zweistufiges Inventarsystem (Boot + Depot) stellt sicher, dass bei der Abfahrt nichts fehlt. Verfolgen Sie Ausrüstung, Vorräte und Materialien präzise.",
+          },
+        "Bakım Takibi": {
+          en: "Maintenance Tracking",
+          de: "Wartungsverfolgung",
+        },
+        "Planlı servis ve talep üzerine onarımlar, maliyet ve geçmiş kayıtlarıyla. Otomatik bakım hatırlatıcıları ve kapsamlı servis kayıtlarıyla filonuzu en iyi durumda tutun.":
+          {
+            en: "Scheduled servicing and on‑demand repairs with cost and history logs. Keep your fleet in top condition with automated maintenance reminders and comprehensive service records.",
+            de: "Geplante Wartung und On-Demand-Reparaturen mit Kosten- und Verlaufsprotokollen. Halten Sie Ihre Flotte in Top-Zustand mit automatischen Wartungserinnerungen und umfassenden Serviceaufzeichnungen.",
+          },
+        "Doküman Yönetimi": {
+          en: "Document Management",
+          de: "Dokumentenverwaltung",
+        },
+        "Lisanslar, sigortalar, sertifikalar, son kullanma hatırlatıcıları ve rol tabanlı erişimle. Doküman yenilemeleri için otomatik uyarılarla uyumlu kalın.":
+          {
+            en: "Licenses, insurance, certificates with expiry reminders and role‑based access. Stay compliant with automated alerts for document renewals.",
+            de: "Lizenzen, Versicherungen, Zertifikate mit Ablauferinnerungen und rollenbasiertem Zugriff. Bleiben Sie konform mit automatischen Warnungen für Dokumentenerneuerungen.",
+          },
+        "Çoklu Üs Operasyonları": {
+          en: "Multi‑base Operations",
+          de: "Multi-Basis-Betrieb",
+        },
+        "Gemileri, personeli ve stokları lokasyonlar arasında koordine edin. Merkezi kontrol ile birden fazla marina ve kiralama üssü arasındaki operasyonları sorunsuz yönetin.":
+          {
+            en: "Coordinate vessels, staff, and stock across locations. Seamlessly manage operations across multiple marinas and charter bases with centralized control.",
+            de: "Koordinieren Sie Schiffe, Personal und Lagerbestände standortübergreifend. Verwalten Sie nahtlos Betriebe über mehrere Marinas und Charterbasen mit zentraler Kontrolle.",
+          },
+
+        // SailOps short description for projects page
+        "SailOps, yat kiralama şirketleri ve filo operatörleri için uçtan uca operasyon platformudur. Filo durumu, dijital check-in/out, envanter, bakım, dokümanlar ve çoklu üs koordinasyonunu tek bir yerde merkezileştirir.":
+          {
+            en: "SailOps is an end-to-end operations platform for yacht charter companies and fleet operators. It centralizes fleet status, digital check‑in/out, inventory, maintenance, documents, and multi‑base coordination—into one place.",
+            de: "SailOps ist eine End-to-End-Betriebsplattform für Yachtcharterunternehmen und Flottenbetreiber. Es zentralisiert Flottenstatus, digitales Check-in/out, Inventar, Wartung, Dokumente und Multi-Basis-Koordination an einem Ort.",
+          },
       };
 
       // Helper function to normalize text for comparison
@@ -997,16 +1141,19 @@
         }
       });
 
-      document.querySelectorAll(".project-info-card p").forEach(function (el) {
-        var text = el.textContent.replace(/\s+/g, " ").trim();
-        var normalized = normalizeText(text);
-        if (
-          normalizedTranslations[normalized] &&
-          normalizedTranslations[normalized][lang]
-        ) {
-          el.textContent = normalizedTranslations[normalized][lang];
-        }
-      });
+      // Translate paragraphs in both project-card and project-info-card
+      document
+        .querySelectorAll(".project-card p, .project-info-card p")
+        .forEach(function (el) {
+          var text = el.textContent.replace(/\s+/g, " ").trim();
+          var normalized = normalizeText(text);
+          if (
+            normalizedTranslations[normalized] &&
+            normalizedTranslations[normalized][lang]
+          ) {
+            el.textContent = normalizedTranslations[normalized][lang];
+          }
+        });
     } catch (e) {
       console.error("Product page translation error:", e);
     }
