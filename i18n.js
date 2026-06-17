@@ -306,8 +306,10 @@
         de: "Proton Nachrichten verwaltungs plattform",
       },
       SailOps: { en: "SailOps", de: "SailOps" },
+      ChattyFire: { en: "ChattyFire", de: "ChattyFire" },
+      "SailOps Marketplace": { en: "SailOps Marketplace", de: "SailOps Marketplace" },
     };
-    document.querySelectorAll(".project-title h1").forEach(function (el) {
+    document.querySelectorAll(".project-title h1, .project-card h1").forEach(function (el) {
       var t = el.textContent.trim();
       if (mapTitles[t]) {
         el.textContent = mapTitles[t][lang] || t;
@@ -335,6 +337,11 @@
         {
           en: "SailOps is an end-to-end operations platform for yacht charter companies and fleet operators. It centralizes fleet status, digital check‑in/out, inventory, maintenance, documents, and multi‑base coordination—into one place.",
           de: "SailOps ist eine End-to-End-Betriebsplattform für Yachtcharterunternehmen und Flottenbetreiber. Es zentralisiert Flottenstatus, digitales Check-in/out, Inventar, Wartung, Dokumente und Multi-Basis-Koordination an einem Ort.",
+        },
+      "ChattyFire, işletmeler için gerçek zamanlı müşteri iletişim ve destek platformudur. Canlı sohbet, chatbot, çok kanallı mesajlaşma ve müşteri etkileşim analitiğini tek bir çatı altında birleştirir.":
+        {
+          en: "ChattyFire is a real-time customer communication and support platform for businesses. It unifies live chat, chatbot, omnichannel messaging, and customer interaction analytics under one roof.",
+          de: "ChattyFire ist eine Echtzeit-Kundenkommunikations- und Supportplattform für Unternehmen. Sie vereint Live-Chat, Chatbot, Omnichannel-Messaging und Kundeninteraktionsanalytik unter einem Dach.",
         },
     };
 
@@ -1110,6 +1117,141 @@
           {
             en: "SailOps is an end-to-end operations platform for yacht charter companies and fleet operators. It centralizes fleet status, digital check‑in/out, inventory, maintenance, documents, and multi‑base coordination—into one place.",
             de: "SailOps ist eine End-to-End-Betriebsplattform für Yachtcharterunternehmen und Flottenbetreiber. Es zentralisiert Flottenstatus, digitales Check-in/out, Inventar, Wartung, Dokumente und Multi-Basis-Koordination an einem Ort.",
+          },
+
+        // SailOps Marketplace translations
+        "SailOps Marketplace": {
+          en: "SailOps Marketplace",
+          de: "SailOps Marketplace",
+        },
+        "SailOps Marketplace, yat kiralama sektörüne özel dijital bir pazar yeridir. Kiralama şirketleri, tekne sahipleri ve hizmet sağlayıcıları tek bir platformda buluşturarak sektördeki ticari etkileşimleri kolaylaştırır.":
+          {
+            en: "SailOps Marketplace is a digital marketplace dedicated to the yacht charter industry. It facilitates commercial interactions in the sector by bringing together charter companies, boat owners, and service providers on a single platform.",
+            de: "SailOps Marketplace ist ein digitaler Marktplatz speziell für die Yachtcharterbranche. Er erleichtert kommerzielle Interaktionen in der Branche, indem er Charterunternehmen, Bootseigner und Dienstleister auf einer einzigen Plattform zusammenbringt.",
+          },
+        "Tekne Listeleme ve Arama": {
+          en: "Boat Listing & Search",
+          de: "Bootsangebote & Suche",
+        },
+        "Gelişmiş filtreleme seçenekleriyle tekne arama, detaylı tekne profilleri ve fotoğraf galerileri. Konum, kapasite, fiyat aralığı ve tekne tipine göre arama yaparak ideal tekneyi kolayca bulun.":
+          {
+            en: "Search for boats with advanced filtering options, detailed boat profiles, and photo galleries. Easily find the ideal boat by searching by location, capacity, price range, and boat type.",
+            de: "Suchen Sie Boote mit erweiterten Filteroptionen, detaillierten Bootsprofilen und Fotogalerien. Finden Sie einfach das ideale Boot durch Suche nach Standort, Kapazität, Preisbereich und Bootstyp.",
+          },
+        "Rezervasyon Yönetimi": {
+          en: "Booking Management",
+          de: "Buchungsverwaltung",
+        },
+        "Anlık müsaitlik takvimi, online rezervasyon ve otomatik onay süreçleri. Kiralama taleplerini, ödemeleri ve iptal politikalarını tek bir panel üzerinden yönetin.":
+          {
+            en: "Real-time availability calendar, online booking, and automated approval processes. Manage rental requests, payments, and cancellation policies from a single dashboard.",
+            de: "Echtzeit-Verfügbarkeitskalender, Online-Buchung und automatisierte Genehmigungsprozesse. Verwalten Sie Mietanfragen, Zahlungen und Stornierungsrichtlinien über ein einziges Dashboard.",
+          },
+        "Hizmet Sağlayıcı Ağı": {
+          en: "Service Provider Network",
+          de: "Dienstleisternetzwerk",
+        },
+        "Kaptan, mürettebat, temizlik, yakıt ikmal ve teknik servis gibi hizmet sağlayıcılarını keşfedin. Değerlendirme ve yorum sistemiyle en uygun hizmet sağlayıcıyı seçin.":
+          {
+            en: "Discover service providers such as captains, crew, cleaning, refueling, and technical services. Choose the best service provider with the rating and review system.",
+            de: "Entdecken Sie Dienstleister wie Kapitäne, Besatzung, Reinigung, Betankung und technischen Service. Wählen Sie den besten Dienstleister mit dem Bewertungs- und Rezensionssystem.",
+          },
+        "Güvenli Ödeme Altyapısı": {
+          en: "Secure Payment Infrastructure",
+          de: "Sichere Zahlungsinfrastruktur",
+        },
+        "Entegre ödeme sistemi ile güvenli online işlemler, otomatik faturalama ve komisyon yönetimi. Çoklu para birimi desteği ile uluslararası işlemleri kolayca gerçekleştirin.":
+          {
+            en: "Secure online transactions with integrated payment system, automated invoicing, and commission management. Easily process international transactions with multi-currency support.",
+            de: "Sichere Online-Transaktionen mit integriertem Zahlungssystem, automatisierter Rechnungsstellung und Provisionsverwaltung. Verarbeiten Sie internationale Transaktionen einfach mit Mehrwährungsunterstützung.",
+          },
+        "Değerlendirme ve Yorumlar": {
+          en: "Ratings & Reviews",
+          de: "Bewertungen & Rezensionen",
+        },
+        "Kiracı ve tekne sahibi karşılıklı değerlendirme sistemi, doğrulanmış yorumlar ve güven puanı. Şeffaf geri bildirimlerle platform güvenilirliğini artırın.":
+          {
+            en: "Mutual rating system between renters and boat owners, verified reviews, and trust scores. Increase platform reliability with transparent feedback.",
+            de: "Gegenseitiges Bewertungssystem zwischen Mietern und Bootseignern, verifizierte Bewertungen und Vertrauenspunkte. Erhöhen Sie die Plattformzuverlässigkeit mit transparentem Feedback.",
+          },
+        "Analitik ve Raporlama": {
+          en: "Analytics & Reporting",
+          de: "Analytik & Berichterstattung",
+        },
+        "Pazar trendleri, fiyat analizi, doluluk oranları ve gelir raporları. Veriye dayalı kararlar alarak kiralama stratejinizi optimize edin.":
+          {
+            en: "Market trends, price analysis, occupancy rates, and revenue reports. Optimize your rental strategy by making data-driven decisions.",
+            de: "Markttrends, Preisanalysen, Belegungsraten und Umsatzberichte. Optimieren Sie Ihre Vermietungsstrategie durch datengestützte Entscheidungen.",
+          },
+
+        // ChattyFire translations
+        ChattyFire: {
+          en: "ChattyFire",
+          de: "ChattyFire",
+        },
+        "ChattyFire, işletmeler için gerçek zamanlı müşteri iletişim ve destek platformudur. Canlı sohbet, chatbot, çok kanallı mesajlaşma ve müşteri etkileşim analitiğini tek bir çatı altında birleştirir. Proto Yazılım tarafından geliştirilmiş ve sahiplenilmiştir.":
+          {
+            en: "ChattyFire is a real-time customer communication and support platform for businesses. It unifies live chat, chatbot, omnichannel messaging, and customer interaction analytics under one roof. Developed and owned by Proto Yazılım.",
+            de: "ChattyFire ist eine Echtzeit-Kundenkommunikations- und Supportplattform für Unternehmen. Sie vereint Live-Chat, Chatbot, Omnichannel-Messaging und Kundeninteraktionsanalytik unter einem Dach. Entwickelt und im Besitz von Proto Yazılım.",
+          },
+        "ChattyFire, işletmeler için gerçek zamanlı müşteri iletişim ve destek platformudur. Canlı sohbet, chatbot, çok kanallı mesajlaşma ve müşteri etkileşim analitiğini tek bir çatı altında birleştirir.":
+          {
+            en: "ChattyFire is a real-time customer communication and support platform for businesses. It unifies live chat, chatbot, omnichannel messaging, and customer interaction analytics under one roof.",
+            de: "ChattyFire ist eine Echtzeit-Kundenkommunikations- und Supportplattform für Unternehmen. Sie vereint Live-Chat, Chatbot, Omnichannel-Messaging und Kundeninteraktionsanalytik unter einem Dach.",
+          },
+        "Canlı Sohbet": {
+          en: "Live Chat",
+          de: "Live-Chat",
+        },
+        "Web sitenize ve mobil uygulamanıza kolayca entegre edilebilen canlı sohbet widget'ı. Ziyaretçilerinizle anlık iletişim kurarak müşteri memnuniyetini ve dönüşüm oranlarını artırın.":
+          {
+            en: "A live chat widget that can be easily integrated into your website and mobile app. Increase customer satisfaction and conversion rates by communicating instantly with your visitors.",
+            de: "Ein Live-Chat-Widget, das einfach in Ihre Website und mobile App integriert werden kann. Steigern Sie die Kundenzufriedenheit und Konversionsraten durch sofortige Kommunikation mit Ihren Besuchern.",
+          },
+        "Akıllı Chatbot": {
+          en: "Smart Chatbot",
+          de: "Intelligenter Chatbot",
+        },
+        "Yapay zeka destekli chatbot ile sık sorulan soruları otomatik yanıtlayın. Özelleştirilebilir senaryolar ve doğal dil işleme ile 7/24 kesintisiz müşteri desteği sağlayın.":
+          {
+            en: "Automatically answer frequently asked questions with an AI-powered chatbot. Provide 24/7 uninterrupted customer support with customizable scenarios and natural language processing.",
+            de: "Beantworten Sie häufig gestellte Fragen automatisch mit einem KI-gestützten Chatbot. Bieten Sie 24/7 ununterbrochenen Kundensupport mit anpassbaren Szenarien und natürlicher Sprachverarbeitung.",
+          },
+        "Çok Kanallı Mesajlaşma": {
+          en: "Omnichannel Messaging",
+          de: "Omnichannel-Messaging",
+        },
+        "WhatsApp, Telegram, e-posta ve sosyal medya kanallarını tek bir gelen kutusunda birleştirin. Tüm müşteri konuşmalarını merkezi bir panelden yönetin.":
+          {
+            en: "Unify WhatsApp, Telegram, email, and social media channels in a single inbox. Manage all customer conversations from a centralized dashboard.",
+            de: "Vereinen Sie WhatsApp, Telegram, E-Mail und Social-Media-Kanäle in einem einzigen Posteingang. Verwalten Sie alle Kundengespräche über ein zentrales Dashboard.",
+          },
+        "Ekip İşbirliği": {
+          en: "Team Collaboration",
+          de: "Teamzusammenarbeit",
+        },
+        "Konuşmaları ekip üyelerine atayın, dahili notlar ekleyin ve departmanlar arası işbirliği yapın. Yanıt şablonları ve otomatik yönlendirme ile verimliliği artırın.":
+          {
+            en: "Assign conversations to team members, add internal notes, and collaborate across departments. Increase efficiency with response templates and automatic routing.",
+            de: "Weisen Sie Gespräche Teammitgliedern zu, fügen Sie interne Notizen hinzu und arbeiten Sie abteilungsübergreifend zusammen. Steigern Sie die Effizienz mit Antwortvorlagen und automatischer Weiterleitung.",
+          },
+        "Müşteri Analitiği": {
+          en: "Customer Analytics",
+          de: "Kundenanalytik",
+        },
+        "Müşteri memnuniyeti skorları, yanıt süreleri, konuşma hacmi ve temsilci performans raporları. Gerçek zamanlı panolar ile destek kalitesini sürekli iyileştirin.":
+          {
+            en: "Customer satisfaction scores, response times, conversation volume, and agent performance reports. Continuously improve support quality with real-time dashboards.",
+            de: "Kundenzufriedenheitswerte, Antwortzeiten, Gesprächsvolumen und Agentenleistungsberichte. Verbessern Sie die Supportqualität kontinuierlich mit Echtzeit-Dashboards.",
+          },
+        "Entegrasyonlar ve API": {
+          en: "Integrations & API",
+          de: "Integrationen & API",
+        },
+        "CRM, e-ticaret ve yardım masası araçlarıyla sorunsuz entegrasyon. RESTful API ve webhook desteği ile mevcut iş süreçlerinize kolayca bağlanın.":
+          {
+            en: "Seamless integration with CRM, e-commerce, and help desk tools. Easily connect to your existing business processes with RESTful API and webhook support.",
+            de: "Nahtlose Integration mit CRM-, E-Commerce- und Helpdesk-Tools. Verbinden Sie sich einfach mit Ihren bestehenden Geschäftsprozessen über RESTful API und Webhook-Unterstützung.",
           },
       };
 
