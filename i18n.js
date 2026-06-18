@@ -31,6 +31,8 @@
       consulting: "Danışmanlık",
       big_data: "Büyük Veri",
       digital_solutions: "Dijital çözümler",
+      ai_consulting: "AI Danışmanlığı",
+      custom_solutions: "Özel Çözümler",
       references: "Referanslar",
       strong_culture: "Güçlü iş kültürü",
       together: "Birlikte\nçalışalım",
@@ -65,6 +67,8 @@
       consulting: "Consulting",
       big_data: "Big Data",
       digital_solutions: "Digital solutions",
+      ai_consulting: "AI Consulting",
+      custom_solutions: "Custom Solutions",
       references: "References",
       strong_culture: "Strong work culture",
       together: "Let’s\nwork together",
@@ -98,6 +102,8 @@
       consulting: "Beratung",
       big_data: "Big Data",
       digital_solutions: "Digitale Lösungen",
+      ai_consulting: "KI-Beratung",
+      custom_solutions: "Individuelle Lösungen",
       references: "Referenzen",
       strong_culture: "Starke Arbeitskultur",
       together: "Lass uns\nzusammenarbeiten",
@@ -338,10 +344,10 @@
           en: "SailOps is an end-to-end operations platform for yacht charter companies and fleet operators. It centralizes fleet status, digital check‑in/out, inventory, maintenance, documents, and multi‑base coordination—into one place.",
           de: "SailOps ist eine End-to-End-Betriebsplattform für Yachtcharterunternehmen und Flottenbetreiber. Es zentralisiert Flottenstatus, digitales Check-in/out, Inventar, Wartung, Dokumente und Multi-Basis-Koordination an einem Ort.",
         },
-      "ChattyFire, işletmeler için gerçek zamanlı müşteri iletişim ve destek platformudur. Canlı sohbet, chatbot, çok kanallı mesajlaşma ve müşteri etkileşim analitiğini tek bir çatı altında birleştirir.":
+      "ChattyFire, kurumsal düzeyde bir AI asistan platformudur. Çoklu LLM provider desteği, gelişmiş RAG özellikleri, esnek plugin sistemi ve çoklu agent orkestrasyonu ile güçlü bir AI chat ve doküman yönetim sistemi sunar.":
         {
-          en: "ChattyFire is a real-time customer communication and support platform for businesses. It unifies live chat, chatbot, omnichannel messaging, and customer interaction analytics under one roof.",
-          de: "ChattyFire ist eine Echtzeit-Kundenkommunikations- und Supportplattform für Unternehmen. Sie vereint Live-Chat, Chatbot, Omnichannel-Messaging und Kundeninteraktionsanalytik unter einem Dach.",
+          en: "ChattyFire is an enterprise-grade AI assistant platform. It offers a powerful AI chat and document management system with multi-LLM provider support, advanced RAG capabilities, a flexible plugin system, and multi-agent orchestration.",
+          de: "ChattyFire ist eine KI-Assistenzplattform auf Unternehmensniveau. Sie bietet ein leistungsstarkes KI-Chat- und Dokumentenmanagementsystem mit Multi-LLM-Provider-Unterstützung, erweiterten RAG-Funktionen, einem flexiblen Plugin-System und Multi-Agent-Orchestrierung.",
         },
     };
 
@@ -437,6 +443,16 @@
       {
         en: "We provide services and product solutions in distributed system architectures, orchestration solutions, and end‑to‑end web and mobile application development.",
         de: "Wir bieten Dienstleistungen und Produktlösungen für verteilte Systemarchitekturen, Orchestrierungslösungen sowie End‑to‑End‑Web‑ und Mobile‑App‑Entwicklung.",
+      },
+    "Yapay zeka stratejisi, LLM entegrasyonu, RAG sistemleri ve agent orkestrasyonu konularında danışmanlık hizmetleri sunarak işletmelerin AI dönüşümüne rehberlik ediyoruz.":
+      {
+        en: "We guide enterprises through AI transformation by providing consultancy on AI strategy, LLM integration, RAG systems, and agent orchestration.",
+        de: "Wir begleiten Unternehmen bei der KI‑Transformation durch Beratung zu KI‑Strategie, LLM‑Integration, RAG‑Systemen und Agent‑Orchestrierung.",
+      },
+    "İş ortaklarımızın ihtiyaçlarına özel, sıfırdan tasarlanan yazılım çözümleri geliştiriyoruz. Kurumsal süreçlere tam uyumlu, ölçeklenebilir ve sürdürülebilir sistemler sunuyoruz.":
+      {
+        en: "We develop custom software solutions designed from scratch for our partners' specific needs. We deliver scalable and sustainable systems fully aligned with enterprise processes.",
+        de: "Wir entwickeln maßgeschneiderte Softwarelösungen, die von Grund auf für die spezifischen Bedürfnisse unserer Partner konzipiert werden. Wir liefern skalierbare und nachhaltige Systeme, die vollständig auf Unternehmensprozesse abgestimmt sind.",
       },
     // index - references description
     "İş ortaklarımıza, rakiplerinden bir adım önde olma avantajını sağlayacak yenilikçi çözümler sunuyoruz.":
@@ -610,6 +626,10 @@
           h4.textContent = tText("big_data");
         } else if (titleText === "Dijital çözümler") {
           h4.textContent = tText("digital_solutions");
+        } else if (titleText === "AI Danışmanlığı") {
+          h4.textContent = tText("ai_consulting");
+        } else if (titleText === "Özel Çözümler") {
+          h4.textContent = tText("custom_solutions");
         }
       });
 
@@ -1189,69 +1209,64 @@
           en: "ChattyFire",
           de: "ChattyFire",
         },
-        "ChattyFire, işletmeler için gerçek zamanlı müşteri iletişim ve destek platformudur. Canlı sohbet, chatbot, çok kanallı mesajlaşma ve müşteri etkileşim analitiğini tek bir çatı altında birleştirir. Proto Yazılım tarafından geliştirilmiş ve sahiplenilmiştir.":
+        "ChattyFire, kurumsal düzeyde bir AI asistan platformudur. Çoklu LLM provider desteği, gelişmiş RAG özellikleri, esnek plugin sistemi ve çoklu agent orkestrasyonu ile güçlü bir AI chat ve doküman yönetim sistemi sunar.":
           {
-            en: "ChattyFire is a real-time customer communication and support platform for businesses. It unifies live chat, chatbot, omnichannel messaging, and customer interaction analytics under one roof. Developed and owned by Proto Yazılım.",
-            de: "ChattyFire ist eine Echtzeit-Kundenkommunikations- und Supportplattform für Unternehmen. Sie vereint Live-Chat, Chatbot, Omnichannel-Messaging und Kundeninteraktionsanalytik unter einem Dach. Entwickelt und im Besitz von Proto Yazılım.",
+            en: "ChattyFire is an enterprise-grade AI assistant platform. It offers a powerful AI chat and document management system with multi-LLM provider support, advanced RAG capabilities, a flexible plugin system, and multi-agent orchestration.",
+            de: "ChattyFire ist eine KI-Assistenzplattform auf Unternehmensniveau. Sie bietet ein leistungsstarkes KI-Chat- und Dokumentenmanagementsystem mit Multi-LLM-Provider-Unterstützung, erweiterten RAG-Funktionen, einem flexiblen Plugin-System und Multi-Agent-Orchestrierung.",
           },
-        "ChattyFire, işletmeler için gerçek zamanlı müşteri iletişim ve destek platformudur. Canlı sohbet, chatbot, çok kanallı mesajlaşma ve müşteri etkileşim analitiğini tek bir çatı altında birleştirir.":
-          {
-            en: "ChattyFire is a real-time customer communication and support platform for businesses. It unifies live chat, chatbot, omnichannel messaging, and customer interaction analytics under one roof.",
-            de: "ChattyFire ist eine Echtzeit-Kundenkommunikations- und Supportplattform für Unternehmen. Sie vereint Live-Chat, Chatbot, Omnichannel-Messaging und Kundeninteraktionsanalytik unter einem Dach.",
-          },
-        "Canlı Sohbet": {
-          en: "Live Chat",
-          de: "Live-Chat",
+        "Çoklu LLM Desteği": {
+          en: "Multi-LLM Support",
+          de: "Multi-LLM-Unterstützung",
         },
-        "Web sitenize ve mobil uygulamanıza kolayca entegre edilebilen canlı sohbet widget'ı. Ziyaretçilerinizle anlık iletişim kurarak müşteri memnuniyetini ve dönüşüm oranlarını artırın.":
+        "OpenAI, Azure OpenAI, Ollama, Mistral AI ve LM Studio gibi birden fazla LLM provider'ı destekler. Her provider için ayrı API key yönetimi, model seçimi ve dinamik provider ekleme/çıkarma imkanı sunar.":
           {
-            en: "A live chat widget that can be easily integrated into your website and mobile app. Increase customer satisfaction and conversion rates by communicating instantly with your visitors.",
-            de: "Ein Live-Chat-Widget, das einfach in Ihre Website und mobile App integriert werden kann. Steigern Sie die Kundenzufriedenheit und Konversionsraten durch sofortige Kommunikation mit Ihren Besuchern.",
+            en: "Supports multiple LLM providers including OpenAI, Azure OpenAI, Ollama, Mistral AI, and LM Studio. Offers separate API key management, model selection, and dynamic provider add/remove capabilities for each provider.",
+            de: "Unterstützt mehrere LLM-Provider wie OpenAI, Azure OpenAI, Ollama, Mistral AI und LM Studio. Bietet separate API-Key-Verwaltung, Modellauswahl und dynamisches Hinzufügen/Entfernen von Providern.",
           },
-        "Akıllı Chatbot": {
-          en: "Smart Chatbot",
-          de: "Intelligenter Chatbot",
+        "Çoklu Agent Sistemi": {
+          en: "Multi-Agent System",
+          de: "Multi-Agent-System",
         },
-        "Yapay zeka destekli chatbot ile sık sorulan soruları otomatik yanıtlayın. Özelleştirilebilir senaryolar ve doğal dil işleme ile 7/24 kesintisiz müşteri desteği sağlayın.":
+        "Sınırsız agent oluşturma, her agent için farklı LLM ve özel system prompt tanımlama imkanı. Handoff, Group Chat, Sequential, Concurrent ve Magentic orkestrasyon stratejileri ile karmaşık iş akışlarını yönetin.":
           {
-            en: "Automatically answer frequently asked questions with an AI-powered chatbot. Provide 24/7 uninterrupted customer support with customizable scenarios and natural language processing.",
-            de: "Beantworten Sie häufig gestellte Fragen automatisch mit einem KI-gestützten Chatbot. Bieten Sie 24/7 ununterbrochenen Kundensupport mit anpassbaren Szenarien und natürlicher Sprachverarbeitung.",
+            en: "Create unlimited agents, each with a different LLM and custom system prompt. Manage complex workflows with Handoff, Group Chat, Sequential, Concurrent, and Magentic orchestration strategies.",
+            de: "Erstellen Sie unbegrenzt viele Agents, jeweils mit unterschiedlichem LLM und benutzerdefiniertem System-Prompt. Verwalten Sie komplexe Workflows mit Handoff-, Group-Chat-, Sequential-, Concurrent- und Magentic-Orchestrierungsstrategien.",
           },
-        "Çok Kanallı Mesajlaşma": {
-          en: "Omnichannel Messaging",
-          de: "Omnichannel-Messaging",
+        "RAG Sistemi": {
+          en: "RAG System",
+          de: "RAG-System",
         },
-        "WhatsApp, Telegram, e-posta ve sosyal medya kanallarını tek bir gelen kutusunda birleştirin. Tüm müşteri konuşmalarını merkezi bir panelden yönetin.":
+        "Qdrant tabanlı vector store, gelişmiş embedding desteği ve hybrid arama özellikleri. PDF, DOCX, TXT, MD formatlarında doküman işleme, akıllı chunking ve kullanıcı bazlı erişim kontrolü ile güçlü bilgi erişimi sağlar.":
           {
-            en: "Unify WhatsApp, Telegram, email, and social media channels in a single inbox. Manage all customer conversations from a centralized dashboard.",
-            de: "Vereinen Sie WhatsApp, Telegram, E-Mail und Social-Media-Kanäle in einem einzigen Posteingang. Verwalten Sie alle Kundengespräche über ein zentrales Dashboard.",
+            en: "Qdrant-based vector store, advanced embedding support, and hybrid search capabilities. Provides powerful knowledge retrieval with PDF, DOCX, TXT, MD document processing, smart chunking, and user-based access control.",
+            de: "Qdrant-basierter Vector Store, erweiterte Embedding-Unterstützung und hybride Suchfunktionen. Bietet leistungsstarken Wissenszugriff mit PDF-, DOCX-, TXT-, MD-Dokumentenverarbeitung, intelligentem Chunking und benutzerbasierter Zugriffskontrolle.",
           },
-        "Ekip İşbirliği": {
-          en: "Team Collaboration",
-          de: "Teamzusammenarbeit",
+        "Plugin Sistemi": {
+          en: "Plugin System",
+          de: "Plugin-System",
         },
-        "Konuşmaları ekip üyelerine atayın, dahili notlar ekleyin ve departmanlar arası işbirliği yapın. Yanıt şablonları ve otomatik yönlendirme ile verimliliği artırın.":
+        "Built-in, OpenAPI spec, DLL ve external plugin desteği. OpenAPI/Swagger dosyalarından otomatik plugin oluşturma, hot reload ve runtime'da dinamik plugin yükleme/kaldırma özellikleri sunar.":
           {
-            en: "Assign conversations to team members, add internal notes, and collaborate across departments. Increase efficiency with response templates and automatic routing.",
-            de: "Weisen Sie Gespräche Teammitgliedern zu, fügen Sie interne Notizen hinzu und arbeiten Sie abteilungsübergreifend zusammen. Steigern Sie die Effizienz mit Antwortvorlagen und automatischer Weiterleitung.",
+            en: "Built-in, OpenAPI spec, DLL, and external plugin support. Offers automatic plugin creation from OpenAPI/Swagger files, hot reload, and dynamic runtime plugin loading/unloading.",
+            de: "Built-in-, OpenAPI-Spec-, DLL- und External-Plugin-Unterstützung. Bietet automatische Plugin-Erstellung aus OpenAPI/Swagger-Dateien, Hot Reload und dynamisches Laden/Entladen von Plugins zur Laufzeit.",
           },
-        "Müşteri Analitiği": {
-          en: "Customer Analytics",
-          de: "Kundenanalytik",
+        "Güvenlik ve Yetkilendirme": {
+          en: "Security & Authorization",
+          de: "Sicherheit & Autorisierung",
         },
-        "Müşteri memnuniyeti skorları, yanıt süreleri, konuşma hacmi ve temsilci performans raporları. Gerçek zamanlı panolar ile destek kalitesini sürekli iyileştirin.":
+        "Cookie, API Key ve JWT Bearer Token ile çoklu kimlik doğrulama. RBAC tabanlı yetkilendirme, PBKDF2 şifreleme, IP ban, rate limiting ve token maskeleme ile kurumsal düzeyde güvenlik sağlar.":
           {
-            en: "Customer satisfaction scores, response times, conversation volume, and agent performance reports. Continuously improve support quality with real-time dashboards.",
-            de: "Kundenzufriedenheitswerte, Antwortzeiten, Gesprächsvolumen und Agentenleistungsberichte. Verbessern Sie die Supportqualität kontinuierlich mit Echtzeit-Dashboards.",
+            en: "Multi-method authentication with Cookie, API Key, and JWT Bearer Token. Provides enterprise-grade security with RBAC-based authorization, PBKDF2 encryption, IP ban, rate limiting, and token masking.",
+            de: "Mehrfache Authentifizierung mit Cookie, API Key und JWT Bearer Token. Bietet Sicherheit auf Unternehmensniveau mit RBAC-basierter Autorisierung, PBKDF2-Verschlüsselung, IP-Sperre, Rate Limiting und Token-Maskierung.",
           },
-        "Entegrasyonlar ve API": {
-          en: "Integrations & API",
-          de: "Integrationen & API",
+        "API ve Entegrasyonlar": {
+          en: "API & Integrations",
+          de: "API & Integrationen",
         },
-        "CRM, e-ticaret ve yardım masası araçlarıyla sorunsuz entegrasyon. RESTful API ve webhook desteği ile mevcut iş süreçlerinize kolayca bağlanın.":
+        "OpenAI uyumlu API endpoint'i, RESTful API, Swagger/OpenAPI dokümantasyonu ve SSE streaming desteği. OpenAPI spec import ile harici API'leri plugin olarak ekleyebilir, MCP entegrasyonu ile genişletebilirsiniz.":
           {
-            en: "Seamless integration with CRM, e-commerce, and help desk tools. Easily connect to your existing business processes with RESTful API and webhook support.",
-            de: "Nahtlose Integration mit CRM-, E-Commerce- und Helpdesk-Tools. Verbinden Sie sich einfach mit Ihren bestehenden Geschäftsprozessen über RESTful API und Webhook-Unterstützung.",
+            en: "OpenAI-compatible API endpoint, RESTful API, Swagger/OpenAPI documentation, and SSE streaming support. Import external APIs as plugins via OpenAPI spec and extend with MCP integration.",
+            de: "OpenAI-kompatibler API-Endpunkt, RESTful API, Swagger/OpenAPI-Dokumentation und SSE-Streaming-Unterstützung. Importieren Sie externe APIs als Plugins über OpenAPI-Spezifikationen und erweitern Sie mit MCP-Integration.",
           },
       };
 
