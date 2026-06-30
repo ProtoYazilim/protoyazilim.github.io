@@ -26,6 +26,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://www.protoyazilim.com/projects/temporapdf.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://www.protoyazilim.com/projects/galata.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

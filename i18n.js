@@ -314,6 +314,7 @@
       SailOps: { en: "SailOps", de: "SailOps" },
       ChattyFire: { en: "ChattyFire", de: "ChattyFire" },
       "SailOps Marketplace": { en: "SailOps Marketplace", de: "SailOps Marketplace" },
+      TemporaPDF: { en: "TemporaPDF", de: "TemporaPDF" },
     };
     document.querySelectorAll(".project-title h1, .project-card h1").forEach(function (el) {
       var t = el.textContent.trim();
@@ -348,6 +349,11 @@
         {
           en: "ChattyFire is an enterprise-grade AI assistant platform. It offers a powerful AI chat and document management system with multi-LLM provider support, advanced RAG capabilities, a flexible plugin system, and multi-agent orchestration.",
           de: "ChattyFire ist eine KI-Assistenzplattform auf Unternehmensniveau. Sie bietet ein leistungsstarkes KI-Chat- und Dokumentenmanagementsystem mit Multi-LLM-Provider-Unterstützung, erweiterten RAG-Funktionen, einem flexiblen Plugin-System und Multi-Agent-Orchestrierung.",
+        },
+      "TemporaPDF, kod yazmadan PDF şablonu tasarlama, versiyonlama, onaylama ve toplu üretim sağlayan kurumsal bir platformdur. Görsel tasarımcı, onay iş akışları ve bileşen kütüphanesi ile PDF üretim sürecinizi tamamen kontrolünüze bırakır.":
+        {
+          en: "TemporaPDF is an enterprise platform for designing, versioning, approving, and bulk-generating PDF templates without writing code. With its visual designer, approval workflows, and component library, it puts your PDF generation process fully under your control.",
+          de: "TemporaPDF ist eine Unternehmensplattform zum Gestalten, Versionieren, Genehmigen und massenhaften Erzeugen von PDF-Vorlagen ohne Programmierung. Mit visuellem Designer, Genehmigungs-Workflows und Komponentenbibliothek behalten Sie die volle Kontrolle über Ihren PDF-Erstellungsprozess.",
         },
     };
 
@@ -1267,6 +1273,71 @@
           {
             en: "OpenAI-compatible API endpoint, RESTful API, Swagger/OpenAPI documentation, and SSE streaming support. Import external APIs as plugins via OpenAPI spec and extend with MCP integration.",
             de: "OpenAI-kompatibler API-Endpunkt, RESTful API, Swagger/OpenAPI-Dokumentation und SSE-Streaming-Unterstützung. Importieren Sie externe APIs als Plugins über OpenAPI-Spezifikationen und erweitern Sie mit MCP-Integration.",
+          },
+
+        // TemporaPDF translations
+        TemporaPDF: {
+          en: "TemporaPDF",
+          de: "TemporaPDF",
+        },
+        "TemporaPDF, kod yazmadan PDF şablonu tasarlama, versiyonlama, onaylama ve toplu üretim sağlayan kurumsal bir platformdur. Sürükle-bırak şablon tasarımcısı, onay iş akışları, yeniden kullanılabilir bileşen kütüphanesi ve rol bazlı erişim kontrolü ile PDF üretim sürecinizi tamamen sizin kontrolünüze bırakır.":
+          {
+            en: "TemporaPDF is an enterprise platform for designing, versioning, approving, and bulk-generating PDF templates without writing code. With a drag-and-drop template designer, approval workflows, a reusable component library, and role-based access control, it puts your PDF generation process fully under your control.",
+            de: "TemporaPDF ist eine Unternehmensplattform zum Gestalten, Versionieren, Genehmigen und massenhaften Erzeugen von PDF-Vorlagen ohne Programmierung. Mit einem Drag-and-Drop-Vorlagendesigner, Genehmigungs-Workflows, einer wiederverwendbaren Komponentenbibliothek und rollenbasierter Zugriffskontrolle behalten Sie die volle Kontrolle über Ihren PDF-Erstellungsprozess.",
+          },
+        "Görsel Şablon Tasarımcısı": {
+          en: "Visual Template Designer",
+          de: "Visueller Vorlagendesigner",
+        },
+        "Sürükle-bırak arayüzü ile metin, görsel, kutu, tablo, QR kod, barkod ve checkbox bileşenlerini şablonlarınıza ekleyin. Çok sayfalı header/footer desteği, [field] ve $$VARIABLE$$ formatında canlı veri bağlama, özel CSS ve JSON import/export ile kod yazmadan profesyonel PDF şablonları oluşturun.":
+          {
+            en: "Add text, image, box, table, QR code, barcode, and checkbox components to your templates with a drag-and-drop interface. Create professional PDF templates without code, with multi-page header/footer support, live data binding in [field] and $$VARIABLE$$ format, custom CSS, and JSON import/export.",
+            de: "Fügen Sie Text-, Bild-, Box-, Tabellen-, QR-Code-, Barcode- und Checkbox-Komponenten per Drag-and-Drop zu Ihren Vorlagen hinzu. Erstellen Sie professionelle PDF-Vorlagen ohne Code – mit mehrseitiger Kopf-/Fußzeilen-Unterstützung, Live-Datenbindung im Format [field] und $$VARIABLE$$, benutzerdefiniertem CSS sowie JSON-Import/Export.",
+          },
+        "Versiyon Kontrolü ve Onay İş Akışı": {
+          en: "Version Control & Approval Workflow",
+          de: "Versionskontrolle & Genehmigungsworkflow",
+        },
+        "Her şablon DRAFT, PENDING_APPROVAL, APPROVED, ACTIVE ve INACTIVE yaşam döngüsü durumlarından geçer. Maker-approver onay modeli ile değişiklikler yayına alınmadan önce kontrol edilir, tüm versiyon geçmişi saklanır.":
+          {
+            en: "Every template moves through DRAFT, PENDING_APPROVAL, APPROVED, ACTIVE, and INACTIVE lifecycle states. A maker-approver model reviews changes before they go live, and the full version history is preserved.",
+            de: "Jede Vorlage durchläuft die Lebenszyklusphasen DRAFT, PENDING_APPROVAL, APPROVED, ACTIVE und INACTIVE. Ein Maker-Approver-Modell prüft Änderungen vor der Veröffentlichung, und der gesamte Versionsverlauf bleibt erhalten.",
+          },
+        "Bileşen Kütüphanesi": {
+          en: "Component Library",
+          de: "Komponentenbibliothek",
+        },
+        "Sık kullanılan içerikleri yeniden kullanılabilir bileşenler olarak tanımlayın. Bir bileşende yapılan değişikliğin hangi şablonları etkileyeceğini gösteren cascade impact analizi ile büyük ölçekte tutarlılığı koruyun.":
+          {
+            en: "Define frequently used content as reusable components. Maintain consistency at scale with cascade impact analysis that shows which templates are affected by a change to a component.",
+            de: "Definieren Sie häufig verwendete Inhalte als wiederverwendbare Komponenten. Sorgen Sie mit einer Cascade-Impact-Analyse, die zeigt, welche Vorlagen von einer Komponentenänderung betroffen sind, für Konsistenz im großen Maßstab.",
+          },
+        "Merkezi Varlık Yönetimi": {
+          en: "Centralized Asset Management",
+          de: "Zentrales Asset-Management",
+        },
+        "$$KEY$$ formatında değişkenler ve merkezi görsel kayıt defteri ile tüm varlıklarınızı tek noktadan yönetin. XML ve JSON veri bağlama desteği ile mevcut sistemlerinizden gelen verileri doğrudan şablonlara aktarın.":
+          {
+            en: "Manage all your assets from a single point with $$KEY$$ format variables and a centralized image registry. Feed data from your existing systems directly into templates with XML and JSON data binding support.",
+            de: "Verwalten Sie alle Ihre Assets zentral mit Variablen im $$KEY$$-Format und einem zentralen Bildregister. Übertragen Sie Daten aus Ihren bestehenden Systemen direkt in Vorlagen mit XML- und JSON-Datenbindung.",
+          },
+        "Güvenlik, Roller ve Audit": {
+          en: "Security, Roles & Audit",
+          de: "Sicherheit, Rollen & Audit",
+        },
+        "JWT tabanlı kimlik doğrulama, rol ve izin yönetimi, CSV dışa aktarımlı detaylı audit log ile her işlem kayıt altına alınır. Tam audit kapsamı ve kurumsal entegrasyon hazırlığı ile uyumluluk gereksinimlerinizi karşılar.":
+          {
+            en: "JWT-based authentication, role and permission management, and a detailed audit log with CSV export record every action. Meet your compliance requirements with full audit coverage and enterprise integration readiness.",
+            de: "JWT-basierte Authentifizierung, Rollen- und Berechtigungsverwaltung sowie ein detailliertes Audit-Log mit CSV-Export erfassen jede Aktion. Erfüllen Sie Ihre Compliance-Anforderungen mit vollständiger Audit-Abdeckung und Bereitschaft für die Unternehmensintegration.",
+          },
+        "Yüksek Hacimli Üretim": {
+          en: "High-Volume Generation",
+          de: "Hochvolumige Erzeugung",
+        },
+        "Design, Review, Approve, Activate, Generate adımlarından oluşan iş akışı ile şablonlarınızı bir kez onaylayın, milyonlarca PDF'i hatasız ve geliştirici bağımlılığı olmadan toplu üretin. Bankacılık, sigorta, telekom, kamu, lojistik ve e-ticaret sektörlerinde kullanılır.":
+          {
+            en: "Approve your templates once with a Design, Review, Approve, Activate, Generate workflow, then bulk-generate millions of PDFs error-free without developer dependency. Used across banking, insurance, telecom, public sector, logistics, and e-commerce.",
+            de: "Genehmigen Sie Ihre Vorlagen einmal mit einem Design-Review-Approve-Activate-Generate-Workflow und erzeugen Sie anschließend Millionen von PDFs fehlerfrei und ohne Entwicklerabhängigkeit in großen Mengen. Im Einsatz in Banking, Versicherung, Telekommunikation, öffentlichem Sektor, Logistik und E-Commerce.",
           },
       };
 
