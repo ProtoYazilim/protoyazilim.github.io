@@ -5,9 +5,6 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="Proto Yazılım" content="Proto Yazılım Website" />
   <title>Proto Yazılım</title>
-    <script>
-      //"mailto:no-one@snai1mai1.com?subject=free chocolate"
-    </script>
     <script
       src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -46,43 +43,97 @@
     <link href="style.css" rel="stylesheet" />
   </head>
   <body>
-    <main id="swup" class="transition-fade">
-      <section id="contact">
-        <div class="container">
-          <div class="row mb-4">
-            <div class="col">
-              <a class="reset-a" href="/index.html"
-                ><div class="back-button">
+    <div id="swup">
+      <header>
+        <nav class="fixed-top">
+          <div id="nav" class="container-fluid">
+            <svg
+              id="hamburger"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="white"
+              class="bi bi-list"
+              viewBox="0 0 16 16"
+              onclick="hamburger()"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+              />
+            </svg>
+            <div class="proto-navbar">
+              <ul>
+                <li class="selected-item">
                   <svg
-                    id="back-arrow"
-                    width="26"
-                    height="23"
-                    viewBox="0 0 26 23"
-                    fill="none"
                     xmlns="http://www.w3.org/2000/svg"
+                    width="8"
+                    height="8"
+                    fill="currentColor"
+                    class="bi bi-circle-fill"
+                    viewBox="0 0 16 16"
                   >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                      d="M11.9474 0.842329L13.7939 2.6888L5.86713 10.6156L26 10.6156V13.2269L5.86725 13.2269L13.7939 21.1535L11.9474 23L0.868589 11.9212L2.71507 10.0747L11.9474 0.842329ZM4.58731 11.947V11.8954L4.56154 11.9212L4.58731 11.947Z"
-                      fill="white"
-                    />
+                    <circle cx="8" cy="8" r="8" />
                   </svg>
-                  <span>geri dön</span>
-                </div></a
-              >
+                  <a href="/about.html">Hakkımızda</a>
+                </li>
+                <li><a href="/projects.html">Ürünler</a></li>
+                <li><a href="/career.html">Kariyer</a></li>
+                <li><a href="/contact.html">İletişim</a></li>
+              </ul>
             </div>
+            <a id="proto-logo" href="/index.html">;proto</a>
           </div>
+          <div class="navbar-background"></div>
+          <svg
+            id="close"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="white"
+            class="bi bi-x"
+            viewBox="0 0 16 16"
+            onclick="hamburger()"
+          >
+            <path
+              d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"
+            />
+          </svg>
+        </nav>
+      </header>
+      <main class="transition-fade">
+        <div class="container about-container">
+          <div class="col-12 col-lg-8">
+            <h1 class="title mb-4">Hakkımızda</h1>
+            <p class="content">
+              Proto Yazılım; yazılım profesyonelleri tarafından kurulmuş bir
+              teknoloji şirketi olup; yazılım geliştirme, danışmanlık, dijital
+              çözümler ve sistem entegrasyonu konularında hizmet vermektedir.
+              Çözüm odaklı yapısını koruyarak, katma değerli ürün ve hizmet
+              üretmeyi hedef olarak benimseyen Proto Yazılım; iş ortaklarının
+              ihtiyaçları doğrultusunda, yenilikçi ürünleri ile güncel
+              teknolojiye uygun çözümler sunmaktadır.
+            </p>
+          </div>
+        </div>
+      </main>
+      <footer>
+        <div class="img-container">
+          <img id="footer-img" src="public/Bottom.png" alt="footer image" />
+        </div>
+      </footer>
+      <section id="footer-contact">
+        <div class="container">
           <div class="row mb-3">
             <div class="col">
               <h1 class="phrase">Birlikte<br />çalışalım</h1>
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-              <div class="row mb-5">
-                <div class="col">
-                  <a class="contact-info" href="mailto:info@protoyazilim.com"
+            <div class="col-lg-5 col-md-5 col-sm-12">
+              <div class="row mb-3">
+                <div class="col contact-text-container">
+                  <a class="contact-text" href="mailto:info@protoyazilim.com"
                     >info@protoyazilim.com</a
                   >
                 </div>
@@ -116,30 +167,31 @@
                     Kozyatağı İçerenköy Mh.<br />
                     Topçu ibrahim Sk.<br />
                     No:8-10d, 34752<br />
-                    Ataşehir<br />
-                    İstanbul
+                    Ataşehir<br />İstanbul
                   </address>
                 </div>
               </div>
               <div class="row mb-5">
                 <div class="col">
-                  <a href="tel:+902162551600" class="contact-info"
+                  <a href="tel:+902162551600" class="contact-text"
                     >+902162551600</a
                   >
                 </div>
               </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12">
-              <div class="row">
+            <div class="col-lg-7 col-md-7 col-sm-12">
+              <div class="row mb-3">
                 <div class="col">
-                  <h2 class="contact-address">Mesaj gönderin veya arayın.</h2>
+                  <h2 class="contact-address">
+                    Bize bir mesaj gönderin veya arayın.
+                  </h2>
                 </div>
               </div>
               <div class="row">
                 <div class="col">
                   <form>
-                    <div class="row mb-4">
-                      <div class="col">
+                    <div class="row">
+                      <div class="col-md-12 col-sm-12 mb-3">
                         <div class="form-outline">
                           <input
                             id="form-name"
@@ -149,26 +201,34 @@
                         </div>
                       </div>
                     </div>
-                    <div class="form-outline mb-4">
-                      <input
-                        type="email"
-                        id="form-email"
-                        class="form-control"
-                        placeholder="E-Posta adresi"
-                      />
+                    <div class="row mb-3">
+                      <div class="col">
+                        <div class="form-outline">
+                          <input
+                            type="email"
+                            id="form-email"
+                            class="form-control"
+                            placeholder="Şirket eposta adresi"
+                          />
+                        </div>
+                      </div>
                     </div>
-                    <div class="form-outline mb-5">
-                      <textarea
-                        class="form-control"
-                        id="form-message"
-                        rows="2"
-                        placeholder="Mesajınızı buraya yazınız"
-                      ></textarea>
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-outline mb-3">
+                          <textarea
+                            class="form-control"
+                            id="form-message"
+                            rows="1"
+                            placeholder="Mesajınızı buraya yazınız"
+                          ></textarea>
+                        </div>
+                      </div>
                     </div>
                   </form>
                 </div>
               </div>
-              <div class="row mb-5 pb-5">
+              <div class="row mt-2 last-row">
                 <div class="col d-flex justify-content-end">
                   <div class="next-button" onclick="handleSubmit()">
                     <span>Mesaj gönder </span
@@ -193,8 +253,11 @@
               </div>
             </div>
           </div>
+          <div class="logo-copyright">
+            <span>;proto</span> <span>Copyright 2021</span>
+          </div>
         </div>
       </section>
-    </main>
+    </div>
   </body>
 </html>
