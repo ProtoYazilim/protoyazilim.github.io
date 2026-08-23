@@ -1,0 +1,1562 @@
+// Lightweight i18n for Proto Yazılım site
+(function () {
+  // Use localStorage instead of cookies to avoid third-party cookie issues
+  function setStorage(name, value) {
+    try {
+      localStorage.setItem(name, value);
+    } catch (e) {
+      console.warn("localStorage not available:", e);
+    }
+  }
+
+  function getStorage(name) {
+    try {
+      return localStorage.getItem(name);
+    } catch (e) {
+      console.warn("localStorage not available:", e);
+      return null;
+    }
+  }
+
+  window.__I18N__ = {
+    tr: {
+      langLabel: "Dil",
+      nav_about: "Hakkımızda",
+      nav_projects: "Ürünler",
+      nav_career: "Kariyer",
+      nav_contact: "İletişim",
+      see_products: "Ürünleri Gör",
+      what_we_do: "Ne yapıyoruz?",
+      software_dev: "Yazılım geliştirme",
+      consulting: "Danışmanlık",
+      big_data: "Büyük Veri",
+      digital_solutions: "Dijital çözümler",
+      ai_consulting: "AI Danışmanlığı",
+      custom_solutions: "Özel Çözümler",
+      references: "Referanslar",
+      strong_culture: "Güçlü iş kültürü",
+      together: "Birlikte\nçalışalım",
+      contact_us: "Mesaj gönderin veya arayın.",
+      contact_us_alt: "Bize bir mesaj gönderin veya arayın.",
+      name_placeholder: "Ad soyad",
+      email_placeholder_company: "Şirket eposta adresi",
+      email_placeholder: "E-Posta adresi",
+      message_placeholder: "Mesajınızı buraya yazınız",
+      send_message: "Mesaj gönder",
+      back: "geri dön",
+      detail: "Detay",
+      detail_hide: "Detay Gizle",
+      products_title: "Ürünler",
+      about_title: "Hakkımızda",
+      career_title: "Kariyer",
+      frontend_title: "Arayüz Geliştirici - Title: Frontend Developer",
+      backend_title:
+        "Senior Yazılım Geliştirici - Title: Sr. Backend Developer Java",
+      proto_contact_subject: "Proto İletişim",
+      cv_send: "CV Gönder",
+    },
+    en: {
+      langLabel: "Language",
+      nav_about: "About",
+      nav_projects: "Products",
+      nav_career: "Career",
+      nav_contact: "Contact",
+      see_products: "See Products",
+      what_we_do: "What do we do?",
+      software_dev: "Software development",
+      consulting: "Consulting",
+      big_data: "Big Data",
+      digital_solutions: "Digital solutions",
+      ai_consulting: "AI Consulting",
+      custom_solutions: "Custom Solutions",
+      references: "References",
+      strong_culture: "Strong work culture",
+      together: "Let’s\nwork together",
+      contact_us: "Send a message or call.",
+      contact_us_alt: "Send us a message or call.",
+      name_placeholder: "Full name",
+      email_placeholder_company: "Company email address",
+      email_placeholder: "Email address",
+      message_placeholder: "Write your message here",
+      send_message: "Send message",
+      back: "go back",
+      detail: "Detail",
+      detail_hide: "Hide detail",
+      products_title: "Products",
+      about_title: "About",
+      career_title: "Career",
+      frontend_title: "Frontend Developer",
+      backend_title: "Senior Software Developer - Sr. Backend Developer (Java)",
+      proto_contact_subject: "Proto Contact",
+      cv_send: "Send CV",
+    },
+    de: {
+      langLabel: "Sprache",
+      nav_about: "Über uns",
+      nav_projects: "Produkte",
+      nav_career: "Karriere",
+      nav_contact: "Kontakt",
+      see_products: "Produkte ansehen",
+      what_we_do: "Was machen wir?",
+      software_dev: "Softwareentwicklung",
+      consulting: "Beratung",
+      big_data: "Big Data",
+      digital_solutions: "Digitale Lösungen",
+      ai_consulting: "KI-Beratung",
+      custom_solutions: "Individuelle Lösungen",
+      references: "Referenzen",
+      strong_culture: "Starke Arbeitskultur",
+      together: "Lass uns\nzusammenarbeiten",
+      contact_us: "Nachricht senden oder anrufen.",
+      contact_us_alt: "Senden Sie uns eine Nachricht oder rufen Sie an.",
+      name_placeholder: "Vollständiger Name",
+      email_placeholder_company: "Unternehmens-E-Mail-Adresse",
+      email_placeholder: "E‑Mail‑Adresse",
+      message_placeholder: "Schreiben Sie hier Ihre Nachricht",
+      send_message: "Nachricht senden",
+      back: "zurück",
+      detail: "Details",
+      detail_hide: "Details ausblenden",
+      products_title: "Produkte",
+      about_title: "Über uns",
+      career_title: "Karriere",
+      frontend_title: "Frontend‑Entwickler(in)",
+      backend_title: "Senior Softwareentwickler – Sr. Backend Developer (Java)",
+      proto_contact_subject: "Proto Kontakt",
+      cv_send: "Lebenslauf senden",
+    },
+  };
+
+  function currentLang() {
+    return getStorage("site_lang") || "tr";
+  }
+  function setLang(lang) {
+    setStorage("site_lang", lang);
+  }
+
+  function ensureLangSelector() {
+    try {
+      var nav = document.querySelector(".proto-navbar ul");
+      if (!nav) {
+        console.warn("Language selector: .proto-navbar ul not found");
+        return;
+      }
+      if (document.getElementById("lang-select")) {
+        console.log("Language selector already exists");
+        return;
+      }
+
+      var li = document.createElement("li");
+      li.style.marginLeft = "12px";
+      li.style.display = "flex";
+      li.style.alignItems = "center";
+
+      var sel = document.createElement("select");
+      sel.id = "lang-select";
+      sel.style.background = "rgba(0,0,0,0.3)";
+      sel.style.border = "1px solid rgba(255,255,255,0.6)";
+      sel.style.color = "white";
+      sel.style.padding = "4px 8px";
+      sel.style.borderRadius = "4px";
+      sel.style.fontSize = "14px";
+      sel.style.fontWeight = "500";
+      sel.style.cursor = "pointer";
+      sel.style.outline = "none";
+
+      // Style options for better visibility
+      sel.style.webkitAppearance = "none";
+      sel.style.mozAppearance = "none";
+      sel.style.appearance = "none";
+
+      var opts = [
+        { v: "tr", l: "TR" },
+        { v: "en", l: "EN" },
+        { v: "de", l: "DE" },
+      ];
+      opts.forEach(function (o) {
+        var op = document.createElement("option");
+        op.value = o.v;
+        op.textContent = o.l;
+        op.style.background = "#1e1d1d";
+        op.style.color = "white";
+        sel.appendChild(op);
+      });
+      sel.value = currentLang();
+
+      sel.addEventListener("change", function () {
+        setLang(sel.value);
+        // Refresh the page so all content and routes pick up the new language
+        try {
+          window.location.reload();
+        } catch (e) {
+          applyTranslations();
+        }
+      });
+
+      // Add hover effect
+      sel.addEventListener("mouseenter", function () {
+        sel.style.background = "rgba(0,0,0,0.5)";
+        sel.style.borderColor = "rgba(255,255,255,0.8)";
+      });
+
+      sel.addEventListener("mouseleave", function () {
+        sel.style.background = "rgba(0,0,0,0.3)";
+        sel.style.borderColor = "rgba(255,255,255,0.6)";
+      });
+
+      li.appendChild(sel);
+      nav.appendChild(li);
+      console.log("Language selector created successfully");
+    } catch (e) {
+      console.error("Language selector error:", e);
+    }
+  }
+
+  function tText(key) {
+    var lang = currentLang();
+    var dict = window.__I18N__[lang] || window.__I18N__.tr;
+    var phrases = window.__I18N_PHRASES__ || {};
+
+    // First check in phrases object
+    if (phrases[key] && phrases[key][lang]) {
+      return phrases[key][lang];
+    }
+
+    // Then check in main dict
+    return dict[key] || key;
+  }
+
+  function translateCommon() {
+    var lang = currentLang();
+    var dict = window.__I18N__[lang] || window.__I18N__.tr;
+    try {
+      document.documentElement.setAttribute("lang", lang);
+    } catch (e) {}
+    var m = {
+      "/about.html": "nav_about",
+      "/projects.html": "nav_projects",
+      "/career.html": "nav_career",
+      "/contact.html": "nav_contact",
+    };
+    Object.keys(m).forEach(function (href) {
+      var a = document.querySelector('.proto-navbar a[href="' + href + '"]');
+      if (a) {
+        a.textContent = dict[m[href]];
+        a.style.whiteSpace = "nowrap";
+      }
+    });
+    document
+      .querySelectorAll("#footer-contact .phrase, #contact .phrase")
+      .forEach(function (el) {
+        el.innerHTML = dict.together.replace("\n", "<br />");
+      });
+    document.querySelectorAll(".contact-address").forEach(function (el) {
+      el.textContent = el.textContent.includes("Bize")
+        ? dict.contact_us_alt
+        : dict.contact_us;
+    });
+    ["form-name", "form-email", "form-message"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      var key =
+        id === "form-name"
+          ? "name_placeholder"
+          : id === "form-email"
+          ? el.placeholder && el.placeholder.toLowerCase().includes("şirket")
+            ? "email_placeholder_company"
+            : "email_placeholder"
+          : "message_placeholder";
+      el.placeholder = dict[key];
+    });
+    document.querySelectorAll(".next-button span").forEach(function (el) {
+      el.textContent = dict.send_message;
+    });
+    // Translate all back buttons (contact page and product pages)
+    document.querySelectorAll(".back-button span").forEach(function (el) {
+      el.textContent = dict.back;
+    });
+    var h2s = document.querySelectorAll("h2");
+    h2s.forEach(function (h) {
+      var t = h.textContent.trim();
+      if (t === "Ne yapıyoruz?") h.textContent = dict.what_we_do;
+      if (t === "Referanslar") h.textContent = dict.references;
+      if (t === "Güçlü iş kültürü") h.textContent = dict.strong_culture;
+    });
+    var h1s = document.querySelectorAll("h1");
+    h1s.forEach(function (h) {
+      var t = h.textContent.trim();
+      if (t === "Ürünler") h.textContent = dict.products_title;
+      if (t === "Hakkımızda") h.textContent = dict.about_title;
+      if (t === "Kariyer") h.textContent = dict.career_title;
+    });
+    document
+      .querySelectorAll(".project-button span, .detail-button span")
+      .forEach(function (el) {
+        if (el.textContent.trim().startsWith("Detay"))
+          el.textContent = dict.detail;
+      });
+    window.__I18N_TOGGLE_OPEN__ = dict.detail;
+    window.__I18N_TOGGLE_CLOSE__ = dict.detail_hide;
+  }
+
+  function translateSpecificContent() {
+    var lang = currentLang();
+    var mapTitles = {
+      "Galata İzleme Platformu": {
+        en: "Galata Monitoring Platform",
+        de: "Galata Überwachungs plattform",
+      },
+      "Lepton Framework": { en: "Lepton Framework", de: "Lepton Framework" },
+      "Proton Mesaj Yönetim Platformu": {
+        en: "Proton Message Management Platform",
+        de: "Proton Nachrichten verwaltungs plattform",
+      },
+      SailOps: { en: "SailOps", de: "SailOps" },
+      ChattyFire: { en: "ChattyFire", de: "ChattyFire" },
+      "SailOps Marketplace": { en: "SailOps Marketplace", de: "SailOps Marketplace" },
+      TemporaPDF: { en: "TemporaPDF", de: "TemporaPDF" },
+    };
+    document.querySelectorAll(".project-title h1, .project-card h1").forEach(function (el) {
+      var t = el.textContent.trim();
+      if (mapTitles[t]) {
+        el.textContent = mapTitles[t][lang] || t;
+      }
+    });
+
+    // Translate product descriptions - direct mapping
+    var productDescriptions = {
+      "Galata İzleme Platformu, kurumunuzda bulunan tüm uygulamaların ürettiği log'ların ilgili sunuculardan toplanıp, merkezi bir log cluster'ında indekslenmesine ve bu log'ların gerçek zamanlı olarak analiz edilmesine olanak sağlar.":
+        {
+          en: "Galata Monitoring Platform collects logs from your applications, indexes them in a central log cluster, and enables real‑time analysis.",
+          de: "Die Galata‑Überwachungs plattform sammelt Logs Ihrer Anwendungen, indexiert sie in einem zentralen Log‑Cluster und ermöglicht Echtzeitanalysen.",
+        },
+      "Lepton Framework, mobil ve web uygulamalarınızı aynı çatı altında kolaylıkla geliştirmenizi sağlayan bir üründür. Lepton komponentleri kullanılarak, projelerin mobil-web uygulamaları platform bağımsız ve ek maliyet olmadan eş zamanlı geliştirilebilir. Dokümantasyonu ve örnek projeleri ile hızlı başlangıçlara olanak sağlar.":
+        {
+          en: "Lepton Framework lets you easily build mobile and web apps under one roof. Using Lepton components, mobile and web apps can be developed simultaneously, platform‑independently, and without extra cost. Its documentation and sample projects enable fast starts.",
+          de: "Mit dem Lepton Framework entwickeln Sie Mobile‑ und Web‑Apps einfach unter einem Dach. Mit Lepton‑Komponenten können Mobile‑ und Web‑Apps plattformunabhängig und ohne zusätzliche Kosten parallel entwickelt werden. Dokumentation und Beispielprojekte ermöglichen einen schnellen Einstieg.",
+        },
+      "Proton Mesaj Yönetim Platformu; kullanıcılarınıza göndereceğiniz milyonlarca e-posta, SMS ve anlık bildirimi tasarlayıp, hızlı ve sorunsuz iletebileceğiniz, kullanıcı-bildirim etkileşimlerini raporlayabileceğiniz, altyapınıza veya bulut hesabınıza kurabileceğiniz bir mesaj yönetim platformudur. Proton, toplu mesaj gönderme yeteneğinin yanında, sağladığı API'ler aracılığı ile gerçek zamanlı bildirim gönderme yeteneğine de sahiptir.":
+        {
+          en: "Proton Message Management Platform lets you design, send, and report millions of emails, SMS, and push notifications quickly and reliably. It can be deployed on your infrastructure or cloud account. Beyond bulk messaging, Proton provides APIs for real‑time notifications.",
+          de: "Die Proton Nachrichten verwaltungs plattform ermöglicht das Entwerfen, Versenden und Auswerten von Millionen E‑Mails, SMS und Push‑Benachrichtigungen – schnell und zuverlässig. Deployments sind on‑premises oder in Ihrer Cloud möglich. Neben Massenversand bietet Proton APIs für Echtzeit‑Benachrichtigungen.",
+        },
+      "SailOps, yat kiralama şirketleri ve filo operatörleri için uçtan uca operasyon platformudur. Filo durumu, dijital check-in/out, envanter, bakım, dokümanlar ve çoklu üs koordinasyonunu tek bir yerde merkezileştirir.":
+        {
+          en: "SailOps is an end-to-end operations platform for yacht charter companies and fleet operators. It centralizes fleet status, digital check‑in/out, inventory, maintenance, documents, and multi‑base coordination—into one place.",
+          de: "SailOps ist eine End-to-End-Betriebsplattform für Yachtcharterunternehmen und Flottenbetreiber. Es zentralisiert Flottenstatus, digitales Check-in/out, Inventar, Wartung, Dokumente und Multi-Basis-Koordination an einem Ort.",
+        },
+      "ChattyFire, kurumsal düzeyde bir AI asistan platformudur. Çoklu LLM provider desteği, gelişmiş RAG özellikleri, esnek plugin sistemi ve çoklu agent orkestrasyonu ile güçlü bir AI chat ve doküman yönetim sistemi sunar.":
+        {
+          en: "ChattyFire is an enterprise-grade AI assistant platform. It offers a powerful AI chat and document management system with multi-LLM provider support, advanced RAG capabilities, a flexible plugin system, and multi-agent orchestration.",
+          de: "ChattyFire ist eine KI-Assistenzplattform auf Unternehmensniveau. Sie bietet ein leistungsstarkes KI-Chat- und Dokumentenmanagementsystem mit Multi-LLM-Provider-Unterstützung, erweiterten RAG-Funktionen, einem flexiblen Plugin-System und Multi-Agent-Orchestrierung.",
+        },
+      "TemporaPDF, kod yazmadan PDF şablonu tasarlama, versiyonlama, onaylama ve toplu üretim sağlayan kurumsal bir platformdur. Görsel tasarımcı, onay iş akışları ve bileşen kütüphanesi ile PDF üretim sürecinizi tamamen kontrolünüze bırakır.":
+        {
+          en: "TemporaPDF is an enterprise platform for designing, versioning, approving, and bulk-generating PDF templates without writing code. With its visual designer, approval workflows, and component library, it puts your PDF generation process fully under your control.",
+          de: "TemporaPDF ist eine Unternehmensplattform zum Gestalten, Versionieren, Genehmigen und massenhaften Erzeugen von PDF-Vorlagen ohne Programmierung. Mit visuellem Designer, Genehmigungs-Workflows und Komponentenbibliothek behalten Sie die volle Kontrolle über Ihren PDF-Erstellungsprozess.",
+        },
+    };
+
+    // Only translate product descriptions if not Turkish
+    if (lang !== "tr") {
+      document.querySelectorAll(".project-info p").forEach(function (el) {
+        var originalText = el.textContent || el.innerText || "";
+        var normalized = originalText.replace(/\s+/g, " ").trim();
+
+        // Try direct match
+        if (normalized && productDescriptions[normalized]) {
+          var translation = productDescriptions[normalized][lang];
+          if (translation) {
+            el.textContent = translation;
+          }
+        }
+      });
+    }
+
+    // Translate projects page intro
+    if (lang !== "tr") {
+      var projectPhrase = document.querySelector(".project-container .phrase");
+      if (projectPhrase) {
+        var introText =
+          "Proto Yazılım ürünleri; mühendislerimizin özgün fikirleri ile kullanıcı deneyimleri dikkate alınarak oluşturulmuştur. Ürünlerimiz, güncel teknolojiye dayanan alt yapıları ile geliştirilmeye uygun olup; ürünlerimizin kurulumu, kullanımı ve işletilmeleri kolaydır.";
+        var introTranslations = {
+          en: "Proto Yazılım products are created with our engineers' original ideas and with user experience in mind. Built on modern technology, our products are easy to develop on, install, use, and operate.",
+          de: "Proto Yazılım‑Produkte entstehen aus den originellen Ideen unserer Ingenieur:innen und mit Fokus auf das Nutzererlebnis. Auf moderner Technologie aufgebaut, sind sie leicht erweiterbar, zu installieren, zu nutzen und zu betreiben.",
+        };
+
+        var phraseText = projectPhrase.textContent.replace(/\s+/g, " ").trim();
+        if (phraseText === introText && introTranslations[lang]) {
+          projectPhrase.textContent = introTranslations[lang];
+        }
+      }
+    }
+
+    document
+      .querySelectorAll(".see-products a span.pr-2")
+      .forEach(function (el) {
+        el.textContent = tText("see_products");
+      });
+    var el1 = document.querySelector("#career-page h2");
+    if (el1) {
+      var t = el1.textContent.trim();
+      if (t.indexOf("Arayüz Geliştirici") === 0)
+        el1.textContent = tText("frontend_title");
+    }
+    var els = document.querySelectorAll("#career-page h2");
+    if (els && els.length > 1) {
+      var t2 = els[1].textContent.trim();
+      if (t2.indexOf("Senior Yazılım Geliştirici") === 0)
+        els[1].textContent = tText("backend_title");
+    }
+  }
+
+  function translateMailto() {
+    window.__I18N_MAIL_SUBJECT__ = tText("proto_contact_subject");
+  }
+
+  // Phrase-level translations for full content
+  // Map of exact Turkish snippets to { en, de }
+  window.__I18N_PHRASES__ = {
+    // index - page 1 intro paragraph
+    "Proaktif yaklaşımımızla bilgiye dayanan kapsayıcı fikir ve çözümlerimizi şeffaf bir şekilde iş ortaklarımızla paylaşıyoruz. Teknolojiyi, kullanıcı deneyimi ve görsel tasarım ile birleştirerek optimum değerlerde çalışan yazılımlar üretiyoruz.":
+      {
+        en: "With our proactive approach, we transparently share inclusive, knowledge-based ideas and solutions with our partners. We combine technology with user experience and visual design to produce software that operates at optimal value.",
+        de: "Mit unserem proaktiven Ansatz teilen wir wissensbasierte, ganzheitliche Ideen und Lösungen transparent mit unseren Partnern. Wir verbinden Technologie mit Nutzererlebnis und visuellem Design, um Software mit optimalem Mehrwert zu entwickeln.",
+      },
+    // index - what we do left paragraph
+    "Her işimizde yeni bir vizyon yaratmak ve o vizyonu şekillendirmek için çalışıyoruz. Cesur, meraklı ve tecrübeli ekibimiz ile öğrendiklerimizi beklentileri aşmak için kullanıyoruz.":
+      {
+        en: "In every project, we work to create and shape a new vision. With our bold, curious, and experienced team, we use what we learn to exceed expectations.",
+        de: "In jedem Projekt arbeiten wir daran, eine neue Vision zu schaffen und zu gestalten. Mit unserem mutigen, neugierigen und erfahrenen Team nutzen wir unsere Erkenntnisse, um Erwartungen zu übertreffen.",
+      },
+    // index - service descriptions
+    "İş ortaklarımızın stratejik hedeflerine ve kurumsal yapılarına uygun, uçtan uca eksiksiz yazılımlarla nitelikli çözümler sunuyoruz.":
+      {
+        en: "We deliver high‑quality solutions with end‑to‑end software tailored to our partners’ strategic goals and organizational structures.",
+        de: "Wir liefern hochwertige Lösungen mit End‑to‑End‑Software, die auf die strategischen Ziele und die Organisationsstruktur unserer Partner zugeschnitten ist.",
+      },
+    "Uygulama Geliştirme, Proje Yönetimi, DevOps ve UI/UX projelerinde deneyimli takımımızla beraber yanınızdayız.":
+      {
+        en: "We stand by you with our experienced team in Application Development, Project Management, DevOps, and UI/UX projects.",
+        de: "Wir stehen Ihnen mit unserem erfahrenen Team in Anwendungsentwicklung, Projektmanagement, DevOps und UI/UX‑Projekten zur Seite.",
+      },
+    "Veri platformu altyapılarının kurulması, analiz araçlarının raporlama ve iş zekası çözümleri ile makine öğrenmesi süreçlerinin tanımlanması konularında danışmanlık hizmetleri veriyor ve ürün çözümleri sunuyoruz.":
+      {
+        en: "We provide consultancy and product solutions for setting up data platform infrastructures, defining analytics/reporting and business intelligence solutions, and machine learning processes.",
+        de: "Wir bieten Beratung und Produktlösungen für den Aufbau von Datenplattform‑Infrastrukturen, die Definition von Analyse‑/Reporting‑ und Business‑Intelligence‑Lösungen sowie für Machine‑Learning‑Prozesse.",
+      },
+    "Dağıtık sistem mimarileri, orkestrasyon çözümleri, uçtan uca web ve mobil uygulama-geliştirme konularında hizmet veriyor ve ürün çözümleri sunuyoruz.":
+      {
+        en: "We provide services and product solutions in distributed system architectures, orchestration solutions, and end‑to‑end web and mobile application development.",
+        de: "Wir bieten Dienstleistungen und Produktlösungen für verteilte Systemarchitekturen, Orchestrierungslösungen sowie End‑to‑End‑Web‑ und Mobile‑App‑Entwicklung.",
+      },
+    "Yapay zeka stratejisi, LLM entegrasyonu, RAG sistemleri ve agent orkestrasyonu konularında danışmanlık hizmetleri sunarak işletmelerin AI dönüşümüne rehberlik ediyoruz.":
+      {
+        en: "We guide enterprises through AI transformation by providing consultancy on AI strategy, LLM integration, RAG systems, and agent orchestration.",
+        de: "Wir begleiten Unternehmen bei der KI‑Transformation durch Beratung zu KI‑Strategie, LLM‑Integration, RAG‑Systemen und Agent‑Orchestrierung.",
+      },
+    "İş ortaklarımızın ihtiyaçlarına özel, sıfırdan tasarlanan yazılım çözümleri geliştiriyoruz. Kurumsal süreçlere tam uyumlu, ölçeklenebilir ve sürdürülebilir sistemler sunuyoruz.":
+      {
+        en: "We develop custom software solutions designed from scratch for our partners' specific needs. We deliver scalable and sustainable systems fully aligned with enterprise processes.",
+        de: "Wir entwickeln maßgeschneiderte Softwarelösungen, die von Grund auf für die spezifischen Bedürfnisse unserer Partner konzipiert werden. Wir liefern skalierbare und nachhaltige Systeme, die vollständig auf Unternehmensprozesse abgestimmt sind.",
+      },
+    // index - references description
+    "İş ortaklarımıza, rakiplerinden bir adım önde olma avantajını sağlayacak yenilikçi çözümler sunuyoruz.":
+      {
+        en: "We offer innovative solutions that give our partners the advantage of staying one step ahead of their competitors.",
+        de: "Wir bieten innovative Lösungen, die unseren Partnern den Vorteil verschaffen, ihren Wettbewerbern einen Schritt voraus zu sein.",
+      },
+    // index - strong culture paragraphs
+    "Mutlu bir işyerinin, daha üretken çalışanlar anlamına geldiğini biliyoruz. Çalışanlarımıza, kendilerini; değerli, güvende ve rahat hissettikleri, gelişme fırsatlarıyla dolu bir çalışma ortamı sunuyoruz.":
+      {
+        en: "We know that a happy workplace means more productive employees. We provide our employees with a work environment full of growth opportunities where they feel valued, safe, and comfortable.",
+        de: "Wir wissen, dass ein glücklicher Arbeitsplatz produktivere Mitarbeitende bedeutet. Wir bieten ein Arbeitsumfeld voller Entwicklungsmöglichkeiten, in dem sich unsere Mitarbeitenden wertgeschätzt, sicher und wohl fühlen.",
+      },
+    "Cesur, meraklı, tecrübeli ekibimiz ile yeniyi, hep daha iyiyi hedefliyor ve öğrendiklerimizi, beklentileri aşmak için kullanıyoruz.":
+      {
+        en: "With our bold, curious, and experienced team, we always aim for the new and the better, using what we learn to exceed expectations.",
+        de: "Mit unserem mutigen, neugierigen und erfahrenen Team streben wir stets nach Neuem und Besserem und nutzen unsere Erkenntnisse, um Erwartungen zu übertreffen.",
+      },
+    "Sonuç odaklı bakış açımızla ürünlerimizi tecrübemizle birleştirip, iş ortaklarımıza kesintisiz ve üretken çözümlerle destek veriyoruz.":
+      {
+        en: "With our result‑oriented approach, we combine our products with our experience and support our partners with seamless and productive solutions.",
+        de: "Mit unserem ergebnisorientierten Ansatz verbinden wir unsere Produkte mit unserer Erfahrung und unterstützen unsere Partner mit nahtlosen und produktiven Lösungen.",
+      },
+    "Yaratıcı ve çözüm odaklı yapımızla iş ortaklarımıza dünya standartlarında yazılımlara sahip olma deneyimi yaşatıyoruz.":
+      {
+        en: "With our creative and solution‑oriented structure, we enable our partners to experience world‑class software.",
+        de: "Mit unserer kreativen und lösungsorientierten Ausrichtung ermöglichen wir unseren Partnern Software auf Weltklasseniveau.",
+      },
+    // projects page intro
+    "Proto Yazılım ürünleri; mühendislerimizin özgün fikirleri ile kullanıcı deneyimleri dikkate alınarak oluşturulmuştur. Ürünlerimiz, güncel teknolojiye dayanan alt yapıları ile geliştirilmeye uygun olup; ürünlerimizin kurulumu, kullanımı ve işletilmeleri kolaydır.":
+      {
+        en: "Proto Yazılım products are created with our engineers’ original ideas and with user experience in mind. Built on modern technology, our products are easy to develop on, install, use, and operate.",
+        de: "Proto Yazılım‑Produkte entstehen aus den originellen Ideen unserer Ingenieur:innen und mit Fokus auf das Nutzererlebnis. Auf moderner Technologie aufgebaut, sind sie leicht erweiterbar, zu installieren, zu nutzen und zu betreiben.",
+      },
+    // product cards brief
+    "Galata İzleme Platformu, kurumunuzda bulunan tüm uygulamaların ürettiği log’ların ilgili sunuculardan toplanıp, merkezi bir log cluster’ında indekslenmesine ve bu log’ların gerçek zamanlı olarak analiz edilmesine olanak sağlar.":
+      {
+        en: "Galata Monitoring Platform collects logs from your applications, indexes them in a central log cluster, and enables real‑time analysis.",
+        de: "Die Galata‑Überwachungsplattform sammelt Logs Ihrer Anwendungen, indexiert sie in einem zentralen Log‑Cluster und ermöglicht Echtzeitanalysen.",
+      },
+    "Lepton Framework, mobil ve web uygulamalarınızı aynı çatı altında kolaylıkla geliştirmenizi sağlayan bir üründür. Lepton komponentleri kullanılarak, projelerin mobil-web uygulamaları platform bağımsız ve ek maliyet olmadan eş zamanlı geliştirilebilir. Dokümantasyonu ve örnek projeleri ile hızlı başlangıçlara olanak sağlar.":
+      {
+        en: "Lepton Framework lets you easily build mobile and web apps under one roof. Using Lepton components, mobile and web apps can be developed simultaneously, platform‑independently, and without extra cost. Its documentation and sample projects enable fast starts.",
+        de: "Mit dem Lepton Framework entwickeln Sie Mobile‑ und Web‑Apps einfach unter einem Dach. Mit Lepton‑Komponenten können Mobile‑ und Web‑Apps plattformunabhängig und ohne zusätzliche Kosten parallel entwickelt werden. Dokumentation und Beispielprojekte ermöglichen einen schnellen Einstieg.",
+      },
+    "Proton Mesaj Yönetim Platformu; kullanıcılarınıza göndereceğiniz milyonlarca e-posta, SMS ve anlık bildirimi tasarlayıp, hızlı ve sorunsuz iletebileceğiniz, kullanıcı-bildirim etkileşimlerini raporlayabileceğiniz, altyapınıza veya bulut hesabınıza kurabileceğiniz bir mesaj yönetim platformudur. Proton, toplu mesaj gönderme yeteneğinin yanında, sağladığı API’ler aracılığı ile gerçek zamanlı bildirim gönderme yeteneğine de sahiptir.":
+      {
+        en: "Proton Message Management Platform lets you design, send, and report millions of emails, SMS, and push notifications quickly and reliably. It can be deployed on your infrastructure or cloud account. Beyond bulk messaging, Proton provides APIs for real‑time notifications.",
+        de: "Die Proton Nachrichten verwaltungs plattform ermöglicht das Entwerfen, Versenden und Auswerten von Millionen E‑Mails, SMS und Push‑Benachrichtigungen – schnell und zuverlässig. Deployments sind on‑premises oder in Ihrer Cloud möglich. Neben Massenversand bietet Proton APIs für Echtzeit‑Benachrichtigungen.",
+      },
+    // contact page heading variant
+    "Mesaj gönderin veya arayın.": {
+      en: "Send a message or call.",
+      de: "Nachricht senden oder anrufen.",
+    },
+    // index - page 1 header
+    "Yeniyi ve daha iyiyi hedefliyoruz": {
+      en: "We aim for the new and the better",
+      de: "Wir streben nach Neuem und Besserem",
+    },
+    // index - strong culture item titles
+    "Deneyimli takım": {
+      en: "Experienced team",
+      de: "Erfahrenes Team",
+    },
+    "Müşteri desteği": {
+      en: "Customer support",
+      de: "Kundensupport",
+    },
+    "Müşteri odaklı çözümler": {
+      en: "Customer‑centric solutions",
+      de: "Kundenorientierte Lösungen",
+    },
+    // career page phrases
+    "Her geçen gün büyüyen ekibimizde yerini almak ister misin? Hemen iletişime geç.":
+      {
+        en: "Would you like to join our ever‑growing team? Get in touch now.",
+        de: "Möchtest du Teil unseres stetig wachsenden Teams werden? Melde dich jetzt.",
+      },
+    "Deneyimli ve dinamik organizasyonumuzda bizimle birlikte yer alacak Frontend Developer takım arkadaşı aramaktayız.":
+      {
+        en: "We are looking for a Frontend Developer teammate to join our experienced and dynamic organization.",
+        de: "Wir suchen eine(n) Frontend‑Entwickler(in), die/der unser erfahrenes und dynamisches Team verstärkt.",
+      },
+    "Deneyimli ve dinamik organizasyonumuzda bizimle birlikte yer alacak Java Developer takım arkadaşı aramaktayız.":
+      {
+        en: "We are looking for a Java Developer teammate to join our experienced and dynamic organization.",
+        de: "Wir suchen eine(n) Java‑Entwickler(in), die/der unser erfahrenes und dynamisches Team verstärkt.",
+      },
+    // about page content
+    "Proto Yazılım; yazılım profesyonelleri tarafından kurulmuş bir teknoloji şirketi olup; yazılım geliştirme, danışmanlık, dijital çözümler ve sistem entegrasyonu konularında hizmet vermektedir. Çözüm odaklı yapısını koruyarak, katma değerli ürün ve hizmet üretmeyi hedef olarak benimseyen Proto Yazılım; iş ortaklarının ihtiyaçları doğrultusunda, yenilikçi ürünleri ile güncel teknolojiye uygun çözümler sunmaktadır.":
+      {
+        en: "Proto Yazılım is a technology company founded by software professionals; providing services in software development, consulting, digital solutions and system integration. Maintaining its solution-oriented structure, Proto Yazılım adopts producing value-added products and services as its goal; offering solutions suitable for current technology with innovative products in line with the needs of its business partners.",
+        de: "Proto Yazılım ist ein Technologieunternehmen, das von Softwareprofis gegründet wurde und Dienstleistungen in den Bereichen Softwareentwicklung, Beratung, digitale Lösungen und Systemintegration anbietet. Proto Yazılım, der seine lösungsorientierte Struktur bewahrt, hat sich zum Ziel gesetzt, Mehrwertprodukte und -dienstleistungen zu produzieren; und bietet Lösungen, die der aktuellen Technologie entsprechen, mit innovativen Produkten entsprechend den Bedürfnissen seiner Geschäftspartner.",
+      },
+    // career page job requirements - Frontend
+    "Üniversitelerin ilgili bölümlerinden mezun Javascript Framework'leri ile ilgili en az 2 yıllık deneyim sahibi Javascript, HTML, CSS ve SASS konularında bilgi sahibi Tercihen React bilgisine sahip, (NodeJS, AngularJS, ReactJS, VueJS, KnockoutJS vb.) Tercihen Native Mobile Javascript Framework'leri ile ilgili deneyim sahibi Javascript ortamına hakim, (Webpack, Bower, Npm, Grunt, ESLint, Node.js, Metro vb.) İyi seviyede İngilizce bilen Danışmanlık ekibimizde yer alarak müşteri yönetimine destek verebilecek İletişime açık, problem çözme becerisi gelişmiş, takım oyuncusu Sorumluluk alan ve kendisini sürekli geliştiren; araştırmacı Yeniliklere açık, öğrenmek ve öğretmek konusunda hevesli":
+      {
+        en: "Graduate from relevant university departments At least 2 years of experience with Javascript Frameworks Knowledge of Javascript, HTML, CSS and SASS Preferably experienced with React (NodeJS, AngularJS, ReactJS, VueJS, KnockoutJS, etc.) Preferably experienced with Native Mobile Javascript Frameworks Proficient in Javascript environment (Webpack, Bower, Npm, Grunt, ESLint, Node.js, Metro, etc.) Good level of English Be able to support customer management by taking part in our consulting team Open to communication, strong problem solving skills, team player Takes responsibility and continuously improves oneself; researcher Open to innovation, eager to learn and teach",
+        de: "Abschluss relevanter Universitätsfakultäten Mindestens 2 Jahre Erfahrung mit Javascript‑Frameworks Kenntnisse in Javascript, HTML, CSS und SASS Vorzugsweise Erfahrung mit React (NodeJS, AngularJS, ReactJS, VueJS, KnockoutJS usw.) Vorzugsweise Erfahrung mit Native Mobile Javascript Frameworks Vertraut mit der Javascript‑Umgebung (Webpack, Bower, Npm, Grunt, ESLint, Node.js, Metro usw.) Gute Englischkenntnisse In der Lage, die Kundenverwaltung durch Teilnahme an unserem Beratungsteam zu unterstützen Kommunikativ, ausgeprägte Problemlösungsfähigkeit, Teamplayer Übernimmt Verantwortung und entwickelt sich kontinuierlich weiter; forschend Offen für Innovation, lernbegierig und lehrfreudig",
+      },
+    // career page job requirements - Backend
+    "Üniversitelerin ilgili bölümlerinden mezun Tercihen master derecesine sahip Konusunda en az 3 yıllık deneyime sahibi Java ve Spring Framework teknolojilerine hakim OOP, Design Pattern'ler, Test Driven Development ve Unit Test konularına hakim RDBMS ve NoSql konularında deneyimli CI/CD konularında deneyimli Tercihen Cloud teknolojileri ile çalışmış Agile metodolojileri ileilgili deneyimli İyi seviyede İngilizce bilen Danışmanlık ekibimizde yer alarak müşteri yönetimine destek verebilecek İletişime açık, problem çözme becerisi gelişmiş, takım oyuncusu Sorumluluk alan ve kendisini sürekli geliştiren; araştırmacı Yeniliklere açık, öğrenmek ve öğretmek konusunda hevesli":
+      {
+        en: "Graduate from relevant university departments Preferably holding a master's degree At least 3 years of experience in the field Proficient in Java and Spring Framework technologies Knowledgeable in OOP, Design Patterns, Test Driven Development and Unit Testing Experienced in RDBMS and NoSQL Experienced in CI/CD Preferably worked with Cloud technologies Experienced with Agile methodologies Good level of English Be able to support customer management by taking part in our consulting team Open to communication, strong problem solving skills, team player Takes responsibility and continuously improves oneself; researcher Open to innovation, eager to learn and teach",
+        de: "Abschluss relevanter Universitätsfakultäten Vorzugsweise Master‑Abschluss Mindestens 3 Jahre Erfahrung im Bereich Versiert in Java‑ und Spring‑Framework‑Technologien Kenntnisse in OOP, Design Patterns, Test Driven Development und Unit Testing Erfahren in RDBMS und NoSQL Erfahren in CI/CD Vorzugsweise Erfahrung mit Cloud‑Technologien Erfahren mit agilen Methoden Gute Englischkenntnisse In der Lage, die Kundenverwaltung durch Teilnahme an unserem Beratungsteam zu unterstützen Kommunikativ, ausgeprägte Problemlösungsfähigkeit, Teamplayer Übernimmt Verantwortung und entwickelt sich kontinuierlich weiter; forschend Offen für Innovation, lernbegierig und lehrfreudig",
+      },
+  };
+
+  function translateByPhrase() {
+    var lang = currentLang();
+    if (lang === "tr") return; // no-op for Turkish
+    var dict = window.__I18N_PHRASES__ || {};
+    // Walk text nodes inside main content areas
+    var root = document.getElementById("swup") || document.body;
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (n) {
+        if (!n.nodeValue) return NodeFilter.FILTER_REJECT;
+        var t = n.nodeValue.replace(/\s+/g, " ").trim();
+        if (!t) return NodeFilter.FILTER_REJECT;
+        // only consider reasonably long texts to avoid changing tiny labels handled elsewhere
+        if (t.length < 3) return NodeFilter.FILTER_REJECT;
+        return dict[t] ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_SKIP;
+      },
+    });
+    var node;
+    var changed = 0;
+    while ((node = walker.nextNode())) {
+      var originalRaw = node.nodeValue;
+      var originalNorm = originalRaw.replace(/\s+/g, " ").trim();
+      var trans = dict[originalNorm] && dict[originalNorm][lang];
+      if (trans) {
+        // preserve surrounding whitespace of the text node
+        var leading = originalRaw.match(/^\s*/)[0];
+        var trailing = originalRaw.match(/\s*$/)[0];
+        node.nodeValue = leading + trans + trailing;
+        changed++;
+      }
+    }
+    // Also adjust some exact heading/label elements whose innerText equals a known key
+    Object.keys(dict).forEach(function (k) {
+      var all = document.querySelectorAll("*");
+      for (var i = 0; i < all.length; i++) {
+        var el = all[i];
+        if (el.children && el.children.length) continue;
+        var txt = (el.innerText || "").replace(/\s+/g, " ").trim();
+        if (txt === k) {
+          el.innerText = dict[k][lang];
+        }
+      }
+    });
+  }
+
+  // Explicit bindings for index.html to use global variables for all static texts
+  function bindIndex() {
+    try {
+      var lang = currentLang();
+      // Page 1 header
+      var p1h = document.querySelector(".page-1 h2");
+      if (p1h) p1h.textContent = tText("Yeniyi ve daha iyiyi hedefliyoruz");
+
+      // Service titles - What we do section
+      var serviceTitles = document.querySelectorAll(".page-2 h4");
+      serviceTitles.forEach(function (h4) {
+        var titleText = h4.textContent.trim();
+        if (titleText === "Yazılım geliştirme") {
+          h4.textContent = tText("software_dev");
+        } else if (titleText === "Danışmanlık") {
+          h4.textContent = tText("consulting");
+        } else if (titleText === "Büyük Veri") {
+          h4.textContent = tText("big_data");
+        } else if (titleText === "Dijital çözümler") {
+          h4.textContent = tText("digital_solutions");
+        } else if (titleText === "AI Danışmanlığı") {
+          h4.textContent = tText("ai_consulting");
+        } else if (titleText === "Özel Çözümler") {
+          h4.textContent = tText("custom_solutions");
+        }
+      });
+
+      // Strong culture main title
+      var strongCultureTitle = document.querySelector(".page-4 h2");
+      if (strongCultureTitle)
+        strongCultureTitle.textContent = tText("strong_culture");
+
+      // Strong culture main paragraph
+      var strongCulturePara = document.querySelector(
+        ".page-4 .col-lg-4.col-md-12 p"
+      );
+      if (strongCulturePara) {
+        strongCulturePara.textContent = tText(
+          "Mutlu bir işyerinin, daha üretken çalışanlar anlamına geldiğini biliyoruz. Çalışanlarımıza, kendilerini; değerli, güvende ve rahat hissettikleri, gelişme fırsatlarıyla dolu bir çalışma ortamı sunuyoruz."
+        );
+      }
+
+      // Strong culture block titles and subtitles
+      var centerItem = document.querySelector(".page-4 .center-context.item");
+      if (centerItem) {
+        var h4 = centerItem.querySelector("h4");
+        var p = centerItem.querySelector("p.subtitle");
+        if (h4) h4.textContent = tText("Deneyimli takım");
+        if (p)
+          p.textContent = tText(
+            "Cesur, meraklı, tecrübeli ekibimiz ile yeniyi, hep daha iyiyi hedefliyor ve öğrendiklerimizi, beklentileri aşmak için kullanıyoruz."
+          );
+      }
+      var supportItem = document.querySelectorAll(".page-4 .item")[1];
+      if (supportItem) {
+        var h4s = supportItem.querySelector("h4");
+        var ps = supportItem.querySelector("p.subtitle");
+        if (h4s) h4s.textContent = tText("Müşteri desteği");
+        if (ps)
+          ps.textContent = tText(
+            "Sonuç odaklı bakış açımızla ürünlerimizi tecrübemizle birleştirip, iş ortaklarımıza kesintisiz ve üretken çözümlerle destek veriyoruz."
+          );
+      }
+      var customerItem = document.querySelectorAll(".page-4 .item")[2];
+      if (customerItem) {
+        var h4c = customerItem.querySelector("h4");
+        var pc = customerItem.querySelector("p.subtitle");
+        if (h4c) h4c.textContent = tText("Müşteri odaklı çözümler");
+        if (pc)
+          pc.textContent = tText(
+            "Yaratıcı ve çözüm odaklı yapımızla iş ortaklarımıza dünya standartlarında yazılımlara sahip olma deneyimi yaşatıyoruz."
+          );
+      }
+    } catch (e) {}
+  }
+
+  // Explicit bindings for about.html
+  function bindAbout() {
+    try {
+      var lang = currentLang();
+
+      // About page main title
+      var aboutTitle = document.querySelector(".about-container h1");
+      if (aboutTitle) aboutTitle.textContent = tText("about_title");
+
+      // About page main content
+      var aboutContent = document.querySelector(".about-container .content");
+      if (aboutContent) {
+        aboutContent.textContent = tText(
+          "Proto Yazılım; yazılım profesyonelleri tarafından kurulmuş bir teknoloji şirketi olup; yazılım geliştirme, danışmanlık, dijital çözümler ve sistem entegrasyonu konularında hizmet vermektedir. Çözüm odaklı yapısını koruyarak, katma değerli ürün ve hizmet üretmeyi hedef olarak benimseyen Proto Yazılım; iş ortaklarının ihtiyaçları doğrultusunda, yenilikçi ürünleri ile güncel teknolojiye uygun çözümler sunmaktadır."
+        );
+      }
+    } catch (e) {}
+  }
+
+  // Explicit bindings for career.html
+  function bindCareer() {
+    try {
+      var lang = currentLang();
+
+      // Only run if we're on the career page
+      if (!document.querySelector("#career-page")) return;
+
+      // Career page main title
+      var careerTitle = document.querySelector("#career-page h1");
+      if (careerTitle) careerTitle.textContent = tText("career_title");
+
+      // Career page main phrase
+      var careerPhrase = document.querySelector("#career-page .phrase");
+      if (careerPhrase) {
+        careerPhrase.textContent = tText(
+          "Her geçen gün büyüyen ekibimizde yerini almak ister misin? Hemen iletişime geç."
+        );
+      }
+
+      // CV Send buttons
+      var cvButtons = document.querySelectorAll(".cv-button a");
+      cvButtons.forEach(function (btn) {
+        var btnText = btn.textContent.trim();
+        if (
+          btnText === "CV Gönder" ||
+          btnText === "Send CV" ||
+          btnText === "Lebenslauf senden"
+        ) {
+          btn.textContent = tText("cv_send");
+        }
+      });
+
+      // Detail toggle buttons - translate the initial "Detay" text
+      var detailButtons = document.querySelectorAll(".detail-button span");
+      detailButtons.forEach(function (span) {
+        var spanText = span.textContent.trim();
+        if (
+          spanText === "Detay" ||
+          spanText === "Detail" ||
+          spanText === "Details"
+        ) {
+          span.textContent = tText("detail");
+        } else if (
+          spanText === "Detay Gizle" ||
+          spanText === "Hide detail" ||
+          spanText === "Details ausblenden"
+        ) {
+          span.textContent = tText("detail_hide");
+        }
+      });
+
+      // Job details - Frontend
+      var frontendDetails = document.querySelector("#detail-01 .detail");
+      if (frontendDetails) {
+        // For English
+        if (lang === "en") {
+          var lines = [
+            "Graduate from relevant university departments",
+            "At least 2 years of experience with Javascript Frameworks",
+            "Knowledge of Javascript, HTML, CSS and SASS",
+            "Preferably experienced with React (NodeJS, AngularJS, ReactJS, VueJS, KnockoutJS, etc.)",
+            "Preferably experienced with Native Mobile Javascript Frameworks",
+            "Proficient in Javascript environment (Webpack, Bower, Npm, Grunt, ESLint, Node.js, Metro, etc.)",
+            "Good level of English",
+            "Be able to support customer management by taking part in our consulting team",
+            "Open to communication, strong problem solving skills, team player",
+            "Takes responsibility and continuously improves oneself; researcher",
+            "Open to innovation, eager to learn and teach",
+          ];
+          frontendDetails.innerHTML = lines.join(" <br />");
+        }
+        // For German
+        else if (lang === "de") {
+          var linesDE = [
+            "Abschluss relevanter Universitätsfakultäten",
+            "Mindestens 2 Jahre Erfahrung mit Javascript‑Frameworks",
+            "Kenntnisse in Javascript, HTML, CSS und SASS",
+            "Vorzugsweise Erfahrung mit React (NodeJS, AngularJS, ReactJS, VueJS, KnockoutJS usw.)",
+            "Vorzugsweise Erfahrung mit Native Mobile Javascript Frameworks",
+            "Vertraut mit der Javascript‑Umgebung (Webpack, Bower, Npm, Grunt, ESLint, Node.js, Metro usw.)",
+            "Gute Englischkenntnisse",
+            "In der Lage, die Kundenverwaltung durch Teilnahme an unserem Beratungsteam zu unterstützen",
+            "Kommunikativ, ausgeprägte Problemlösungsfähigkeit, Teamplayer",
+            "Übernimmt Verantwortung und entwickelt sich kontinuierlich weiter; forschend",
+            "Offen für Innovation, lernbegierig und lehrfreudig",
+          ];
+          frontendDetails.innerHTML = linesDE.join(" <br />");
+        }
+      }
+
+      // Job details - Backend
+      var backendDetails = document.querySelector("#detail-02 .detail");
+      if (backendDetails) {
+        // For English
+        if (lang === "en") {
+          var linesEN2 = [
+            "Graduate from relevant university departments",
+            "Preferably holding a master's degree",
+            "At least 3 years of experience in the field",
+            "Proficient in Java and Spring Framework technologies",
+            "Knowledgeable in OOP, Design Patterns, Test Driven Development and Unit Testing",
+            "Experienced in RDBMS and NoSQL",
+            "Experienced in CI/CD",
+            "Preferably worked with Cloud technologies",
+            "Experienced with Agile methodologies",
+            "Good level of English",
+            "Be able to support customer management by taking part in our consulting team",
+            "Open to communication, strong problem solving skills, team player",
+            "Takes responsibility and continuously improves oneself; researcher",
+            "Open to innovation, eager to learn and teach",
+          ];
+          backendDetails.innerHTML = linesEN2.join(" <br />");
+        }
+        // For German
+        else if (lang === "de") {
+          var linesDE2 = [
+            "Abschluss relevanter Universitätsfakultäten",
+            "Vorzugsweise Master‑Abschluss",
+            "Mindestens 3 Jahre Erfahrung im Bereich",
+            "Versiert in Java‑ und Spring‑Framework‑Technologien",
+            "Kenntnisse in OOP, Design Patterns, Test Driven Development und Unit Testing",
+            "Erfahren in RDBMS und NoSQL",
+            "Erfahren in CI/CD",
+            "Vorzugsweise Erfahrung mit Cloud‑Technologien",
+            "Erfahren mit agilen Methoden",
+            "Gute Englischkenntnisse",
+            "In der Lage, die Kundenverwaltung durch Teilnahme an unserem Beratungsteam zu unterstützen",
+            "Kommunikativ, ausgeprägte Problemlösungsfähigkeit, Teamplayer",
+            "Übernimmt Verantwortung und entwickelt sich kontinuierlich weiter; forschend",
+            "Offen für Innovation, lernbegierig und lehrfreudig",
+          ];
+          backendDetails.innerHTML = linesDE2.join(" <br />");
+        }
+      }
+    } catch (e) {}
+  }
+
+  // Explicit bindings for galata.html and other product pages
+  function bindProductPages() {
+    try {
+      var lang = currentLang();
+      if (lang === "tr") return;
+
+      // Check if we're on a product detail page
+      var isProductPage = document.querySelector(".project-pages");
+      if (!isProductPage) return;
+
+      // All product pages translations (Galata, Lepton, Proton)
+      var productTranslations = {
+        "Kolay kurulum": {
+          en: "Easy Installation",
+          de: "Einfache Installation",
+        },
+        "Galata İzleme Platformu, log'ların ilgili sistemlerden toplanması esnasında uygulama sunucusu kaynaklarını minimum seviyede kullanacak şekilde ayarlanmış 'agent' teknolojilerini kullanır. Uygulama log'ları, merkezi bir Elasticsearch cluster'ına indekslenir. Platform ile sağlanan kurulum betikleri (script) aracılığı ile kurum gereksinimlerine uygun optimize edilmiş Elasticsearch cluster tamamen otomatik olarak kendi sunucularınızdan oluşan altyapınıza veya bulut hesabınıza (AWS veya GCP) dakikalar içinde kurulur ve kullanıma hazır hale gelir.":
+          {
+            en: "Galata Monitoring Platform uses 'agent' technologies configured to use minimal application server resources when collecting logs from relevant systems. Application logs are indexed in a central Elasticsearch cluster. Through installation scripts provided with the platform, an optimized Elasticsearch cluster suitable for your organization's requirements is automatically installed on your own infrastructure or cloud account (AWS or GCP) within minutes and becomes ready to use.",
+            de: "Die Galata-Überwachungsplattform verwendet 'Agent'-Technologien, die so konfiguriert sind, dass sie beim Sammeln von Logs aus relevanten Systemen minimale Anwendungsserver-Ressourcen verwenden. Anwendungslogs werden in einem zentralen Elasticsearch-Cluster indexiert. Über die mit der Plattform bereitgestellten Installationsskripte wird ein optimierter Elasticsearch-Cluster, der den Anforderungen Ihrer Organisation entspricht, automatisch innerhalb weniger Minuten auf Ihrer eigenen Infrastruktur oder Ihrem Cloud-Konto (AWS oder GCP) installiert und ist einsatzbereit.",
+          },
+        "Rol Tabanlı Kullanıcı Yönetimi": {
+          en: "Role-Based User Management",
+          de: "Rollenbasierte Benutzerverwaltung",
+        },
+        "Galata İzleme Platformu ile Elasticsearch üzerinde oluşturulacak indekslere hangi kullanıcıların hangi yetkilerle erişebileceği kolaylıkla tanımlanmakta, yeni kullanıcı tanımlama ve bunların rol atamaları yetkili kullanıcı tarafından yapılmaktadır.":
+          {
+            en: "With Galata Monitoring Platform, it is easy to define which users can access indexes to be created on Elasticsearch with what permissions, and new user definitions and their role assignments are made by authorized users.",
+            de: "Mit der Galata-Überwachungsplattform lässt sich einfach definieren, welche Benutzer mit welchen Berechtigungen auf in Elasticsearch zu erstellende Indizes zugreifen können, und neue Benutzerdefinitionen sowie deren Rollenzuweisungen werden von autorisierten Benutzern vorgenommen.",
+          },
+        "Legacy uygulamalar": {
+          en: "Legacy Applications",
+          de: "Legacy-Anwendungen",
+        },
+        "Galata İzleme Platformu, legacy uygulamaların mevcut işleyişlerini hiçbir şekilde değiştirmeden, üretilen kayıtların zaman, seviye ve mesaj içeriklerinin json formatına dönüştürülmesine olanak sağlamaktadır.":
+          {
+            en: "Galata Monitoring Platform enables the conversion of time, level, and message contents of generated records to JSON format without changing the existing operations of legacy applications in any way.",
+            de: "Die Galata-Überwachungsplattform ermöglicht die Konvertierung von Zeit-, Level- und Nachrichteninhalten der generierten Datensätze in das JSON-Format, ohne den bestehenden Betrieb von Legacy-Anwendungen in irgendeiner Weise zu ändern.",
+          },
+        "Orkestrasyon Desteği": {
+          en: "Orchestration Support",
+          de: "Orchestrierungsunterstützung",
+        },
+        "Galata İzleme Platformu, isterseniz mevcut K8s cluster'ınıza, isterseniz kendi kurulumuyla provize edilebilen Docker Swarm cluster'ına otomatik kurulabilmektedir.":
+          {
+            en: "Galata Monitoring Platform can be automatically installed on your existing K8s cluster or on a Docker Swarm cluster that can be provisioned with its own installation.",
+            de: "Die Galata-Überwachungsplattform kann automatisch auf Ihrem bestehenden K8s-Cluster oder auf einem Docker-Swarm-Cluster installiert werden, der mit seiner eigenen Installation bereitgestellt werden kann.",
+          },
+        Analiz: {
+          en: "Analysis",
+          de: "Analyse",
+        },
+        "Galata İzleme Platformu ile beraber kurulan Kibana uygulaması sayesinde gerçek zamanlı hata ayıklama ve olay bazlı grafiklerin çıkartılıp, bunların analizlerinin yapılması da mümkün kılınmaktadır.":
+          {
+            en: "Thanks to the Kibana application installed with Galata Monitoring Platform, it is possible to perform real-time debugging and extract event-based graphs and analyze them.",
+            de: "Dank der mit der Galata-Überwachungsplattform installierten Kibana-Anwendung ist es möglich, Echtzeit-Debugging durchzuführen und ereignisbasierte Grafiken zu extrahieren und zu analysieren.",
+          },
+        "Log yapısı": {
+          en: "Log Structure",
+          de: "Log-Struktur",
+        },
+        "Galata İzleme Platformu, bütün log'ları json formatında tutar. Her kayda ait zaman bilgisi, log seviyesi, mesaj içeriği vb. Elasticsearch üzerinde ayrı ayrı alanlarda indekslenir. Böylelikle büyük mesaj içeriklerinde tam metin araması yapmak yerine, zaman veya seviye bilgisiyle indekslenen bu alanlar özelinde sorgu yapmak mümkün olmaktadır.":
+          {
+            en: "Galata Monitoring Platform stores all logs in JSON format. Time information, log level, message content, etc. for each record are indexed in separate fields on Elasticsearch. Thus, instead of doing full-text search in large message contents, it is possible to query specifically in these fields indexed by time or level information.",
+            de: "Die Galata-Überwachungsplattform speichert alle Logs im JSON-Format. Zeitinformationen, Log-Level, Nachrichteninhalte usw. für jeden Datensatz werden in separaten Feldern auf Elasticsearch indexiert. Somit ist es möglich, anstelle einer Volltextsuche in großen Nachrichteninhalten gezielt in diesen nach Zeit- oder Level-Informationen indexierten Feldern zu suchen.",
+          },
+
+        // Lepton Framework translations
+        Temalandırma: {
+          en: "Theming",
+          de: "Thematisierung",
+        },
+        "Lepton Framework, mobil ve web uygulamaları için oluşturulan temayı, her iki platform için de ayrı efor sarf etmeden kullanabilmenize olanak sağlar. Projelerin ve komponentlerin görünümlerinin hızlıca değiştirilmesinde esnek bir yapı sunar.":
+          {
+            en: "Lepton Framework allows you to use the theme created for mobile and web applications without spending separate effort for both platforms. It offers a flexible structure for quickly changing the appearance of projects and components.",
+            de: "Das Lepton Framework ermöglicht es Ihnen, das für mobile und Webanwendungen erstellte Theme ohne separaten Aufwand für beide Plattformen zu verwenden. Es bietet eine flexible Struktur für die schnelle Änderung des Erscheinungsbilds von Projekten und Komponenten.",
+          },
+        Stillendirme: {
+          en: "Styling",
+          de: "Stilisierung",
+        },
+        "Lepton Framework, oluşturulan tema dışında, hem web hem de mobil platformu üzerinde herhangi bir komponentin özel olarak görünümünün kolaylıkla değiştirilmesine olanak sağlar. Değişen dizayn kararlarına hızlı adapte olmayı mümkün kılar.":
+          {
+            en: "Apart from the created theme, Lepton Framework allows you to easily change the appearance of any component on both web and mobile platforms. It enables quick adaptation to changing design decisions.",
+            de: "Neben dem erstellten Theme ermöglicht das Lepton Framework die einfache Änderung des Erscheinungsbilds beliebiger Komponenten sowohl auf Web- als auch auf mobilen Plattformen. Es ermöglicht eine schnelle Anpassung an sich ändernde Design-Entscheidungen.",
+          },
+        "Global State Yönetimi": {
+          en: "Global State Management",
+          de: "Globale Zustandsverwaltung",
+        },
+        "Lepton Framework; global state yönetiminde, ağaç yapısı ile sizleri sistem karmaşasından kurtarır. Böylelikle, büyük projelerdeki global state yönetimini kolaylıkla yapmanızı sağlar.":
+          {
+            en: "Lepton Framework saves you from system complexity in global state management with its tree structure. Thus, it enables you to easily manage global state in large projects.",
+            de: "Das Lepton Framework befreit Sie mit seiner Baumstruktur von der Systemkomplexität bei der globalen Zustandsverwaltung. Somit ermöglicht es Ihnen, den globalen Zustand in großen Projekten einfach zu verwalten.",
+          },
+        "Şablon Desteği": {
+          en: "Template Support",
+          de: "Vorlagenunterstützung",
+        },
+        "Lepton Framework; projenizin kapsamına göre, önceden hazırlanan (e-ticaret, bankacılık, sağlık vb.) şablonlar ile projelerin daha önemli gereksinimlerine vakit ayırabilmenizi sağlar. Hazır konfigürasyonlar ile proje başlangıç maliyetlerinizi minimuma indirir. Kapsama göre hazırlanan örnekler ile hızlı adaptasyon sağlar.":
+          {
+            en: "Lepton Framework allows you to focus on more important requirements of projects with pre-prepared templates (e-commerce, banking, healthcare, etc.) according to the scope of your project. It minimizes your project startup costs with ready-made configurations. It provides quick adaptation with examples prepared according to scope.",
+            de: "Das Lepton Framework ermöglicht es Ihnen, sich mit vorbereiteten Vorlagen (E-Commerce, Banking, Gesundheitswesen usw.) entsprechend dem Umfang Ihres Projekts auf wichtigere Anforderungen der Projekte zu konzentrieren. Es minimiert Ihre Projektstartkosten mit vorgefertigten Konfigurationen. Es bietet schnelle Anpassung mit nach Umfang vorbereiteten Beispielen.",
+          },
+        "Proje İskeleti": {
+          en: "Project Scaffolding",
+          de: "Projektgerüst",
+        },
+        "Lepton Framework, projenize uygun olarak kullanmak istediğiniz proje şablonunu tek komut satırı ile oluşturmaya olanak sağlar. Kod yazım standartları ile projenizin takım halinde uyumlu ve kaliteli çalışılmasını mümkün kılar.":
+          {
+            en: "Lepton Framework allows you to create the project template you want to use for your project with a single command line. It enables your project to work harmoniously and with quality as a team with code writing standards.",
+            de: "Das Lepton Framework ermöglicht es Ihnen, die Projektvorlage, die Sie für Ihr Projekt verwenden möchten, mit einer einzigen Befehlszeile zu erstellen. Es ermöglicht Ihrem Projekt, harmonisch und qualitativ hochwertig als Team mit Codeschreibstandards zu arbeiten.",
+          },
+
+        // Proton Message Management Platform translations
+        "Proton Mesaj Yönetim Platformu, milyonlarca mesajın sorunsuz ve hızlı işlenebilmesi amacıyla Apache Kafka kullanır. Platformda sağlanan kurulum betikleri (script) aracılığı ile canlı sistem kalitesinde, uygulama gereksinimlerine uygun optimize edilmiş Kafka cluster, tamamen otomatik olarak kendi sunucularınızdan oluşan altyapınıza veya bulut hesabınıza (AWS veya GCP) dakikalar içinde kurulur ve kullanıma hazır hale gelir.":
+          {
+            en: "Proton Message Management Platform uses Apache Kafka for seamless and fast processing of millions of messages. Through installation scripts provided on the platform, a production-quality Kafka cluster optimized according to application requirements is automatically installed on your own infrastructure or cloud account (AWS or GCP) within minutes and becomes ready to use.",
+            de: "Die Proton-Nachrichtenverwaltungsplattform verwendet Apache Kafka für die nahtlose und schnelle Verarbeitung von Millionen von Nachrichten. Über die auf der Plattform bereitgestellten Installationsskripte wird ein produktionsreifer Kafka-Cluster, der entsprechend den Anwendungsanforderungen optimiert ist, automatisch innerhalb weniger Minuten auf Ihrer eigenen Infrastruktur oder Ihrem Cloud-Konto (AWS oder GCP) installiert und ist einsatzbereit.",
+          },
+        "Proton Designer": {
+          en: "Proton Designer",
+          de: "Proton Designer",
+        },
+        "Proton Mesaj Yönetim Platformu'nda, Proton Designer ile bildirim gönderilecek hedef kitlenin verilerini; sisteme, önceden oluşturulan formatlar aracılığıyla yükleyebilir, bildirim mesajlarını şablon olarak tasarlayıp ileri tarihli toplu dağıtımları internet tarayıcınızdan kolaylıkla planlayabilirsiniz. Gerçekleşmiş bütün dağıtımların istatistiklerini (başarılı ve başarısız gönderimler, kullanıcılar tarafından okunmuş bildirim sayıları gibi) Proton Designer üzerinden raporlayabilirsiniz.":
+          {
+            en: "In Proton Message Management Platform, with Proton Designer you can upload target audience data for notifications to the system through pre-created formats, design notification messages as templates and easily schedule future bulk distributions from your web browser. You can report statistics of all completed distributions (such as successful and failed sends, number of notifications read by users) through Proton Designer.",
+            de: "In der Proton-Nachrichtenverwaltungsplattform können Sie mit Proton Designer Zielgruppendaten für Benachrichtigungen über vorab erstellte Formate in das System hochladen, Benachrichtigungsnachrichten als Vorlagen entwerfen und zukünftige Massenverteilungen einfach über Ihren Webbrowser planen. Sie können Statistiken aller abgeschlossenen Verteilungen (wie erfolgreiche und fehlgeschlagene Sendungen, Anzahl der von Benutzern gelesenen Benachrichtigungen) über Proton Designer berichten.",
+          },
+        "Kampanya Yönetimi": {
+          en: "Campaign Management",
+          de: "Kampagnenverwaltung",
+        },
+        "Proton Mesaj Yönetim Platformu, sisteme yüklenen kullanıcı verisinde yer alan değerlere göre, filtreler kurgulamanıza ve veri setinizi değiştirmeden ihtiyaçlarınıza özel kampanyalar oluşturmanıza olanak sağlar. Örneğin, Proton Designer üzerinden; belirli bir yaş grubuna, belirli bir konumdaki kullanıcılara veya kendi belirleyeceğiniz değişken değerlere uyan kullanıcılara bildirim gönderebilirsiniz.":
+          {
+            en: "Proton Message Management Platform allows you to set up filters according to values in the user data uploaded to the system and create campaigns specific to your needs without changing your data set. For example, through Proton Designer, you can send notifications to a specific age group, users in a specific location, or users matching variable values you define.",
+            de: "Die Proton-Nachrichtenverwaltungsplattform ermöglicht es Ihnen, Filter entsprechend den Werten in den in das System hochgeladenen Benutzerdaten einzurichten und Kampagnen zu erstellen, die auf Ihre Bedürfnisse zugeschnitten sind, ohne Ihren Datensatz zu ändern. Beispielsweise können Sie über Proton Designer Benachrichtigungen an eine bestimmte Altersgruppe, Benutzer an einem bestimmten Ort oder Benutzer senden, die mit von Ihnen definierten variablen Werten übereinstimmen.",
+          },
+        "Kişiselleştirilmiş Bildirimler": {
+          en: "Personalized Notifications",
+          de: "Personalisierte Benachrichtigungen",
+        },
+        "Proton Mesaj Yönetim Platformu'na yüklediğiniz verilere e-posta, SMS veya anlık bildirim şablonlarından erişebilir, içeriğinde yer alan veriler ile kullanıcılarınıza özel bildirimler hazırlayabilirsiniz.":
+          {
+            en: "You can access the data you upload to Proton Message Management Platform from email, SMS or instant notification templates, and prepare personalized notifications for your users with the data contained in them.",
+            de: "Sie können auf die Daten, die Sie auf die Proton-Nachrichtenverwaltungsplattform hochladen, von E-Mail-, SMS- oder Sofortbenachrichtigungsvorlagen aus zugreifen und mit den darin enthaltenen Daten personalisierte Benachrichtigungen für Ihre Benutzer erstellen.",
+          },
+        "Proton Mesaj Yönetim Platformu, isterseniz mevcut K8s cluster'ınıza, isterseniz kendi kurulumuyla provize edilebilen Docker Swarm cluster'ına otomatik kurulabilmektedir. Proton, mikroservis mimarisine uygun tasarlanmıştır.":
+          {
+            en: "Proton Message Management Platform can be automatically installed on your existing K8s cluster or on a Docker Swarm cluster that can be provisioned with its own installation. Proton is designed according to microservice architecture.",
+            de: "Die Proton-Nachrichtenverwaltungsplattform kann automatisch auf Ihrem bestehenden K8s-Cluster oder auf einem Docker-Swarm-Cluster installiert werden, der mit seiner eigenen Installation bereitgestellt werden kann. Proton ist gemäß Microservice-Architektur konzipiert.",
+          },
+        Entegrasyonlar: {
+          en: "Integrations",
+          de: "Integrationen",
+        },
+        "Proton Mesaj Yönetim Platformu, e-posta gönderimleriniz için SMTP, SMS gönderimleriniz için Twilio, anlık bildirim gönderimleriniz için APNS ve Firebase Cloud Messaging desteği sağlamaktadır. Ayrıca Proton, kuruma özel entegrasyonların yapılmasına da olanak vermektedir.":
+          {
+            en: "Proton Message Management Platform provides SMTP support for your email sending, Twilio for your SMS sending, APNS and Firebase Cloud Messaging support for your instant notification sending. In addition, Proton allows for organization-specific integrations.",
+            de: "Die Proton-Nachrichtenverwaltungsplattform bietet SMTP-Unterstützung für Ihr E-Mail-Versenden, Twilio für Ihr SMS-Versenden, APNS- und Firebase Cloud Messaging-Unterstützung für Ihr Sofortbenachrichtigungs-Versenden. Darüber hinaus ermöglicht Proton organisationsspezifische Integrationen.",
+          },
+
+        // SailOps translations
+        SailOps: {
+          en: "SailOps",
+          de: "SailOps",
+        },
+        "SailOps is an end-to-end operations platform for yacht charter companies and fleet operators. It centralizes fleet status, digital check‑in/out, inventory, maintenance, documents, and multi‑base coordination—into one place. Developed and owned by Proto Yazılım.":
+          {
+            tr: "SailOps, yat kiralama şirketleri ve filo operatörleri için uçtan uca operasyon platformudur. Filo durumu, dijital check-in/out, envanter, bakım, dokümanlar ve çoklu üs koordinasyonunu tek bir yerde merkezileştirir.",
+            de: "SailOps ist eine End-to-End-Betriebsplattform für Yachtcharterunternehmen und Flottenbetreiber. Es zentralisiert Flottenstatus, digitales Check-in/out, Inventar, Wartung, Dokumente und Multi-Basis-Koordination an einem Ort. Entwickelt und im Besitz von Proto Yazılım.",
+          },
+        "Fleet Management": {
+          tr: "Filo Yönetimi",
+          de: "Flottenverwaltung",
+        },
+        "Central tracking of vessels, technical specs, and availability per base. Manage your entire fleet from a single dashboard with real-time status updates.":
+          {
+            tr: "Gemilerin, teknik özelliklerin ve üs başına müsaitlik durumunun merkezi takibi. Tüm filonuzu gerçek zamanlı durum güncellemeleri ile tek bir panelden yönetin.",
+            de: "Zentrale Verfolgung von Schiffen, technischen Spezifikationen und Verfügbarkeit pro Basis. Verwalten Sie Ihre gesamte Flotte von einem einzigen Dashboard mit Echtzeit-Statusaktualisierungen.",
+          },
+        "Digital Check‑in / Check‑out": {
+          tr: "Dijital Check-in / Check-out",
+          de: "Digitales Check-in / Check-out",
+        },
+        "Timestamped handover checklists for safety and equipment, with photos and notes. Ensure every charter starts and ends with complete documentation.":
+          {
+            tr: "Güvenlik ve ekipman için zaman damgalı teslim kontrol listeleri, fotoğraflar ve notlarla. Her kiralama işleminin eksiksiz dokümantasyonla başladığından ve bittiğinden emin olun.",
+            de: "Zeitgestempelte Übergabe-Checklisten für Sicherheit und Ausrüstung mit Fotos und Notizen. Stellen Sie sicher, dass jeder Charter mit vollständiger Dokumentation beginnt und endet.",
+          },
+        "Inventory Management": {
+          tr: "Envanter Yönetimi",
+          de: "Bestandsverwaltung",
+        },
+        "Two‑level inventory system (boat + depot) ensures nothing is missing at departure. Track equipment, provisions, and supplies with precision.":
+          {
+            tr: "İki seviyeli envanter sistemi (tekne + depo) kalkışta hiçbir şeyin eksik olmamasını sağlar. Ekipman, erzak ve malzemeleri hassasiyetle takip edin.",
+            de: "Zweistufiges Inventarsystem (Boot + Depot) stellt sicher, dass bei der Abfahrt nichts fehlt. Verfolgen Sie Ausrüstung, Vorräte und Materialien präzise.",
+          },
+        "Maintenance Tracking": {
+          tr: "Bakım Takibi",
+          de: "Wartungsverfolgung",
+        },
+        "Scheduled servicing and on‑demand repairs with cost and history logs. Keep your fleet in top condition with automated maintenance reminders and comprehensive service records.":
+          {
+            tr: "Planlı servis ve talep üzerine onarımlar, maliyet ve geçmiş kayıtlarıyla. Otomatik bakım hatırlatıcıları ve kapsamlı servis kayıtlarıyla filonuzu en iyi durumda tutun.",
+            de: "Geplante Wartung und On-Demand-Reparaturen mit Kosten- und Verlaufsprotokollen. Halten Sie Ihre Flotte in Top-Zustand mit automatischen Wartungserinnerungen und umfassenden Serviceaufzeichnungen.",
+          },
+        "Document Management": {
+          tr: "Doküman Yönetimi",
+          de: "Dokumentenverwaltung",
+        },
+        "Licenses, insurance, certificates with expiry reminders and role‑based access. Stay compliant with automated alerts for document renewals.":
+          {
+            tr: "Lisanslar, sigortalar, sertifikalar, son kullanma hatırlatıcıları ve rol tabanlı erişimle. Doküman yenilemeleri için otomatik uyarılarla uyumlu kalın.",
+            de: "Lizenzen, Versicherungen, Zertifikate mit Ablauferinnerungen und rollenbasiertem Zugriff. Bleiben Sie konform mit automatischen Warnungen für Dokumentenerneuerungen.",
+          },
+        "Multi‑base Operations": {
+          tr: "Çoklu Üs Operasyonları",
+          de: "Multi-Basis-Betrieb",
+        },
+        "Coordinate vessels, staff, and stock across locations. Seamlessly manage operations across multiple marinas and charter bases with centralized control.":
+          {
+            tr: "Gemileri, personeli ve stokları lokasyonlar arasında koordine edin. Merkezi kontrol ile birden fazla marina ve kiralama üssü arasındaki operasyonları sorunsuz yönetin.",
+            de: "Koordinieren Sie Schiffe, Personal und Lagerbestände standortübergreifend. Verwalten Sie nahtlos Betriebe über mehrere Marinas und Charterbasen mit zentraler Kontrolle.",
+          },
+
+        // Reverse Turkish to English/German translations for SailOps
+        "SailOps, yat kiralama şirketleri ve filo operatörleri için uçtan uca operasyon platformudur. Filo durumu, dijital check-in/out, envanter, bakım, dokümanlar ve çoklu üs koordinasyonunu tek bir yerde merkezileştirir. Proto Yazılım tarafından geliştirilmiş ve sahiplenilmiştir.":
+          {
+            en: "SailOps is an end-to-end operations platform for yacht charter companies and fleet operators. It centralizes fleet status, digital check‑in/out, inventory, maintenance, documents, and multi‑base coordination—into one place. Developed and owned by Proto Yazılım.",
+            de: "SailOps ist eine End-to-End-Betriebsplattform für Yachtcharterunternehmen und Flottenbetreiber. Es zentralisiert Flottenstatus, digitales Check-in/out, Inventar, Wartung, Dokumente und Multi-Basis-Koordination an einem Ort. Entwickelt und im Besitz von Proto Yazılım.",
+          },
+        "SailOps, yat kiralama şirketleri ve filo operatörleri için uçtan uca operasyon platformudur. Filo durumu, dijital check-in/out, envanter, bakım, dokümanlar ve çoklu üs koordinasyonunu tek bir yerde merkezileştirir.":
+          {
+            en: "SailOps is an end-to-end operations platform for yacht charter companies and fleet operators. It centralizes fleet status, digital check‑in/out, inventory, maintenance, documents, and multi‑base coordination—into one place.",
+            de: "SailOps ist eine End-to-End-Betriebsplattform für Yachtcharterunternehmen und Flottenbetreiber. Es zentralisiert Flottenstatus, digitales Check-in/out, Inventar, Wartung, Dokumente und Multi-Basis-Koordination an einem Ort.",
+          },
+        "Filo Yönetimi": {
+          en: "Fleet Management",
+          de: "Flottenverwaltung",
+        },
+        "Gemilerin, teknik özelliklerin ve üs başına müsaitlik durumunun merkezi takibi. Tüm filonuzu gerçek zamanlı durum güncellemeleri ile tek bir panelden yönetin.":
+          {
+            en: "Central tracking of vessels, technical specs, and availability per base. Manage your entire fleet from a single dashboard with real-time status updates.",
+            de: "Zentrale Verfolgung von Schiffen, technischen Spezifikationen und Verfügbarkeit pro Basis. Verwalten Sie Ihre gesamte Flotte von einem einzigen Dashboard mit Echtzeit-Statusaktualisierungen.",
+          },
+        "Dijital Check-in / Check-out": {
+          en: "Digital Check‑in / Check‑out",
+          de: "Digitales Check-in / Check-out",
+        },
+        "Güvenlik ve ekipman için zaman damgalı teslim kontrol listeleri, fotoğraflar ve notlarla. Her kiralama işleminin eksiksiz dokümantasyonla başladığından ve bittiğinden emin olun.":
+          {
+            en: "Timestamped handover checklists for safety and equipment, with photos and notes. Ensure every charter starts and ends with complete documentation.",
+            de: "Zeitgestempelte Übergabe-Checklisten für Sicherheit und Ausrüstung mit Fotos und Notizen. Stellen Sie sicher, dass jeder Charter mit vollständiger Dokumentation beginnt und endet.",
+          },
+        "Envanter Yönetimi": {
+          en: "Inventory Management",
+          de: "Bestandsverwaltung",
+        },
+        "İki seviyeli envanter sistemi (tekne + depo) kalkışta hiçbir şeyin eksik olmamasını sağlar. Ekipman, erzak ve malzemeleri hassasiyetle takip edin.":
+          {
+            en: "Two‑level inventory system (boat + depot) ensures nothing is missing at departure. Track equipment, provisions, and supplies with precision.",
+            de: "Zweistufiges Inventarsystem (Boot + Depot) stellt sicher, dass bei der Abfahrt nichts fehlt. Verfolgen Sie Ausrüstung, Vorräte und Materialien präzise.",
+          },
+        "Bakım Takibi": {
+          en: "Maintenance Tracking",
+          de: "Wartungsverfolgung",
+        },
+        "Planlı servis ve talep üzerine onarımlar, maliyet ve geçmiş kayıtlarıyla. Otomatik bakım hatırlatıcıları ve kapsamlı servis kayıtlarıyla filonuzu en iyi durumda tutun.":
+          {
+            en: "Scheduled servicing and on‑demand repairs with cost and history logs. Keep your fleet in top condition with automated maintenance reminders and comprehensive service records.",
+            de: "Geplante Wartung und On-Demand-Reparaturen mit Kosten- und Verlaufsprotokollen. Halten Sie Ihre Flotte in Top-Zustand mit automatischen Wartungserinnerungen und umfassenden Serviceaufzeichnungen.",
+          },
+        "Doküman Yönetimi": {
+          en: "Document Management",
+          de: "Dokumentenverwaltung",
+        },
+        "Lisanslar, sigortalar, sertifikalar, son kullanma hatırlatıcıları ve rol tabanlı erişimle. Doküman yenilemeleri için otomatik uyarılarla uyumlu kalın.":
+          {
+            en: "Licenses, insurance, certificates with expiry reminders and role‑based access. Stay compliant with automated alerts for document renewals.",
+            de: "Lizenzen, Versicherungen, Zertifikate mit Ablauferinnerungen und rollenbasiertem Zugriff. Bleiben Sie konform mit automatischen Warnungen für Dokumentenerneuerungen.",
+          },
+        "Çoklu Üs Operasyonları": {
+          en: "Multi‑base Operations",
+          de: "Multi-Basis-Betrieb",
+        },
+        "Gemileri, personeli ve stokları lokasyonlar arasında koordine edin. Merkezi kontrol ile birden fazla marina ve kiralama üssü arasındaki operasyonları sorunsuz yönetin.":
+          {
+            en: "Coordinate vessels, staff, and stock across locations. Seamlessly manage operations across multiple marinas and charter bases with centralized control.",
+            de: "Koordinieren Sie Schiffe, Personal und Lagerbestände standortübergreifend. Verwalten Sie nahtlos Betriebe über mehrere Marinas und Charterbasen mit zentraler Kontrolle.",
+          },
+
+        // SailOps short description for projects page
+        "SailOps, yat kiralama şirketleri ve filo operatörleri için uçtan uca operasyon platformudur. Filo durumu, dijital check-in/out, envanter, bakım, dokümanlar ve çoklu üs koordinasyonunu tek bir yerde merkezileştirir.":
+          {
+            en: "SailOps is an end-to-end operations platform for yacht charter companies and fleet operators. It centralizes fleet status, digital check‑in/out, inventory, maintenance, documents, and multi‑base coordination—into one place.",
+            de: "SailOps ist eine End-to-End-Betriebsplattform für Yachtcharterunternehmen und Flottenbetreiber. Es zentralisiert Flottenstatus, digitales Check-in/out, Inventar, Wartung, Dokumente und Multi-Basis-Koordination an einem Ort.",
+          },
+
+        // SailOps Marketplace translations
+        "SailOps Marketplace": {
+          en: "SailOps Marketplace",
+          de: "SailOps Marketplace",
+        },
+        "SailOps Marketplace, yat kiralama sektörüne özel dijital bir pazar yeridir. Kiralama şirketleri, tekne sahipleri ve hizmet sağlayıcıları tek bir platformda buluşturarak sektördeki ticari etkileşimleri kolaylaştırır.":
+          {
+            en: "SailOps Marketplace is a digital marketplace dedicated to the yacht charter industry. It facilitates commercial interactions in the sector by bringing together charter companies, boat owners, and service providers on a single platform.",
+            de: "SailOps Marketplace ist ein digitaler Marktplatz speziell für die Yachtcharterbranche. Er erleichtert kommerzielle Interaktionen in der Branche, indem er Charterunternehmen, Bootseigner und Dienstleister auf einer einzigen Plattform zusammenbringt.",
+          },
+        "Tekne Listeleme ve Arama": {
+          en: "Boat Listing & Search",
+          de: "Bootsangebote & Suche",
+        },
+        "Gelişmiş filtreleme seçenekleriyle tekne arama, detaylı tekne profilleri ve fotoğraf galerileri. Konum, kapasite, fiyat aralığı ve tekne tipine göre arama yaparak ideal tekneyi kolayca bulun.":
+          {
+            en: "Search for boats with advanced filtering options, detailed boat profiles, and photo galleries. Easily find the ideal boat by searching by location, capacity, price range, and boat type.",
+            de: "Suchen Sie Boote mit erweiterten Filteroptionen, detaillierten Bootsprofilen und Fotogalerien. Finden Sie einfach das ideale Boot durch Suche nach Standort, Kapazität, Preisbereich und Bootstyp.",
+          },
+        "Rezervasyon Yönetimi": {
+          en: "Booking Management",
+          de: "Buchungsverwaltung",
+        },
+        "Anlık müsaitlik takvimi, online rezervasyon ve otomatik onay süreçleri. Kiralama taleplerini, ödemeleri ve iptal politikalarını tek bir panel üzerinden yönetin.":
+          {
+            en: "Real-time availability calendar, online booking, and automated approval processes. Manage rental requests, payments, and cancellation policies from a single dashboard.",
+            de: "Echtzeit-Verfügbarkeitskalender, Online-Buchung und automatisierte Genehmigungsprozesse. Verwalten Sie Mietanfragen, Zahlungen und Stornierungsrichtlinien über ein einziges Dashboard.",
+          },
+        "Hizmet Sağlayıcı Ağı": {
+          en: "Service Provider Network",
+          de: "Dienstleisternetzwerk",
+        },
+        "Kaptan, mürettebat, temizlik, yakıt ikmal ve teknik servis gibi hizmet sağlayıcılarını keşfedin. Değerlendirme ve yorum sistemiyle en uygun hizmet sağlayıcıyı seçin.":
+          {
+            en: "Discover service providers such as captains, crew, cleaning, refueling, and technical services. Choose the best service provider with the rating and review system.",
+            de: "Entdecken Sie Dienstleister wie Kapitäne, Besatzung, Reinigung, Betankung und technischen Service. Wählen Sie den besten Dienstleister mit dem Bewertungs- und Rezensionssystem.",
+          },
+        "Güvenli Ödeme Altyapısı": {
+          en: "Secure Payment Infrastructure",
+          de: "Sichere Zahlungsinfrastruktur",
+        },
+        "Entegre ödeme sistemi ile güvenli online işlemler, otomatik faturalama ve komisyon yönetimi. Çoklu para birimi desteği ile uluslararası işlemleri kolayca gerçekleştirin.":
+          {
+            en: "Secure online transactions with integrated payment system, automated invoicing, and commission management. Easily process international transactions with multi-currency support.",
+            de: "Sichere Online-Transaktionen mit integriertem Zahlungssystem, automatisierter Rechnungsstellung und Provisionsverwaltung. Verarbeiten Sie internationale Transaktionen einfach mit Mehrwährungsunterstützung.",
+          },
+        "Değerlendirme ve Yorumlar": {
+          en: "Ratings & Reviews",
+          de: "Bewertungen & Rezensionen",
+        },
+        "Kiracı ve tekne sahibi karşılıklı değerlendirme sistemi, doğrulanmış yorumlar ve güven puanı. Şeffaf geri bildirimlerle platform güvenilirliğini artırın.":
+          {
+            en: "Mutual rating system between renters and boat owners, verified reviews, and trust scores. Increase platform reliability with transparent feedback.",
+            de: "Gegenseitiges Bewertungssystem zwischen Mietern und Bootseignern, verifizierte Bewertungen und Vertrauenspunkte. Erhöhen Sie die Plattformzuverlässigkeit mit transparentem Feedback.",
+          },
+        "Analitik ve Raporlama": {
+          en: "Analytics & Reporting",
+          de: "Analytik & Berichterstattung",
+        },
+        "Pazar trendleri, fiyat analizi, doluluk oranları ve gelir raporları. Veriye dayalı kararlar alarak kiralama stratejinizi optimize edin.":
+          {
+            en: "Market trends, price analysis, occupancy rates, and revenue reports. Optimize your rental strategy by making data-driven decisions.",
+            de: "Markttrends, Preisanalysen, Belegungsraten und Umsatzberichte. Optimieren Sie Ihre Vermietungsstrategie durch datengestützte Entscheidungen.",
+          },
+
+        // ChattyFire translations
+        ChattyFire: {
+          en: "ChattyFire",
+          de: "ChattyFire",
+        },
+        "ChattyFire, kurumsal düzeyde bir AI asistan platformudur. Çoklu LLM provider desteği, gelişmiş RAG özellikleri, esnek plugin sistemi ve çoklu agent orkestrasyonu ile güçlü bir AI chat ve doküman yönetim sistemi sunar.":
+          {
+            en: "ChattyFire is an enterprise-grade AI assistant platform. It offers a powerful AI chat and document management system with multi-LLM provider support, advanced RAG capabilities, a flexible plugin system, and multi-agent orchestration.",
+            de: "ChattyFire ist eine KI-Assistenzplattform auf Unternehmensniveau. Sie bietet ein leistungsstarkes KI-Chat- und Dokumentenmanagementsystem mit Multi-LLM-Provider-Unterstützung, erweiterten RAG-Funktionen, einem flexiblen Plugin-System und Multi-Agent-Orchestrierung.",
+          },
+        "Çoklu LLM Desteği": {
+          en: "Multi-LLM Support",
+          de: "Multi-LLM-Unterstützung",
+        },
+        "OpenAI, Azure OpenAI, Ollama, Mistral AI ve LM Studio gibi birden fazla LLM provider'ı destekler. Her provider için ayrı API key yönetimi, model seçimi ve dinamik provider ekleme/çıkarma imkanı sunar.":
+          {
+            en: "Supports multiple LLM providers including OpenAI, Azure OpenAI, Ollama, Mistral AI, and LM Studio. Offers separate API key management, model selection, and dynamic provider add/remove capabilities for each provider.",
+            de: "Unterstützt mehrere LLM-Provider wie OpenAI, Azure OpenAI, Ollama, Mistral AI und LM Studio. Bietet separate API-Key-Verwaltung, Modellauswahl und dynamisches Hinzufügen/Entfernen von Providern.",
+          },
+        "Çoklu Agent Sistemi": {
+          en: "Multi-Agent System",
+          de: "Multi-Agent-System",
+        },
+        "Sınırsız agent oluşturma, her agent için farklı LLM ve özel system prompt tanımlama imkanı. Handoff, Group Chat, Sequential, Concurrent ve Magentic orkestrasyon stratejileri ile karmaşık iş akışlarını yönetin.":
+          {
+            en: "Create unlimited agents, each with a different LLM and custom system prompt. Manage complex workflows with Handoff, Group Chat, Sequential, Concurrent, and Magentic orchestration strategies.",
+            de: "Erstellen Sie unbegrenzt viele Agents, jeweils mit unterschiedlichem LLM und benutzerdefiniertem System-Prompt. Verwalten Sie komplexe Workflows mit Handoff-, Group-Chat-, Sequential-, Concurrent- und Magentic-Orchestrierungsstrategien.",
+          },
+        "RAG Sistemi": {
+          en: "RAG System",
+          de: "RAG-System",
+        },
+        "Qdrant tabanlı vector store, gelişmiş embedding desteği ve hybrid arama özellikleri. PDF, DOCX, TXT, MD formatlarında doküman işleme, akıllı chunking ve kullanıcı bazlı erişim kontrolü ile güçlü bilgi erişimi sağlar.":
+          {
+            en: "Qdrant-based vector store, advanced embedding support, and hybrid search capabilities. Provides powerful knowledge retrieval with PDF, DOCX, TXT, MD document processing, smart chunking, and user-based access control.",
+            de: "Qdrant-basierter Vector Store, erweiterte Embedding-Unterstützung und hybride Suchfunktionen. Bietet leistungsstarken Wissenszugriff mit PDF-, DOCX-, TXT-, MD-Dokumentenverarbeitung, intelligentem Chunking und benutzerbasierter Zugriffskontrolle.",
+          },
+        "Plugin Sistemi": {
+          en: "Plugin System",
+          de: "Plugin-System",
+        },
+        "Built-in, OpenAPI spec, DLL ve external plugin desteği. OpenAPI/Swagger dosyalarından otomatik plugin oluşturma, hot reload ve runtime'da dinamik plugin yükleme/kaldırma özellikleri sunar.":
+          {
+            en: "Built-in, OpenAPI spec, DLL, and external plugin support. Offers automatic plugin creation from OpenAPI/Swagger files, hot reload, and dynamic runtime plugin loading/unloading.",
+            de: "Built-in-, OpenAPI-Spec-, DLL- und External-Plugin-Unterstützung. Bietet automatische Plugin-Erstellung aus OpenAPI/Swagger-Dateien, Hot Reload und dynamisches Laden/Entladen von Plugins zur Laufzeit.",
+          },
+        "Güvenlik ve Yetkilendirme": {
+          en: "Security & Authorization",
+          de: "Sicherheit & Autorisierung",
+        },
+        "Cookie, API Key ve JWT Bearer Token ile çoklu kimlik doğrulama. RBAC tabanlı yetkilendirme, PBKDF2 şifreleme, IP ban, rate limiting ve token maskeleme ile kurumsal düzeyde güvenlik sağlar.":
+          {
+            en: "Multi-method authentication with Cookie, API Key, and JWT Bearer Token. Provides enterprise-grade security with RBAC-based authorization, PBKDF2 encryption, IP ban, rate limiting, and token masking.",
+            de: "Mehrfache Authentifizierung mit Cookie, API Key und JWT Bearer Token. Bietet Sicherheit auf Unternehmensniveau mit RBAC-basierter Autorisierung, PBKDF2-Verschlüsselung, IP-Sperre, Rate Limiting und Token-Maskierung.",
+          },
+        "API ve Entegrasyonlar": {
+          en: "API & Integrations",
+          de: "API & Integrationen",
+        },
+        "OpenAI uyumlu API endpoint'i, RESTful API, Swagger/OpenAPI dokümantasyonu ve SSE streaming desteği. OpenAPI spec import ile harici API'leri plugin olarak ekleyebilir, MCP entegrasyonu ile genişletebilirsiniz.":
+          {
+            en: "OpenAI-compatible API endpoint, RESTful API, Swagger/OpenAPI documentation, and SSE streaming support. Import external APIs as plugins via OpenAPI spec and extend with MCP integration.",
+            de: "OpenAI-kompatibler API-Endpunkt, RESTful API, Swagger/OpenAPI-Dokumentation und SSE-Streaming-Unterstützung. Importieren Sie externe APIs als Plugins über OpenAPI-Spezifikationen und erweitern Sie mit MCP-Integration.",
+          },
+
+        // TemporaPDF translations
+        TemporaPDF: {
+          en: "TemporaPDF",
+          de: "TemporaPDF",
+        },
+        "TemporaPDF, kod yazmadan PDF şablonu tasarlama, versiyonlama, onaylama ve toplu üretim sağlayan kurumsal bir platformdur. Sürükle-bırak şablon tasarımcısı, onay iş akışları, yeniden kullanılabilir bileşen kütüphanesi ve rol bazlı erişim kontrolü ile PDF üretim sürecinizi tamamen sizin kontrolünüze bırakır.":
+          {
+            en: "TemporaPDF is an enterprise platform for designing, versioning, approving, and bulk-generating PDF templates without writing code. With a drag-and-drop template designer, approval workflows, a reusable component library, and role-based access control, it puts your PDF generation process fully under your control.",
+            de: "TemporaPDF ist eine Unternehmensplattform zum Gestalten, Versionieren, Genehmigen und massenhaften Erzeugen von PDF-Vorlagen ohne Programmierung. Mit einem Drag-and-Drop-Vorlagendesigner, Genehmigungs-Workflows, einer wiederverwendbaren Komponentenbibliothek und rollenbasierter Zugriffskontrolle behalten Sie die volle Kontrolle über Ihren PDF-Erstellungsprozess.",
+          },
+        "Görsel Şablon Tasarımcısı": {
+          en: "Visual Template Designer",
+          de: "Visueller Vorlagendesigner",
+        },
+        "Sürükle-bırak arayüzü ile metin, görsel, kutu, tablo, QR kod, barkod ve checkbox bileşenlerini şablonlarınıza ekleyin. Çok sayfalı header/footer desteği, [field] ve $$VARIABLE$$ formatında canlı veri bağlama, özel CSS ve JSON import/export ile kod yazmadan profesyonel PDF şablonları oluşturun.":
+          {
+            en: "Add text, image, box, table, QR code, barcode, and checkbox components to your templates with a drag-and-drop interface. Create professional PDF templates without code, with multi-page header/footer support, live data binding in [field] and $$VARIABLE$$ format, custom CSS, and JSON import/export.",
+            de: "Fügen Sie Text-, Bild-, Box-, Tabellen-, QR-Code-, Barcode- und Checkbox-Komponenten per Drag-and-Drop zu Ihren Vorlagen hinzu. Erstellen Sie professionelle PDF-Vorlagen ohne Code – mit mehrseitiger Kopf-/Fußzeilen-Unterstützung, Live-Datenbindung im Format [field] und $$VARIABLE$$, benutzerdefiniertem CSS sowie JSON-Import/Export.",
+          },
+        "Versiyon Kontrolü ve Onay İş Akışı": {
+          en: "Version Control & Approval Workflow",
+          de: "Versionskontrolle & Genehmigungsworkflow",
+        },
+        "Her şablon DRAFT, PENDING_APPROVAL, APPROVED, ACTIVE ve INACTIVE yaşam döngüsü durumlarından geçer. Maker-approver onay modeli ile değişiklikler yayına alınmadan önce kontrol edilir, tüm versiyon geçmişi saklanır.":
+          {
+            en: "Every template moves through DRAFT, PENDING_APPROVAL, APPROVED, ACTIVE, and INACTIVE lifecycle states. A maker-approver model reviews changes before they go live, and the full version history is preserved.",
+            de: "Jede Vorlage durchläuft die Lebenszyklusphasen DRAFT, PENDING_APPROVAL, APPROVED, ACTIVE und INACTIVE. Ein Maker-Approver-Modell prüft Änderungen vor der Veröffentlichung, und der gesamte Versionsverlauf bleibt erhalten.",
+          },
+        "Bileşen Kütüphanesi": {
+          en: "Component Library",
+          de: "Komponentenbibliothek",
+        },
+        "Sık kullanılan içerikleri yeniden kullanılabilir bileşenler olarak tanımlayın. Bir bileşende yapılan değişikliğin hangi şablonları etkileyeceğini gösteren cascade impact analizi ile büyük ölçekte tutarlılığı koruyun.":
+          {
+            en: "Define frequently used content as reusable components. Maintain consistency at scale with cascade impact analysis that shows which templates are affected by a change to a component.",
+            de: "Definieren Sie häufig verwendete Inhalte als wiederverwendbare Komponenten. Sorgen Sie mit einer Cascade-Impact-Analyse, die zeigt, welche Vorlagen von einer Komponentenänderung betroffen sind, für Konsistenz im großen Maßstab.",
+          },
+        "Merkezi Varlık Yönetimi": {
+          en: "Centralized Asset Management",
+          de: "Zentrales Asset-Management",
+        },
+        "$$KEY$$ formatında değişkenler ve merkezi görsel kayıt defteri ile tüm varlıklarınızı tek noktadan yönetin. XML ve JSON veri bağlama desteği ile mevcut sistemlerinizden gelen verileri doğrudan şablonlara aktarın.":
+          {
+            en: "Manage all your assets from a single point with $$KEY$$ format variables and a centralized image registry. Feed data from your existing systems directly into templates with XML and JSON data binding support.",
+            de: "Verwalten Sie alle Ihre Assets zentral mit Variablen im $$KEY$$-Format und einem zentralen Bildregister. Übertragen Sie Daten aus Ihren bestehenden Systemen direkt in Vorlagen mit XML- und JSON-Datenbindung.",
+          },
+        "Güvenlik, Roller ve Audit": {
+          en: "Security, Roles & Audit",
+          de: "Sicherheit, Rollen & Audit",
+        },
+        "JWT tabanlı kimlik doğrulama, rol ve izin yönetimi, CSV dışa aktarımlı detaylı audit log ile her işlem kayıt altına alınır. Tam audit kapsamı ve kurumsal entegrasyon hazırlığı ile uyumluluk gereksinimlerinizi karşılar.":
+          {
+            en: "JWT-based authentication, role and permission management, and a detailed audit log with CSV export record every action. Meet your compliance requirements with full audit coverage and enterprise integration readiness.",
+            de: "JWT-basierte Authentifizierung, Rollen- und Berechtigungsverwaltung sowie ein detailliertes Audit-Log mit CSV-Export erfassen jede Aktion. Erfüllen Sie Ihre Compliance-Anforderungen mit vollständiger Audit-Abdeckung und Bereitschaft für die Unternehmensintegration.",
+          },
+        "Yüksek Hacimli Üretim": {
+          en: "High-Volume Generation",
+          de: "Hochvolumige Erzeugung",
+        },
+        "Design, Review, Approve, Activate, Generate adımlarından oluşan iş akışı ile şablonlarınızı bir kez onaylayın, milyonlarca PDF'i hatasız ve geliştirici bağımlılığı olmadan toplu üretin. Bankacılık, sigorta, telekom, kamu, lojistik ve e-ticaret sektörlerinde kullanılır.":
+          {
+            en: "Approve your templates once with a Design, Review, Approve, Activate, Generate workflow, then bulk-generate millions of PDFs error-free without developer dependency. Used across banking, insurance, telecom, public sector, logistics, and e-commerce.",
+            de: "Genehmigen Sie Ihre Vorlagen einmal mit einem Design-Review-Approve-Activate-Generate-Workflow und erzeugen Sie anschließend Millionen von PDFs fehlerfrei und ohne Entwicklerabhängigkeit in großen Mengen. Im Einsatz in Banking, Versicherung, Telekommunikation, öffentlichem Sektor, Logistik und E-Commerce.",
+          },
+      };
+
+      // Helper function to normalize text for comparison
+      function normalizeText(text) {
+        return text
+          .replace(/\s+/g, " ") // Normalize whitespace
+          .trim()
+          .replace(/[\u2018\u2019]/g, "'") // Replace curly quotes with straight quotes
+          .replace(/[\u201C\u201D]/g, '"'); // Replace curly double quotes
+      }
+
+      // Create a normalized lookup map for faster matching
+      var normalizedTranslations = {};
+      Object.keys(productTranslations).forEach(function (key) {
+        var normalized = normalizeText(key);
+        normalizedTranslations[normalized] = productTranslations[key];
+      });
+
+      // Translate all h1 titles and p content in project-info-card
+      document.querySelectorAll(".project-info-card h1").forEach(function (el) {
+        var text = el.textContent.trim();
+        var normalized = normalizeText(text);
+        if (
+          normalizedTranslations[normalized] &&
+          normalizedTranslations[normalized][lang]
+        ) {
+          el.textContent = normalizedTranslations[normalized][lang];
+        }
+      });
+
+      // Translate paragraphs in both project-card and project-info-card
+      document
+        .querySelectorAll(".project-card p, .project-info-card p")
+        .forEach(function (el) {
+          var text = el.textContent.replace(/\s+/g, " ").trim();
+          var normalized = normalizeText(text);
+          if (
+            normalizedTranslations[normalized] &&
+            normalizedTranslations[normalized][lang]
+          ) {
+            el.textContent = normalizedTranslations[normalized][lang];
+          }
+        });
+    } catch (e) {
+      console.error("Product page translation error:", e);
+    }
+  }
+
+  function applyTranslations() {
+    ensureLangSelector();
+    translateCommon();
+    translateSpecificContent();
+    translateMailto();
+    translateByPhrase();
+    bindIndex();
+    bindAbout();
+    bindCareer();
+    bindProductPages();
+  }
+
+  // Collect all static texts into a global bucket for easy translation authoring
+  function collectStaticTexts() {
+    try {
+      var root = document.getElementById("swup") || document.body;
+      var skipTags = { SCRIPT: 1, STYLE: 1, NOSCRIPT: 1 }; // skip these
+      var missing = window.__I18N_MISSING__ || {};
+      var phrases = window.__I18N_PHRASES__ || {};
+      var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+        acceptNode: function (n) {
+          if (!n.nodeValue) return NodeFilter.FILTER_REJECT;
+          if (n.parentElement && skipTags[n.parentElement.tagName])
+            return NodeFilter.FILTER_REJECT;
+          // skip anchors that are emails/phones
+          if (
+            n.parentElement &&
+            n.parentElement.tagName === "A" &&
+            (n.parentElement.getAttribute("href") || "").match(
+              /^(mailto:|tel:)/
+            )
+          )
+            return NodeFilter.FILTER_REJECT;
+          // skip address blocks
+          if (n.parentElement && n.parentElement.tagName === "ADDRESS")
+            return NodeFilter.FILTER_REJECT;
+          var t = n.nodeValue.replace(/\s+/g, " ").trim();
+          if (!t) return NodeFilter.FILTER_REJECT;
+          // exclude tiny tokens and obvious UI already handled
+          if (t.length < 3) return NodeFilter.FILTER_REJECT;
+          // don't collect if already registered in phrases
+          return phrases[t] ? NodeFilter.FILTER_SKIP : NodeFilter.FILTER_ACCEPT;
+        },
+      });
+      var node;
+      var count = 0;
+      while ((node = walker.nextNode())) {
+        var t = node.nodeValue.replace(/\s+/g, " ").trim();
+        if (!missing[t]) missing[t] = { en: "", de: "" };
+        count++;
+      }
+      window.__I18N_MISSING__ = missing;
+      // Optional: expose a combined view
+      window.__I18N_ALL_TEXTS__ = Object.assign({}, phrases, missing);
+    } catch (e) {}
+  }
+
+  // Run collector too (does not mutate DOM)
+  document.addEventListener("DOMContentLoaded", function () {
+    collectStaticTexts();
+  });
+  document.addEventListener("swup:contentReplaced", function () {
+    collectStaticTexts();
+  });
+
+  // If DOM is already loaded, run collector immediately
+  if (
+    document.readyState === "interactive" ||
+    document.readyState === "complete"
+  ) {
+    collectStaticTexts();
+  }
+
+  // Run now and after swup replaces content
+  document.addEventListener("DOMContentLoaded", function () {
+    applyTranslations();
+  });
+  document.addEventListener("swup:contentReplaced", function () {
+    applyTranslations();
+  });
+
+  // If DOM is already loaded (script is deferred), run immediately
+  if (
+    document.readyState === "interactive" ||
+    document.readyState === "complete"
+  ) {
+    applyTranslations();
+  }
+
+  // Define toggle function for career page
+  window.toggle = function (src, target) {
+    try {
+      var element = document.getElementById(src);
+      if (!element) return;
+
+      var detailOpen = window.__I18N_TOGGLE_OPEN__ || "Detay";
+      var detailClose = window.__I18N_TOGGLE_CLOSE__ || "Detay Gizle";
+
+      // Close other open details
+      for (var i = 1; i <= 2; i++) {
+        var elemId = "show-detail-" + i;
+        var elem = document.getElementById(elemId);
+        if (!elem) continue;
+        var currentText = elem.children[0].innerText.trim();
+        // Check if it's in "close" state (showing "Hide detail" text)
+        if (
+          src !== elemId &&
+          currentText !== detailOpen &&
+          currentText !== "Detay" &&
+          currentText !== "Detail" &&
+          currentText !== "Details"
+        ) {
+          elem.children[0].innerText = detailOpen;
+          elem.classList.remove("button-toggle-on");
+          if (window.jQuery) {
+            jQuery("#detail-0" + i).collapse("toggle");
+          }
+        }
+      }
+
+      // Toggle the target collapse
+      if (window.jQuery) {
+        jQuery("#" + target).collapse("toggle");
+      }
+
+      // Update button text
+      var elementText = element.children[0].innerText.trim();
+      if (
+        elementText === "Detay" ||
+        elementText === "Detail" ||
+        elementText === "Details" ||
+        elementText === detailOpen
+      ) {
+        element.children[0].innerText = detailClose;
+        element.classList.add("button-toggle-on");
+      } else {
+        element.children[0].innerText = detailOpen;
+        element.classList.remove("button-toggle-on");
+      }
+    } catch (e) {
+      console.error("Toggle error:", e);
+    }
+  };
+
+  try {
+    var oldSubmit = window.handleSubmit;
+    if (oldSubmit) {
+      window.handleSubmit = function () {
+        var name = document.getElementById("form-name")
+          ? document.getElementById("form-name").value
+          : "";
+        var email = document.getElementById("form-email")
+          ? document.getElementById("form-email").value
+          : "";
+        var msgEl = document.getElementById("form-message");
+        var msg =
+          msgEl && msgEl.value ? msgEl.value.replaceAll("\n", "%0D") : "";
+        var subject = window.__I18N_MAIL_SUBJECT__ || "Proto İletişim";
+        window.location.href =
+          "mailto:info@protoyazilim.com?cc=" +
+          encodeURIComponent(email) +
+          "&subject=" +
+          encodeURIComponent(subject) +
+          "&body=" +
+          msg +
+          "%0D" +
+          encodeURIComponent(name) +
+          "%0D" +
+          encodeURIComponent(email);
+      };
+    }
+  } catch (e) {}
+})();
