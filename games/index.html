@@ -33,7 +33,8 @@
           "badge_ios": "iOS · Available",
           "badge_android": "Android · Coming soon",
           "detail": "Details",
-          "cml_shot_alt": "Cross Math Leo screenshot"
+          "cml_shot_alt": "Cross Math Leo screenshot",
+          "apps_link": "Discover our mobile apps too"
         },
         "de": {
           "page_title": "Mobile Spiele | Proto Yazılım",
@@ -46,7 +47,8 @@
           "badge_ios": "iOS · Verfügbar",
           "badge_android": "Android · Demnächst",
           "detail": "Details",
-          "cml_shot_alt": "Cross Math Leo Screenshot"
+          "cml_shot_alt": "Cross Math Leo Screenshot",
+          "apps_link": "Entdecken Sie auch unsere mobilen Apps"
         }
       }
     </script>
@@ -86,10 +88,10 @@
     <script defer="defer" src="/main.js"></script>
     <script defer="defer" src="/i18n.js"></script>
     <link href="/style.css" rel="stylesheet" />
-    <link href="/games/games.css" rel="stylesheet" />
+    <link href="/showcase.css" rel="stylesheet" />
   </head>
   <body>
-    <div id="swup" class="games-page">
+    <div id="swup" class="showcase-page">
       <header>
         <nav class="fixed-top">
           <div id="nav" class="container-fluid">
@@ -112,6 +114,7 @@
               <ul>
                 <li><a href="/about.html" data-no-swup>Hakkımızda</a></li>
                 <li><a href="/projects.html" data-no-swup>Ürünler</a></li>
+                <li><a class="nav-apps" href="/apps/" data-no-swup>Uygulamalar</a></li>
                 <li class="selected-item">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -149,9 +152,9 @@
         </nav>
       </header>
       <main class="transition-fade">
-        <div class="games-container">
-          <section class="games-hero">
-            <span class="games-eyebrow" data-i18n="eyebrow">Proto Games</span>
+        <div class="showcase-container">
+          <section class="showcase-hero">
+            <span class="showcase-eyebrow" data-i18n="eyebrow">Proto Games</span>
             <h1 data-i18n="games_title">Mobil Oyunlar</h1>
             <p class="phrase" data-i18n="games_phrase">
               Proto Yazılım olarak kurumsal yazılımların yanı sıra artık mobil
@@ -161,7 +164,7 @@
             </p>
           </section>
 
-          <section class="games-grid" aria-label="Oyunlar">
+          <section class="showcase-grid" aria-label="Oyunlar">
             <article class="game-card">
               <div class="game-card-body">
                 <div class="game-card-head">
@@ -207,6 +210,27 @@
               </div>
             </article>
           </section>
+
+          <p class="showcase-crosslink">
+            <a class="game-detail-link" href="/apps/" data-no-swup>
+              <span data-i18n="apps_link">Mobil uygulamalarımıza da göz atın</span>
+              <svg
+                    width="26"
+                    height="23"
+                    viewBox="0 0 26 23"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-hidden="true"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      clip-rule="evenodd"
+                      d="M11.9474 0.842329L13.7939 2.6888L5.86713 10.6156L26 10.6156V13.2269L5.86725 13.2269L13.7939 21.1535L11.9474 23L0.868589 11.9212L2.71507 10.0747L11.9474 0.842329ZM4.58731 11.947V11.8954L4.56154 11.9212L4.58731 11.947Z"
+                      fill="currentColor"
+                    />
+                  </svg>
+            </a>
+          </p>
         </div>
       </main>
       <footer>

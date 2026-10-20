@@ -1,25 +1,25 @@
-/* Mobile games section (/games/) */
-.games-page {
-  --games-accent: #ff8a3d;
-  --games-gradient: linear-gradient(90deg, #ffd166 0%, #ff8a3d 35%, #ff5fa2 70%, #b388ff 100%);
-  --games-card: #2b3138;
-  --games-muted: rgba(255, 255, 255, 0.72);
+/* Mobile showcase pages: /games/ and /apps/ */
+.showcase-page {
+  --showcase-accent: #ff8a3d;
+  --showcase-gradient: linear-gradient(90deg, #ffd166 0%, #ff8a3d 35%, #ff5fa2 70%, #b388ff 100%);
+  --showcase-card: #2b3138;
+  --showcase-muted: rgba(255, 255, 255, 0.72);
   background-color: #1e1d1d;
   color: #fff;
 }
 
-.games-page main {
+.showcase-page main {
   padding-top: 90px;
   padding-bottom: 96px;
 }
 
-.games-page .games-container {
+.showcase-page .showcase-container {
   max-width: 1080px;
   margin: 0 auto;
   padding: 0 16px;
 }
 
-.games-page .back-button {
+.showcase-page .back-button {
   display: inline-flex;
   align-items: center;
   gap: 12px;
@@ -28,23 +28,23 @@
   font-size: 16px;
 }
 
-.games-page a.reset-a:hover {
+.showcase-page a.reset-a:hover {
   text-decoration: none;
 }
 
 /* Section heading */
-.games-hero {
+.showcase-hero {
   padding: 56px 0 40px;
 }
 
-.games-eyebrow {
+.showcase-eyebrow {
   display: inline-block;
   font-family: Rubik;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  background: var(--games-gradient);
+  background: var(--showcase-gradient);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -52,7 +52,7 @@
   margin-bottom: 16px;
 }
 
-.games-hero h1 {
+.showcase-hero h1 {
   font-family: Sora;
   font-size: 55px;
   font-weight: 700;
@@ -60,17 +60,17 @@
   margin-bottom: 24px;
 }
 
-.games-hero .phrase {
+.showcase-hero .phrase {
   font-family: Sora;
   font-size: 20px;
   font-weight: 300;
   line-height: 32px;
   max-width: 760px;
-  color: var(--games-muted);
+  color: var(--showcase-muted);
 }
 
 /* Game list cards */
-.games-grid {
+.showcase-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
@@ -82,7 +82,7 @@
   grid-template-columns: 1fr;
   gap: 8px 40px;
   align-items: center;
-  background-color: var(--games-card);
+  background-color: var(--showcase-card);
   border-radius: 24px;
   padding: 28px;
   overflow: hidden;
@@ -94,7 +94,7 @@
   position: absolute;
   inset: 0 0 auto 0;
   height: 4px;
-  background: var(--games-gradient);
+  background: var(--showcase-gradient);
 }
 
 .game-card:hover {
@@ -141,7 +141,7 @@
 .game-card .game-genre {
   font-family: Rubik;
   font-size: 14px;
-  color: var(--games-muted);
+  color: var(--showcase-muted);
 }
 
 .game-card p {
@@ -149,7 +149,7 @@
   font-size: 16px;
   font-weight: 300;
   line-height: 26px;
-  color: var(--games-muted);
+  color: var(--showcase-muted);
   flex-grow: 1;
 }
 
@@ -186,7 +186,7 @@
 }
 
 .game-detail-link:hover {
-  color: var(--games-accent);
+  color: var(--showcase-accent);
   text-decoration: none;
 }
 
@@ -227,7 +227,7 @@ a.platform-badge.is-link:hover {
 .platform-badge.is-soon {
   background-color: transparent;
   border: 1px dashed rgba(255, 255, 255, 0.35);
-  color: var(--games-muted);
+  color: var(--showcase-muted);
 }
 
 /* Store buttons */
@@ -285,7 +285,7 @@ a.store-button:hover {
 .store-button.is-soon {
   background-color: transparent;
   border-style: dashed;
-  color: var(--games-muted);
+  color: var(--showcase-muted);
   cursor: default;
 }
 
@@ -327,7 +327,7 @@ a.store-button:hover {
 .game-hero .game-subtitle {
   font-family: Rubik;
   font-size: 18px;
-  color: var(--games-muted);
+  color: var(--showcase-muted);
 }
 
 .game-hero .game-lead {
@@ -335,7 +335,7 @@ a.store-button:hover {
   font-size: 20px;
   font-weight: 300;
   line-height: 32px;
-  color: var(--games-muted);
+  color: var(--showcase-muted);
   margin-bottom: 24px;
 }
 
@@ -362,7 +362,7 @@ a.store-button:hover {
 .game-note {
   font-family: Rubik;
   font-size: 14px;
-  color: var(--games-muted);
+  color: var(--showcase-muted);
   margin-top: 16px;
 }
 
@@ -411,7 +411,7 @@ a.store-button:hover {
 
 .how-to-play li {
   counter-increment: step;
-  background-color: var(--games-card);
+  background-color: var(--showcase-card);
   border-radius: 20px;
   padding: 24px;
   font-family: Rubik;
@@ -428,7 +428,7 @@ a.store-button:hover {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: var(--games-gradient);
+  background: var(--showcase-gradient);
   color: #1e1d1d;
   font-family: Sora;
   font-weight: 700;
@@ -447,7 +447,7 @@ a.store-button:hover {
 }
 
 .feature-card {
-  background-color: var(--games-card);
+  background-color: var(--showcase-card);
   border-radius: 20px;
   padding: 28px;
 }
@@ -466,7 +466,7 @@ a.store-button:hover {
   font-size: 16px;
   font-weight: 300;
   line-height: 26px;
-  color: var(--games-muted);
+  color: var(--showcase-muted);
 }
 
 .feature-card p {
@@ -483,7 +483,7 @@ a.store-button:hover {
   margin-top: 72px;
   border-radius: 28px;
   padding: 48px 40px;
-  background: linear-gradient(135deg, #f2572b 0%, #c2410c 100%);
+  background: var(--cta-bg, linear-gradient(135deg, #f2572b 0%, #c2410c 100%));
   text-align: center;
 }
 
@@ -505,7 +505,7 @@ a.store-button:hover {
 }
 
 @media (max-width: 800.98px) {
-  .games-hero h1 {
+  .showcase-hero h1 {
     font-size: 38px;
     line-height: 46px;
   }
@@ -536,4 +536,26 @@ a.store-button:hover {
   .screenshot-strip img {
     width: 180px;
   }
+}
+
+/* Cross-link between the apps and games lists */
+.showcase-crosslink {
+  margin: 40px 0 0;
+}
+
+/* Extra links under the store buttons (product page, legal pages) */
+.app-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  margin-top: 20px;
+}
+
+.app-links .game-detail-link {
+  font-size: 14px;
+}
+
+.app-links .game-detail-link svg {
+  width: 18px;
+  height: 16px;
 }

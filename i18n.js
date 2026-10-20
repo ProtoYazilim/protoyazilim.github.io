@@ -23,6 +23,7 @@
       langLabel: "Dil",
       nav_about: "Hakkımızda",
       nav_projects: "Ürünler",
+      nav_apps: "Uygulamalar",
       nav_games: "Oyunlar",
       nav_career: "Kariyer",
       nav_contact: "İletişim",
@@ -60,6 +61,7 @@
       langLabel: "Language",
       nav_about: "About",
       nav_projects: "Products",
+      nav_apps: "Apps",
       nav_games: "Games",
       nav_career: "Career",
       nav_contact: "Contact",
@@ -96,6 +98,7 @@
       langLabel: "Sprache",
       nav_about: "Über uns",
       nav_projects: "Produkte",
+      nav_apps: "Apps",
       nav_games: "Spiele",
       nav_career: "Karriere",
       nav_contact: "Kontakt",
@@ -238,6 +241,7 @@
     var m = {
       "/about.html": "nav_about",
       "/projects.html": "nav_projects",
+      "/apps/": "nav_apps",
       "/games/": "nav_games",
       "/career.html": "nav_career",
       "/contact.html": "nav_contact",
@@ -1432,6 +1436,14 @@
             img.getAttribute("data-src-" + lang) ||
             img.getAttribute("data-src-en");
           if (src && img.getAttribute("src") !== src) img.setAttribute("src", src);
+        });
+      }
+      if (lang !== "tr") {
+        document.querySelectorAll("a[data-href-en]").forEach(function (a) {
+          a.setAttribute(
+            "href",
+            a.getAttribute("data-href-" + lang) || a.getAttribute("data-href-en")
+          );
         });
       }
       if (page.page_title) document.title = page.page_title;
