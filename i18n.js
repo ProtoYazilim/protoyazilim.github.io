@@ -23,6 +23,7 @@
       langLabel: "Dil",
       nav_about: "Hakkımızda",
       nav_projects: "Ürünler",
+      nav_games: "Oyunlar",
       nav_career: "Kariyer",
       nav_contact: "İletişim",
       see_products: "Ürünleri Gör",
@@ -59,6 +60,7 @@
       langLabel: "Language",
       nav_about: "About",
       nav_projects: "Products",
+      nav_games: "Games",
       nav_career: "Career",
       nav_contact: "Contact",
       see_products: "See Products",
@@ -94,6 +96,7 @@
       langLabel: "Sprache",
       nav_about: "Über uns",
       nav_projects: "Produkte",
+      nav_games: "Spiele",
       nav_career: "Karriere",
       nav_contact: "Kontakt",
       see_products: "Produkte ansehen",
@@ -235,6 +238,7 @@
     var m = {
       "/about.html": "nav_about",
       "/projects.html": "nav_projects",
+      "/games/": "nav_games",
       "/career.html": "nav_career",
       "/contact.html": "nav_contact",
     };
@@ -1397,6 +1401,37 @@
     bindAbout();
     bindCareer();
     bindProductPages();
+    translateDataI18n();
+  }
+
+  // Generic key-based translation for pages that define their own texts
+  // (e.g. /games/*). Elements carry data-i18n="key"; texts are looked up in
+  // window.__I18N_PAGE__[lang] first, then in the global dictionary.
+  // The HTML itself holds the Turkish text, so missing keys are left as is.
+  function translateDataI18n() {
+    try {
+      var lang = currentLang();
+      var page = (window.__I18N_PAGE__ || {})[lang] || {};
+      var dict = window.__I18N__[lang] || {};
+      function lookup(key) {
+        return page[key] !== undefined ? page[key] : dict[key];
+      }
+      document.querySelectorAll("[data-i18n]").forEach(function (el) {
+        var v = lookup(el.getAttribute("data-i18n"));
+        if (v !== undefined) el.innerHTML = v;
+      });
+      document.querySelectorAll("[data-i18n-alt]").forEach(function (el) {
+        var v = lookup(el.getAttribute("data-i18n-alt"));
+        if (v !== undefined) el.setAttribute("alt", v);
+      });
+      if (page.page_title) document.title = page.page_title;
+      if (page.page_description) {
+        var meta = document.querySelector('meta[name="description"]');
+        if (meta) meta.setAttribute("content", page.page_description);
+      }
+    } catch (e) {
+      console.error("data-i18n error:", e);
+    }
   }
 
   // Collect all static texts into a global bucket for easy translation authoring

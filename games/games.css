@@ -1,0 +1,529 @@
+/* Mobile games section (/games/) */
+.games-page {
+  --games-accent: #ff8a3d;
+  --games-gradient: linear-gradient(90deg, #ffd166 0%, #ff8a3d 35%, #ff5fa2 70%, #b388ff 100%);
+  --games-card: #2b3138;
+  --games-muted: rgba(255, 255, 255, 0.72);
+  background-color: #1e1d1d;
+  color: #fff;
+}
+
+.games-page main {
+  padding-top: 90px;
+  padding-bottom: 96px;
+}
+
+.games-page .games-container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.games-page .back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #fff;
+  font-family: Rubik;
+  font-size: 16px;
+}
+
+.games-page a.reset-a:hover {
+  text-decoration: none;
+}
+
+/* Section heading */
+.games-hero {
+  padding: 56px 0 40px;
+}
+
+.games-eyebrow {
+  display: inline-block;
+  font-family: Rubik;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: var(--games-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  margin-bottom: 16px;
+}
+
+.games-hero h1 {
+  font-family: Sora;
+  font-size: 55px;
+  font-weight: 700;
+  line-height: 64px;
+  margin-bottom: 24px;
+}
+
+.games-hero .phrase {
+  font-family: Sora;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 32px;
+  max-width: 760px;
+  color: var(--games-muted);
+}
+
+/* Game list cards */
+.games-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+.game-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px 40px;
+  align-items: center;
+  background-color: var(--games-card);
+  border-radius: 24px;
+  padding: 28px;
+  overflow: hidden;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.game-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 4px;
+  background: var(--games-gradient);
+}
+
+.game-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+.game-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 801px) {
+  .game-card {
+    grid-template-columns: 1fr 1fr;
+    padding: 40px;
+  }
+}
+
+.game-card-head {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+
+.game-icon {
+  width: 88px;
+  height: 88px;
+  object-fit: cover;
+  border-radius: 22%;
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.game-card h2 {
+  font-family: Sora;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 30px;
+  margin: 0 0 4px;
+}
+
+.game-card .game-genre {
+  font-family: Rubik;
+  font-size: 14px;
+  color: var(--games-muted);
+}
+
+.game-card p {
+  font-family: Rubik;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 26px;
+  color: var(--games-muted);
+  flex-grow: 1;
+}
+
+.game-card .game-preview {
+  display: flex;
+  gap: 10px;
+  margin: 0;
+}
+
+.game-card .game-preview img {
+  width: calc((100% - 20px) / 3);
+  border-radius: 12px;
+  aspect-ratio: 600 / 1304;
+  object-fit: cover;
+}
+
+.game-card-foot {
+  margin-top: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.game-detail-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: Sora;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.game-detail-link:hover {
+  color: var(--games-accent);
+  text-decoration: none;
+}
+
+.game-detail-link svg {
+  transform: rotate(180deg);
+}
+
+/* Platform badges */
+.platform-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.platform-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: Rubik;
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  white-space: nowrap;
+}
+
+.platform-badge.is-soon {
+  background-color: transparent;
+  border: 1px dashed rgba(255, 255, 255, 0.35);
+  color: var(--games-muted);
+}
+
+/* Store buttons */
+.store-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.store-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 56px;
+  padding: 8px 22px 8px 18px;
+  border-radius: 14px;
+  background-color: #000;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+a.store-button:hover {
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-2px);
+  border-color: #fff;
+}
+
+.store-button svg {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.store-button .store-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.store-button small {
+  font-family: Rubik;
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  opacity: 0.85;
+}
+
+.store-button strong {
+  font-family: Sora;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.store-button.is-soon {
+  background-color: transparent;
+  border-style: dashed;
+  color: var(--games-muted);
+  cursor: default;
+}
+
+/* Game detail page */
+.game-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
+  padding: 48px 0 56px;
+}
+
+@media (min-width: 801px) {
+  .game-hero {
+    grid-template-columns: 1.1fr 0.9fr;
+  }
+}
+
+.game-hero-title {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+
+.game-hero-title .game-icon {
+  width: 112px;
+  height: 112px;
+}
+
+.game-hero h1 {
+  font-family: Sora;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 54px;
+  margin: 0 0 6px;
+}
+
+.game-hero .game-subtitle {
+  font-family: Rubik;
+  font-size: 18px;
+  color: var(--games-muted);
+}
+
+.game-hero .game-lead {
+  font-family: Sora;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 32px;
+  color: var(--games-muted);
+  margin-bottom: 24px;
+}
+
+.game-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.game-hero-visual {
+  display: flex;
+  justify-content: center;
+}
+
+.game-hero-visual img {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  border-radius: 28px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.game-note {
+  font-family: Rubik;
+  font-size: 14px;
+  color: var(--games-muted);
+  margin-top: 16px;
+}
+
+.game-section {
+  padding: 56px 0 0;
+}
+
+.game-section h2 {
+  font-family: Sora;
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 42px;
+  margin-bottom: 24px;
+}
+
+/* Screenshot strip */
+.screenshot-strip {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 12px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.screenshot-strip img {
+  flex: 0 0 auto;
+  width: 220px;
+  height: auto;
+  aspect-ratio: 600 / 1304;
+  border-radius: 20px;
+  scroll-snap-align: start;
+  object-fit: cover;
+}
+
+/* How to play */
+.how-to-play {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  counter-reset: step;
+}
+
+.how-to-play li {
+  counter-increment: step;
+  background-color: var(--games-card);
+  border-radius: 20px;
+  padding: 24px;
+  font-family: Rubik;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 26px;
+}
+
+.how-to-play li::before {
+  content: counter(step);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--games-gradient);
+  color: #1e1d1d;
+  font-family: Sora;
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+/* Feature cards */
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.feature-grid .feature-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
+.feature-card {
+  background-color: var(--games-card);
+  border-radius: 20px;
+  padding: 28px;
+}
+
+.feature-card h3 {
+  font-family: Sora;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 30px;
+  margin-bottom: 12px;
+}
+
+.feature-card p,
+.feature-card li {
+  font-family: Rubik;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 26px;
+  color: var(--games-muted);
+}
+
+.feature-card p {
+  margin: 0;
+}
+
+.feature-card ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+/* Closing call to action */
+.game-cta {
+  margin-top: 72px;
+  border-radius: 28px;
+  padding: 48px 40px;
+  background: linear-gradient(135deg, #f2572b 0%, #c2410c 100%);
+  text-align: center;
+}
+
+.game-cta h2 {
+  font-family: Sora;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 40px;
+  margin-bottom: 24px;
+}
+
+.game-cta .store-buttons {
+  justify-content: center;
+}
+
+.game-cta .store-button.is-soon {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.9);
+}
+
+@media (max-width: 800.98px) {
+  .games-hero h1 {
+    font-size: 38px;
+    line-height: 46px;
+  }
+
+  .game-hero h1 {
+    font-size: 34px;
+    line-height: 40px;
+  }
+
+  .game-hero-title .game-icon {
+    width: 88px;
+    height: 88px;
+  }
+
+  .feature-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .game-cta {
+    padding: 36px 20px;
+  }
+
+  .game-cta h2 {
+    font-size: 26px;
+    line-height: 34px;
+  }
+
+  .screenshot-strip img {
+    width: 180px;
+  }
+}
