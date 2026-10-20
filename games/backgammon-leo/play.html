@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<!--
+  GitHub Pages (static): share links use
+  https://www.protoyazilim.com/games/backgammon-leo/play.html?code=ABCD
+  Universal / App Link files live at the domain root: /.well-known/
+  Store URLs: config.js
+-->
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Back Gammon Leo — Davet</title>
+  <style>
+    :root { color-scheme: dark; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #1e1e1e;
+      color: #f6f1ea;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+    main {
+      width: min(28rem, calc(100% - 2rem));
+      padding: 1.75rem 1.25rem 1.5rem;
+      text-align: center;
+    }
+    h1 { font-size: 1.45rem; margin: 0 0 0.5rem; }
+    .lead { color: #d9cfc4; line-height: 1.45; margin: 0 0 1.25rem; }
+    .code-label {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #b7aa9e;
+      margin: 0;
+    }
+    .code {
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: 0.28em;
+      margin: 0.35rem 0 0.5rem;
+    }
+    button, a.store {
+      display: block;
+      width: 100%;
+      margin: 0 0 0.6rem;
+      padding: 0.85rem 1rem;
+      border-radius: 12px;
+      border: 0;
+      font: inherit;
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+    }
+    button.primary {
+      background: #e9695f;
+      color: #1e1e1e;
+      cursor: pointer;
+    }
+    button.secondary {
+      background: transparent;
+      color: #f6f1ea;
+      border: 1px solid #5c534c;
+      cursor: pointer;
+    }
+    button:disabled { opacity: 0.45; cursor: default; }
+    a.store {
+      background: transparent;
+      color: #f6f1ea;
+      border: 1px solid #5c534c;
+    }
+    a.store[aria-disabled="true"] {
+      opacity: 0.55;
+      pointer-events: none;
+    }
+    .hint, .soon {
+      color: #b7aa9e;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      margin: 0.35rem 0 0;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1 id="title">Tavla daveti</h1>
+    <p class="lead" id="lead">Arkadaşın seni bir maça çağırıyor. Uygulama kuruluysa aç; yoksa mağazadan kurup bu sayfaya geri dön.</p>
+    <p class="code-label" id="code-label">Davet kodu</p>
+    <p class="code" id="code">—</p>
+    <button type="button" class="secondary" id="copy" disabled hidden>Kodu kopyala</button>
+    <button type="button" class="primary" id="open" disabled>Uygulamayı aç</button>
+    <a class="store" id="ios-store" href="#" aria-disabled="true">App Store</a>
+    <a class="store" id="android-store" href="#" aria-disabled="true">Google Play</a>
+    <p class="soon" id="soon" hidden>Mağaza bağlantısı henüz yok.</p>
+    <p class="hint" id="hint" hidden></p>
+  </main>
+  <script src="./config.js"></script>
+  <script>
+    const tr = navigator.language.toLowerCase().startsWith("tr");
+    const copy = tr
+      ? {
+          title: "Tavla daveti",
+          lead: "Arkadaşın seni bir maça çağırıyor. Uygulama kuruluysa aç; yoksa mağazadan kurup bu sayfaya geri dön.",
+          missing: "Bu bağlantıda davet kodu yok.",
+          code: "Davet kodu",
+          open: "Uygulamayı aç",
+          copyBtn: "Kodu kopyala",
+          copied: "Kod kopyalandı",
+          soon: "Mağaza bağlantısı henüz yok.",
+          hint: "Kurulumdan sonra bu sayfaya geri dön ve “Uygulamayı aç”a bas. Kod otomatik doldurulur; gerekirse elle de girebilirsin.",
+        }
+      : {
+          title: "Backgammon invite",
+          lead: "A friend invited you to a match. Open the app if it’s installed; otherwise install from the store and return here.",
+          missing: "This link has no invite code.",
+          code: "Invite code",
+          open: "Open the app",
+          copyBtn: "Copy code",
+          copied: "Code copied",
+          soon: "Store link is not available yet.",
+          hint: "After installing, return to this page and tap “Open the app”. The code is filled in automatically; you can also type it.",
+        };
+
+    document.documentElement.lang = tr ? "tr" : "en";
+    document.getElementById("title").textContent = copy.title;
+    document.getElementById("lead").textContent = copy.lead;
+    document.getElementById("code-label").textContent = copy.code;
+    document.getElementById("open").textContent = copy.open;
+    document.getElementById("copy").textContent = copy.copyBtn;
+    document.getElementById("soon").textContent = copy.soon;
+    document.getElementById("hint").textContent = copy.hint;
+
+    function inviteCode() {
+      const fromQuery = new URLSearchParams(location.search).get("code");
+      if (fromQuery) return fromQuery.trim().toUpperCase();
+      const parts = location.pathname.split("/").filter(Boolean);
+      const playAt = parts.indexOf("play");
+      if (playAt >= 0 && parts[playAt + 1] && parts[playAt + 1] !== "play.html") {
+        return parts[playAt + 1].toUpperCase();
+      }
+      return "";
+    }
+
+    const code = inviteCode();
+    const config = window.INVITE_CONFIG || {};
+    const scheme = config.customScheme || "backgammonleo";
+    const openButton = document.getElementById("open");
+    const copyButton = document.getElementById("copy");
+    const codeEl = document.getElementById("code");
+    const hintEl = document.getElementById("hint");
+
+    if (code && /^[A-Z0-9]{4,8}$/.test(code)) {
+      codeEl.textContent = code;
+      openButton.disabled = false;
+      copyButton.hidden = false;
+      copyButton.disabled = false;
+      hintEl.hidden = false;
+
+      copyButton.addEventListener("click", async () => {
+        try {
+          await navigator.clipboard.writeText(code);
+          copyButton.textContent = copy.copied;
+          setTimeout(() => {
+            copyButton.textContent = copy.copyBtn;
+          }, 1600);
+        } catch (_) {}
+      });
+
+      openButton.addEventListener("click", () => {
+        const deep = scheme + "://play/" + code;
+        const started = Date.now();
+        location.href = deep;
+        // If the app is missing, bounce to the visible store link after a short wait.
+        setTimeout(() => {
+          if (document.hidden || Date.now() - started < 900) return;
+          const ios = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+          const android = /Android/i.test(navigator.userAgent);
+          const store =
+            (ios && config.iosStoreUrl) ||
+            (android && config.androidStoreUrl) ||
+            config.iosStoreUrl ||
+            config.androidStoreUrl;
+          if (store) location.href = store;
+        }, 1400);
+      });
+    } else {
+      codeEl.textContent = "—";
+      document.getElementById("lead").textContent = copy.missing;
+    }
+
+    const ua = navigator.userAgent;
+    const ios = /iPhone|iPad|iPod/i.test(ua);
+    const android = /Android/i.test(ua);
+    const iosLink = document.getElementById("ios-store");
+    const androidLink = document.getElementById("android-store");
+
+    function wireStore(link, url, show) {
+      link.hidden = !show;
+      if (!show) return;
+      if (url) {
+        link.href = url;
+        link.removeAttribute("aria-disabled");
+      }
+    }
+
+    wireStore(iosLink, config.iosStoreUrl, ios || !android);
+    wireStore(androidLink, config.androidStoreUrl, android || !ios);
+    const shown = [iosLink, androidLink].filter((link) => !link.hidden);
+    const missingStore = shown.some(
+      (link) => link.getAttribute("aria-disabled") === "true",
+    );
+    document.getElementById("soon").hidden = !missingStore;
+  </script>
+</body>
+</html>
