@@ -56,11 +56,6 @@
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://www.protoyazilim.com/apps/sailops/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
     <loc>https://www.protoyazilim.com/apps/phaselis/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
