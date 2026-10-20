@@ -214,6 +214,16 @@
   white-space: nowrap;
 }
 
+a.platform-badge.is-link {
+  transition: background-color 0.2s ease;
+}
+
+a.platform-badge.is-link:hover {
+  background-color: rgba(255, 255, 255, 0.22);
+  color: #fff;
+  text-decoration: none;
+}
+
 .platform-badge.is-soon {
   background-color: transparent;
   border: 1px dashed rgba(255, 255, 255, 0.35);

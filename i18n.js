@@ -1424,6 +1424,16 @@
         var v = lookup(el.getAttribute("data-i18n-alt"));
         if (v !== undefined) el.setAttribute("alt", v);
       });
+      // Localized images: HTML holds the Turkish src; data-src-<lang> overrides it,
+      // and other languages fall back to data-src-en (e.g. DE uses English visuals)
+      if (lang !== "tr") {
+        document.querySelectorAll("img[data-src-en]").forEach(function (img) {
+          var src =
+            img.getAttribute("data-src-" + lang) ||
+            img.getAttribute("data-src-en");
+          if (src && img.getAttribute("src") !== src) img.setAttribute("src", src);
+        });
+      }
       if (page.page_title) document.title = page.page_title;
       if (page.page_description) {
         var meta = document.querySelector('meta[name="description"]');
