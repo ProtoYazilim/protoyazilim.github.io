@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<!--
+  Auth bridge for Supabase email links (confirm / recover).
+  Flow: email → supabase verify → this page → backgammonleo://auth/callback
+  Keep in sync with AuthLinks.resetRedirectUrl in the Flutter app and
+  Supabase Auth → Redirect URLs.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Back Gammon Leo — Opening…</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #1e1e1e;
+      color: #f6f1ea;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      text-align: center;
+      padding: 1.5rem;
+    }
+    p { color: #d9cfc4; line-height: 1.45; max-width: 22rem; }
+    a {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.85rem 1.25rem;
+      border-radius: 12px;
+      background: #e9695f;
+      color: #1e1e1e;
+      font-weight: 700;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <p id="msg">Opening Back Gammon Leo…</p>
+    <p><a id="open" href="#">Open the app</a></p>
+  </main>
+  <script>
+    (function () {
+      var scheme = "backgammonleo://auth/callback";
+      var suffix = location.search + location.hash;
+      var deep = scheme + suffix;
+      var open = document.getElementById("open");
+      var msg = document.getElementById("msg");
+      open.href = deep;
+
+      var tr = navigator.language.toLowerCase().startsWith("tr");
+      if (tr) {
+        msg.textContent = "Back Gammon Leo açılıyor…";
+        open.textContent = "Uygulamayı aç";
+      }
+
+      // Immediate hand-off to the installed app (TestFlight / App Store build).
+      location.replace(deep);
+    })();
+  </script>
+</body>
+</html>
