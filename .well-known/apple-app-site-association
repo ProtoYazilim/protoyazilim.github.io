@@ -1,0 +1,16 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "3C8L354V5C.com.protoyazilim.backGammonLeo",
+        "paths": [
+          "/games/backgammon-leo/play.html",
+          "/games/backgammon-leo/play.html*",
+          "/games/backgammon-leo/auth.html",
+          "/games/backgammon-leo/auth.html*"
+        ]
+      }
+    ]
+  }
+}
